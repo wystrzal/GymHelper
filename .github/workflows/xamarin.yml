@@ -8,12 +8,11 @@ on:
 
 jobs:        
   Android:
-    runs-on: macos-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
     - name: Android
       run: |
         cd GymHelper
-        nuget restore
         cd GymHelper.Android
-        msbuild GymHelper.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        msbuild GymHelper.Android.csproj /restore /t:SignAndroidPackage
