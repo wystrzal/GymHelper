@@ -1,0 +1,19 @@
+name: Xamarin CI
+
+on:
+  push:
+    branches: [ develop, master ]
+  pull_request:
+    branches: [ develop, master ]
+
+jobs:        
+  Android:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Android
+      run: |
+        cd GymHelper
+        nuget restore
+        cd GymHelper.Android
+        msbuild GymHelper.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
