@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Interfaces\" />
     <Folder Include="Data\Services\" />
     <Folder Include="Helpers\" />
     <Folder Include="Models\" />
