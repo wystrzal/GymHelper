@@ -22,6 +22,9 @@
     <EmbeddedResource Update="View\AuthView\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\AuthView\RegisterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
