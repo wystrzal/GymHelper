@@ -3,6 +3,7 @@ using GymHelper.Data.Interfaces;
 using GymHelper.Data.Services;
 using GymHelper.Models;
 using GymHelper.View;
+using GymHelper.ViewModel.Commands;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -11,13 +12,14 @@ namespace GymHelper.ViewModel
 {
     class LoginPageVM : BaseViewModel
     {
+        public LoginCommand LoginCommand { get; set; }
         public ICommand RegisterNavCommand => new Command(async () => await Navigate<RegisterPage>());
-
         private readonly IAuthService authService;
 
         public LoginPageVM()
         {
             authService = new AuthService(new UnitOfWork());
+            LoginCommand = new LoginCommand(this);
         }
 
         private User user;
