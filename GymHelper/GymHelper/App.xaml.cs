@@ -17,7 +17,7 @@ namespace GymHelper
 
             DataContext = new DataContext(dbPath);
 
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
