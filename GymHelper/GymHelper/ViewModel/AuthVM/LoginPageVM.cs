@@ -18,7 +18,7 @@ namespace GymHelper.ViewModel
 
         public LoginPageVM()
         {
-            authService = new AuthService(new UnitOfWork());
+            authService = App.AuthService;
             LoginCommand = new LoginCommand(this);
         }
 

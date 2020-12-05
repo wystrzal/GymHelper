@@ -22,7 +22,7 @@ namespace GymHelper.ViewModel
 
         public RegisterPageVM()
         {
-            authService = new AuthService(new UnitOfWork());
+            authService = App.AuthService;
             RegisterCommand = new RegisterCommand(this);
         }
 
