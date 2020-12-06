@@ -16,6 +16,7 @@ namespace GymHelper.Helpers
             return new ServiceCollection()
                 .AddSingleton<IUnitOfWork, UnitOfWork>()
                 .AddSingleton<IAuthService, AuthService>()
+                .AddSingleton<INavigateService, NavigateService>()
                 .BuildServiceProvider();
         }
     }

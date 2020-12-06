@@ -13,7 +13,7 @@ namespace GymHelper.ViewModel
     class LoginPageVM : BaseViewModel
     {
         public LoginCommand LoginCommand { get; set; }
-        public ICommand RegisterNavCommand => new Command(async () => await Navigate<RegisterPage>());
+        public ICommand RegisterNavCommand => new Command(async () => await NavigateService.Navigate<RegisterPage>());
         private readonly IAuthService authService;
 
         public LoginPageVM()
@@ -71,7 +71,7 @@ namespace GymHelper.ViewModel
 
             if (loggedSuccessfully)
             {
-                await Navigate<HomePage>();
+                await NavigateService.Navigate<HomePage>();
             }
         }
     }

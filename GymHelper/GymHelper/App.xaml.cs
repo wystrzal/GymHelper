@@ -15,6 +15,7 @@ namespace GymHelper
         public static User User { get; set; }
         public static IAuthService AuthService { get; set; }
         public static IUnitOfWork UnitOfWork { get; set; }
+        public static INavigateService NavigateService { get; set; }
 
         public App(string dbPath)
         {
@@ -31,6 +32,7 @@ namespace GymHelper
             var serviceProvider = AppServiceProvider.BuildServiceProvider();
             AuthService = serviceProvider.GetRequiredService<IAuthService>();
             UnitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
+            NavigateService = serviceProvider.GetRequiredService<INavigateService>();
         }
 
         protected override void OnStart()
