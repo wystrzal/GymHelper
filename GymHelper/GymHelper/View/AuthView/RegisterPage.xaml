@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" xmlns:local="clr-namespace:GymHelper.Helpers"
              BackgroundImageSource="gymBg.jpg"
              NavigationPage.HasNavigationBar="False"
              x:Class="GymHelper.View.RegisterPage">
@@ -21,6 +21,9 @@
                    Margin="10,5,10,0"
                    PlaceholderColor="{StaticResource vividVermilion}"
                    TextColor="{StaticResource vividVermilion}">
+                <Entry.Behaviors>
+                    <local:RequiredValidationBehavior />
+                </Entry.Behaviors>
             </Entry>
 
             <Entry Text="{Binding Password, Mode=TwoWay}"
@@ -29,6 +32,9 @@
                    PlaceholderColor="{StaticResource vividVermilion}"
                    TextColor="{StaticResource vividVermilion}"
                    IsPassword="True">
+                <Entry.Behaviors>
+                    <local:RequiredValidationBehavior />
+                </Entry.Behaviors>
             </Entry>
             
             <Entry Text="{Binding RepeatPassword, Mode=TwoWay}"
@@ -37,6 +43,9 @@
                    PlaceholderColor="{StaticResource vividVermilion}"
                    TextColor="{StaticResource vividVermilion}"
                    IsPassword="True">
+                <Entry.Behaviors>
+                    <local:RequiredValidationBehavior />
+                </Entry.Behaviors>
             </Entry>
             
             <Button Command="{Binding RegisterCommand}"
