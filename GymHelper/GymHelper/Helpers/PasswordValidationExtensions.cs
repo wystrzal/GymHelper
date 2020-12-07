@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GymHelper.Helpers
 {
-    static class PasswordValidationExtensions
+    public static class PasswordValidationExtensions
     {
         public static bool ContainsUpper(this string value)
         {
