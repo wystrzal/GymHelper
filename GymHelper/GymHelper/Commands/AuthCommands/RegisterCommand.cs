@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace GymHelper.ViewModel.Commands
 {
-    class RegisterCommand : ICommand
+    public class RegisterCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
         private readonly RegisterPageVM viewModel;

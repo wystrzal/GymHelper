@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    class RegisterPageVM : BaseViewModel
+    public class RegisterPageVM : BaseViewModel
     {
         public RegisterCommand RegisterCommand { get; set; }
         public ICommand Cancel => new Command(async () => await NavigateService.NavigateBack());
