@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    class LoginPageVM : BaseViewModel
+    public class LoginPageVM : BaseViewModel
     {
         public LoginCommand LoginCommand { get; set; }
         public ICommand RegisterNavCommand => new Command(async () => await NavigateService.Navigate<RegisterPage>());

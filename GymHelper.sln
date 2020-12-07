@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymHelper.Android", "GymHelper\GymHelper.Android\GymHelper.Android.csproj", "{FCD58BCD-B989-440C-8B2C-4DDCF45F8986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymHelper", "GymHelper\GymHelper\GymHelper.csproj", "{B176C325-13D8-4F1A-BB83-EF4780FCED0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymHelper", "GymHelper\GymHelper\GymHelper.csproj", "{B176C325-13D8-4F1A-BB83-EF4780FCED0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymHelper.Test", "GymHelper\GymHelper.Test\GymHelper.Test.csproj", "{3A62C5CC-2CA8-4F29-B354-26593DAF1090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{B176C325-13D8-4F1A-BB83-EF4780FCED0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B176C325-13D8-4F1A-BB83-EF4780FCED0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B176C325-13D8-4F1A-BB83-EF4780FCED0F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3A62C5CC-2CA8-4F29-B354-26593DAF1090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A62C5CC-2CA8-4F29-B354-26593DAF1090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A62C5CC-2CA8-4F29-B354-26593DAF1090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A62C5CC-2CA8-4F29-B354-26593DAF1090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

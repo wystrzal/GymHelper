@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace GymHelper.ViewModel.Commands
 {
-    class LoginCommand : ICommand
+    public class LoginCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
         private readonly LoginPageVM viewModel;
