@@ -32,7 +32,7 @@ namespace GymHelper.Data
 
             if (user.Login == username && user.Password == password)
             {
-                App.User = user;
+                App.Data.User = user;
                 return true;
             }
 

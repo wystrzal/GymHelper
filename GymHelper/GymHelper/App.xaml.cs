@@ -11,30 +11,13 @@ namespace GymHelper
 {
     public partial class App : Application
     {
-        public static DataContext DataContext { get; set; }
-        public static User User { get; set; }
-        public static IAuthService AuthService { get; set; }
-        public static IUnitOfWork UnitOfWork { get; set; }
-        public static INavigateService NavigateService { get; set; }
-        public static IAlertService AlertService { get; set; }
+        public static DataStorage Data { get; set; }
 
         public App(string dbPath)
         {
             InitializeComponent();
-
-            DataContext = new DataContext(dbPath);
-            ProvideServices();
-
+            Data = new DataStorage(dbPath);
             MainPage = new NavigationPage(new LoginPage());
-        }
-
-        private static void ProvideServices()
-        {
-            var serviceProvider = AppServiceProvider.BuildServiceProvider();
-            AuthService = serviceProvider.GetRequiredService<IAuthService>();
-            UnitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
-            NavigateService = serviceProvider.GetRequiredService<INavigateService>();
-            AlertService = serviceProvider.GetRequiredService<IAlertService>();
         }
 
         protected override void OnStart()

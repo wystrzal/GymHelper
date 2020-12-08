@@ -21,8 +21,8 @@ namespace GymHelper.Test.ViewModel
         {
             authService = new Mock<IAuthService>();
             navigateService = new Mock<INavigateService>();
-            App.AuthService = authService.Object;
-            App.NavigateService = navigateService.Object;
+            App.Data.AuthService = authService.Object;
+            App.Data.NavigateService = navigateService.Object;
             user = new User { Login = "test", Password = "Test123", RepeatPassword = "Test123" };
             vm = new RegisterPageVM();
         }

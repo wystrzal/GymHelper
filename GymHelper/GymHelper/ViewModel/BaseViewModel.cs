@@ -13,7 +13,7 @@ namespace GymHelper.ViewModel
         public INavigateService NavigateService { get; private set; }
         public BaseViewModel()
         {
-            NavigateService = App.NavigateService;
+            NavigateService = App.Data.NavigateService;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -16,8 +16,8 @@ namespace GymHelper.Data
 
         public Repository()
         {
-            dataContext = App.DataContext;
-            alertService = App.AlertService;
+            dataContext = App.Data.DataContext;
+            alertService = App.Data.AlertService;
         }
 
         public async Task<bool> Add(TEntity entity)
