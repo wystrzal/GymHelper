@@ -17,6 +17,7 @@ namespace GymHelper.Helpers
                 .AddSingleton<IUnitOfWork, UnitOfWork>()
                 .AddSingleton<IAuthService, AuthService>()
                 .AddSingleton<INavigateService, NavigateService>()
+                .AddSingleton<IAlertService, AlertService>()
                 .BuildServiceProvider();
         }
     }

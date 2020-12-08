@@ -12,10 +12,12 @@ namespace GymHelper.Data
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly DataContext dataContext;
+        private readonly IAlertService alertService;
 
-        public Repository()
+        public Repository(IAlertService alertService)
         {
             dataContext = App.DataContext;
+            this.alertService = alertService;
         }
 
         public async Task<bool> Add(TEntity entity)
@@ -28,7 +30,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się dodać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się dodać danych.", "Ok");
                 return false;
             }
         }
@@ -43,7 +45,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się usunąć danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się usunąć danych.", "Ok");
                 return false;
             }
         }
@@ -56,7 +58,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -71,7 +73,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -87,7 +89,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -101,7 +103,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -116,7 +118,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -130,7 +132,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return false;
             }
         }
@@ -145,7 +147,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się zaktualizować danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się zaktualizować danych.", "Ok");
                 return false;
             }
         }
