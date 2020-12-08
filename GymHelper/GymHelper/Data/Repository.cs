@@ -14,10 +14,10 @@ namespace GymHelper.Data
         private readonly DataContext dataContext;
         private readonly IAlertService alertService;
 
-        public Repository(IAlertService alertService)
+        public Repository()
         {
             dataContext = App.DataContext;
-            this.alertService = alertService;
+            alertService = App.AlertService;
         }
 
         public async Task<bool> Add(TEntity entity)
