@@ -22,30 +22,22 @@ namespace GymHelper.Data
 
         public async Task<bool> LoginTo(string username, string password)
         {
-            try
+            var user = await unitOfWork.Repository<User>().ReadFirstByCondition(u => u.Login == username);
+
+            if (user == null)
             {
-                var user = await unitOfWork.Repository<User>().ReadFirstByCondition(u => u.Login == username);
-
-                if (user != null)
-                {
-                    if (user.Login == username && user.Password == password)
-                    {
-                        App.User = user;
-                        return true;
-                    }
-
-                    await alertService.DisplayAlert("Niepowodzenie", "Nieprawidłowy login lub hasło!", "Ok");
-                    return false;
-                }
-
                 await alertService.DisplayAlert("Niepowodzenie", "Nieprawidłowy login lub hasło!", "Ok");
                 return false;
             }
-            catch (Exception)
+
+            if (user.Login == username && user.Password == password)
             {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się zalogować!", "Ok");
-                return false;
+                App.User = user;
+                return true;
             }
+
+            await alertService.DisplayAlert("Niepowodzenie", "Nieprawidłowy login lub hasło!", "Ok");
+            return false;
         }
 
         public async Task<bool> Register(User user)
