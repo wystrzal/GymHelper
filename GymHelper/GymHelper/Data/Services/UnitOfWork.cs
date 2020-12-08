@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GymHelper.Data.Services
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         public IRepository<TEntity> Repository<TEntity>()
             where TEntity : class
