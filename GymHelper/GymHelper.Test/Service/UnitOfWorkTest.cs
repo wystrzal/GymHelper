@@ -1,7 +1,9 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
 using GymHelper.Data.Services;
+using GymHelper.Helpers;
 using GymHelper.Models;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +18,7 @@ namespace GymHelper.Test.Service
         public UnitOfWorkTest()
         {
             unitOfWork = new UnitOfWork();
+            App.Data = new DataStorage(It.IsAny<string>());
         }
 
         [Fact]

@@ -1,4 +1,5 @@
 ﻿using GymHelper.Data.Interfaces;
+using GymHelper.Helpers;
 using GymHelper.Models;
 using GymHelper.ViewModel;
 using Moq;
@@ -21,6 +22,7 @@ namespace GymHelper.Test.ViewModel
         {
             authService = new Mock<IAuthService>();
             navigateService = new Mock<INavigateService>();
+            App.Data = new DataStorage(It.IsAny<string>());
             App.Data.AuthService = authService.Object;
             App.Data.NavigateService = navigateService.Object;
             user = new User { Login = "test", Password = "Test123", RepeatPassword = "Test123" };

@@ -8,6 +8,7 @@ using GymHelper.ViewModel;
 using System.Threading.Tasks;
 using Xunit;
 using GymHelper.View;
+using GymHelper.Helpers;
 
 namespace GymHelper.Test.ViewModel
 {
@@ -22,6 +23,7 @@ namespace GymHelper.Test.ViewModel
         {
             authService = new Mock<IAuthService>();
             navigateService = new Mock<INavigateService>();
+            App.Data = new DataStorage(It.IsAny<string>());
             App.Data.AuthService = authService.Object;
             App.Data.NavigateService = navigateService.Object;
             user = new User { Login = "test", Password = "Test123" };
