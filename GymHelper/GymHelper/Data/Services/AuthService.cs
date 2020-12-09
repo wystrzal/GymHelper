@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.Data
 {
-    class AuthService : IAuthService
+    public class AuthService : IAuthService
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IAlertService alertService;
