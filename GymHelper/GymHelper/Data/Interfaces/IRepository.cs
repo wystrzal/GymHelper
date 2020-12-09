@@ -8,8 +8,9 @@ namespace GymHelper.Data.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<bool> Add(TEntity entity);
-        Task<bool> Delete(TEntity entity);
+        Task<bool> SaveChanges();
+        Task Add(TEntity entity);
+        Task Delete(TEntity entity);
         Task<List<TEntity>> ReadAll();
         Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition);
         Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
@@ -18,6 +19,6 @@ namespace GymHelper.Data.Interfaces
         Task<TEntity> ReadFirstByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include);
         Task<bool> CheckIfExistByCondition(Func<TEntity, bool> condition);
-        Task<bool> Update(TEntity entity);
+        Task Update(TEntity entity);
     }
 }

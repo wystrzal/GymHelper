@@ -68,7 +68,7 @@ namespace GymHelper.Data
             }
 
             await unitOfWork.Repository<User>().Add(user);
-            return true;
+            return await unitOfWork.Repository<User>().SaveChanges();
         }
     }
 }

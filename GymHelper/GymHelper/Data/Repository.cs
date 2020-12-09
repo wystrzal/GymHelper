@@ -20,33 +20,40 @@ namespace GymHelper.Data
             alertService = App.Data.AlertService;
         }
 
-        public async Task<bool> Add(TEntity entity)
+        public async Task<bool> SaveChanges()
         {
             try
             {
-                await dataContext.Set<TEntity>().AddAsync(entity);
-                await dataContext.SaveChangesAsync();
-                return true;
+                return await dataContext.SaveChangesAsync() > 0;
             }
             catch (Exception)
             {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się dodać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się zapisać danych.", "Ok");
                 return false;
             }
         }
 
-        public async Task<bool> Delete(TEntity entity)
+        public async Task Add(TEntity entity)
+        {
+            try
+            {
+                await dataContext.Set<TEntity>().AddAsync(entity);
+            }
+            catch (Exception)
+            {
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się dodać danych.", "Ok");
+            }
+        }
+
+        public async Task Delete(TEntity entity)
         {
             try
             {
                 dataContext.Set<TEntity>().Remove(entity);
-                await dataContext.SaveChangesAsync();
-                return true;
             }
             catch (Exception)
             {
                 await alertService.DisplayAlert("Niepowodzenie", "Nie udało się usunąć danych.", "Ok");
-                return false;
             }
         }
 
@@ -137,18 +144,15 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<bool> Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             try
             {
                 dataContext.Set<TEntity>().Update(entity);
-                await dataContext.SaveChangesAsync();
-                return true;
             }
             catch (Exception)
             {
                 await alertService.DisplayAlert("Niepowodzenie", "Nie udało się zaktualizować danych.", "Ok");
-                return false;
             }
         }
     }
