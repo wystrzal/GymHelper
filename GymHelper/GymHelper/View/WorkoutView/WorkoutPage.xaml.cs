@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymHelper.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,17 @@ namespace GymHelper.View.WorkoutView
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkoutPage : ContentPage
     {
+        private readonly WorkoutPageVM viewModel;
         public WorkoutPage()
         {
             InitializeComponent();
+            viewModel = BindingContext as WorkoutPageVM;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.ReadWorkouts();
         }
     }
 }
