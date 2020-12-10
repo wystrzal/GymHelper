@@ -56,5 +56,7 @@ namespace GymHelper.Models
                 OnPropertyChanged("RepeatPassword");
             }
         }
+
+        public virtual ICollection<Workout> Workouts { get; set; }
     }
 }

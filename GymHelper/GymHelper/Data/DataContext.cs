@@ -16,6 +16,7 @@ namespace GymHelper.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
