@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymHelper.View.WorkoutView.WorkoutPage"
+             x:Name="Workout">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nowy Trening"/>
+    </ContentPage.ToolbarItems>
+
+    <ListView x:Name="workoutListView"
+              HasUnevenRows="True"
+              BackgroundColor="{DynamicResource blackOlive}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Grid>
+                            <Label Text="{Binding Date}"
+                                   TextColor="{DynamicResource vividVermilion}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="StartAndExpand"
+                                   Padding="5, 15, 5, 15"
+                                   FontSize="16"/>
+
+                            <Label Text="{Binding Name}"
+                                   TextColor="{DynamicResource vividVermilion}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Padding="0, 15, 0, 15"
+                                   FontSize="16"/>
+                        </Grid>
+
+                        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                    </StackLayout>
+
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Usuń"
+                                  IsDestructive="True"
+                                  />
+                        <MenuItem Text="Edytuj"
+                                  />
+                    </ViewCell.ContextActions>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>
