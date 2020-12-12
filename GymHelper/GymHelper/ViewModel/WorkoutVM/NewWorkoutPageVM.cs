@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    class NewWorkoutPageVM : BaseViewModel
+    public class NewWorkoutPageVM : BaseViewModel
     {
+        public NewWorkoutCommand NewWorkoutCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
 
         public NewWorkoutPageVM()
         {
+            NewWorkoutCommand = new NewWorkoutCommand(this);
             unitOfWork = App.Data.UnitOfWork;
         }
 
