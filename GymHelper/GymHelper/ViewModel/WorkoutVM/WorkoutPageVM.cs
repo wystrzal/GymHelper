@@ -18,8 +18,10 @@ namespace GymHelper.ViewModel
     public class WorkoutPageVM : BaseViewModel
     {
         public ObservableCollection<Workout> Workouts { get; set; }
+        public ICommand NewWorkoutNavCommand => new Command(async () => await NavigateService.Navigate<NewWorkoutPage>());
         public ICommand DeleteWorkoutCommand
             => new Command<Workout>(async (workout) => await DeleteWorkout(workout));
+
 
         private readonly IUnitOfWork unitOfWork;
         public WorkoutPageVM()
