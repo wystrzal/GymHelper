@@ -50,6 +50,7 @@ namespace GymHelper.ViewModel
         private async Task DeleteWorkout(Workout workout)
         {
             await unitOfWork.Repository<Workout>().Delete(workout);
+            await unitOfWork.Repository<Workout>().SaveChanges();
             await ReadWorkouts();
         }
     }
