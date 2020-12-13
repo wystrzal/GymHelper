@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,10 +14,12 @@ namespace GymHelper.ViewModel
 {
     class EditWorkoutPageVM : BaseViewModel
     {
+        public EditWorkoutCommand EditWorkoutCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
         public EditWorkoutPageVM()
         {
             unitOfWork = App.Data.UnitOfWork;
+            EditWorkoutCommand = new EditWorkoutCommand(this);
         }
 
         private Workout workout;
@@ -41,7 +44,7 @@ namespace GymHelper.ViewModel
             }
         }
 
-        public async void Update(Workout workout)
+        public async Task Update(Workout workout)
         {
             workout.Name = Name;
             await unitOfWork.Repository<Workout>().Update(workout);
