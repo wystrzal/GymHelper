@@ -8,53 +8,19 @@ using System.Text;
 
 namespace GymHelper.Models
 {
-    public class User : BaseModel
+    public class User
     {
-        private int userId;
-        public int UserId
-        {
-            get { return userId; }
-            set
-            {
-                userId = value;
-                OnPropertyChanged("UserId");
-            }
-        }
+        public int UserId { get; set; }
 
-        private string login;
         [Unique, Required]
-        public string Login
-        {
-            get { return login; }
-            set
-            {
-                login = value;
-                OnPropertyChanged("Login");
-            }
-        }
+        public string Login { get; set; }
 
-        private string password;
         [Required]
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                password = value;
-                OnPropertyChanged("Password");
-            }
-        }
+        public string Password { get; set; }
 
-        private string repeatPassword;
         [Required]
-        public string RepeatPassword
-        {
-            get { return repeatPassword; }
-            set
-            {
-                repeatPassword = value;
-                OnPropertyChanged("RepeatPassword");
-            }
-        }
+        public string RepeatPassword { get; set; }
+
+        public virtual ICollection<Workout> Workouts { get; set; }
     }
 }

@@ -28,5 +28,14 @@
     <EmbeddedResource Update="View\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\WorkoutView\EditWorkoutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\WorkoutView\NewWorkoutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\WorkoutView\WorkoutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
