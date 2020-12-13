@@ -10,7 +10,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nowy Trening"/>
+        <ToolbarItem Text="Nowy Trening"
+                     Command="{Binding NewWorkoutNavCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ListView x:Name="workoutListView"
@@ -42,9 +43,13 @@
                     <ViewCell.ContextActions>
                         <MenuItem Text="Usuń"
                                   IsDestructive="True"
-                                  />
+                                  Command="{Binding Path=BindingContext.DeleteWorkoutCommand,
+                                    Source={x:Reference Workout}}"
+                                  CommandParameter="{Binding}"/>
                         <MenuItem Text="Edytuj"
-                                  />
+                                  Command="{Binding Path=BindingContext.EditWorkoutNavCommand,
+                                    Source={x:Reference Workout}}"
+                                  CommandParameter="{Binding}"/>
                     </ViewCell.ContextActions>
                 </ViewCell>
             </DataTemplate>

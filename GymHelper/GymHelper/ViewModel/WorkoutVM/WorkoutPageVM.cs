@@ -21,7 +21,8 @@ namespace GymHelper.ViewModel
         public ICommand NewWorkoutNavCommand => new Command(async () => await NavigateService.Navigate<NewWorkoutPage>());
         public ICommand DeleteWorkoutCommand
             => new Command<Workout>(async (workout) => await DeleteWorkout(workout));
-
+        public ICommand EditWorkoutNavCommand
+            => new Command<Workout>(async (workout) => await NavigateService.Navigate<EditWorkoutPage>(workout));
 
         private readonly IUnitOfWork unitOfWork;
         public WorkoutPageVM()
