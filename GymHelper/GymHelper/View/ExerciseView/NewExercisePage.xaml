@@ -11,9 +11,11 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Zapisz"/>
+        <ToolbarItem Text="Zapisz" 
+                     Command="{Binding NewExerciseCommand}"
+                     CommandParameter="{Binding Exercise}"/>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <StackLayout>
             <Entry Text="{Binding Name, Mode=TwoWay}"

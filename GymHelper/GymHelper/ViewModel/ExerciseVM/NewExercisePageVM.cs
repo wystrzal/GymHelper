@@ -1,6 +1,7 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
 using GymHelper.Models;
+using GymHelper.ViewModel.Commands.ExerciseCommands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +12,12 @@ namespace GymHelper.ViewModel
 {
     class NewExercisePageVM : BaseViewModel
     {
+        public NewExerciseCommand NewExerciseCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
         public NewExercisePageVM()
         {
             unitOfWork = App.Data.UnitOfWork;
+            NewExerciseCommand = new NewExerciseCommand(this);
         }
 
         private Exercise exercise;
