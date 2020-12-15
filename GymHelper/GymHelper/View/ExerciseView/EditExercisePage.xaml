@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:local="clr-namespace:GymHelper.Helpers"
+             xmlns:local="clr-namespace:GymHelper.Helpers" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
              x:Class="GymHelper.View.EditExercisePage"
              BackgroundColor="{StaticResource blackOlive}">
 
-
+    <ContentPage.BindingContext>
+        <viewModel:EditExercisePageVM/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Zapisz"/>
     </ContentPage.ToolbarItems>
