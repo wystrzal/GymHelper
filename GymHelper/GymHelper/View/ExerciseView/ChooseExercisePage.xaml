@@ -11,7 +11,8 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="newExercise"
-                     Text="Nowe ćwiczenie"/>
+                     Text="Nowe ćwiczenie"
+                     Command="{Binding NewExerciseNavCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ListView ItemsSource="{Binding Exercises}"
