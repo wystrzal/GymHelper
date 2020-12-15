@@ -37,7 +37,7 @@ namespace GymHelper.ViewModel
             get { return name; }
             set
             {
-                name = value;
+                name = value.ToLower();
                 Exercise = new Exercise()
                 {
                     Name = Name
@@ -48,17 +48,17 @@ namespace GymHelper.ViewModel
 
         public async Task AddExercise(Exercise exercise)
         {
+            exercise.UserId = App.Data.User.UserId;
+
             if (await ExerciseExist(exercise))
             {
                 await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Istnieje już takie ćwiczenie.", "Ok");
                 return;
             }
 
-            exercise.UserId = App.Data.User.UserId;
-            await unitOfWork.Repository<Exercise>().Add(exercise);
-            var exerciseAdded = await unitOfWork.Repository<Exercise>().SaveChanges();
+            await unitOfWork.Repository<Exercise>().Add(exercise); 
             
-            if (exerciseAdded)
+            if (await unitOfWork.Repository<Exercise>().SaveChanges())
             {
                 await NavigateService.NavigateBack();
             }

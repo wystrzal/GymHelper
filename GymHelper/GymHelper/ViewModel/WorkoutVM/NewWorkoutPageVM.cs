@@ -38,7 +38,7 @@ namespace GymHelper.ViewModel
             get { return name; }
             set
             {
-                name = value;
+                name = value.ToLower();
                 Workout = new Workout()
                 {
                     Name = Name,
