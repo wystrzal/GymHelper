@@ -15,9 +15,17 @@ namespace GymHelper.View.ExerciseView
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChooseExercisePage : ContentPage
     {
+        private readonly ChooseExercisePageVM viewModel;
         public ChooseExercisePage()
         {
             InitializeComponent();
+            viewModel = BindingContext as ChooseExercisePageVM;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.ReadExercises();
         }
     }
 }

@@ -32,7 +32,6 @@
                                Padding="5, 15, 0, 15"/>
                             
                         <CheckBox IsChecked="False"
-                                  CheckedChanged="CheckBox_CheckedChanged"
                                   HorizontalOptions="EndAndExpand"
                                   VerticalOptions="CenterAndExpand" 
                                   BindingContext="{Binding}"/>
