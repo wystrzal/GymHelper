@@ -17,8 +17,9 @@ namespace GymHelper.ViewModel
         public ObservableCollection<Exercise> Exercises { get; set; }
         public ICommand DeleteExerciseCommand 
             => new Command<Exercise>(async (exercise) => await DeleteExercise(exercise));
-
         public ICommand NewExerciseNavCommand => new Command(async () => await NavigateService.Navigate<NewExercisePage>());
+        public ICommand EditExerciseNavCommand
+            => new Command<Exercise>(async (exercise) => await NavigateService.Navigate<EditExercisePage>(exercise));
 
         private readonly IUnitOfWork unitOfWork;
 

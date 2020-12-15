@@ -42,9 +42,15 @@
                     </StackLayout>
                     <ViewCell.ContextActions>
                         <MenuItem Text="Usuń"
-                                  IsDestructive="True"/>
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.DeleteExerciseCommand,
+                                    Source={x:Reference ChooseExercise}}"
+                                  CommandParameter="{Binding}"/>
                         <MenuItem Text="Edytuj"
-                                  IsDestructive="True"/>
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.EditExerciseNavCommand,
+                                    Source={x:Reference ChooseExercise}}"
+                                  CommandParameter="{Binding}"/>
                     </ViewCell.ContextActions>
                 </ViewCell>
             </DataTemplate>
