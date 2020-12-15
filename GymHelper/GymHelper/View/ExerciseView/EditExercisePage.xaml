@@ -9,9 +9,11 @@
     <ContentPage.BindingContext>
         <viewModel:EditExercisePageVM/>
     </ContentPage.BindingContext>
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Zapisz"/>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding EditExerciseCommand}"
+                     CommandParameter="{Binding Exercise}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

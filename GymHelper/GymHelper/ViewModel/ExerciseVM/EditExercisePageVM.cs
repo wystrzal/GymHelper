@@ -11,11 +11,13 @@ namespace GymHelper.ViewModel
 {
     class EditExercisePageVM : BaseViewModel
     {
+        public EditExerciseCommand EditExerciseCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
 
         public EditExercisePageVM()
         {
             unitOfWork = App.Data.UnitOfWork;
+            EditExerciseCommand = new EditExerciseCommand(this);
         }
 
         private Exercise exercise;
