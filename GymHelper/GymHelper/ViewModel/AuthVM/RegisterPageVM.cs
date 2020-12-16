@@ -15,7 +15,7 @@ namespace GymHelper.ViewModel
 {
     public class RegisterPageVM : BaseViewModel
     {
-        public RegisterCommand RegisterCommand { get; set; }
+        public BaseCommand RegisterCommand { get; set; }
         public ICommand Cancel => new Command(async () => await NavigateService.NavigateBack());
 
         private readonly IAuthService authService;

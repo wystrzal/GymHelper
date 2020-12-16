@@ -14,7 +14,7 @@ namespace GymHelper.ViewModel
 {
     public class EditWorkoutPageVM : BaseViewModel
     {
-        public EditWorkoutCommand EditWorkoutCommand { get; private set; }
+        public BaseCommand EditWorkoutCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
         public EditWorkoutPageVM()
         {

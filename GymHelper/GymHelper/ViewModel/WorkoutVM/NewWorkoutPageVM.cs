@@ -12,7 +12,7 @@ namespace GymHelper.ViewModel
 {
     public class NewWorkoutPageVM : BaseViewModel
     {
-        public NewWorkoutCommand NewWorkoutCommand { get; private set; }
+        public BaseCommand NewWorkoutCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
 
         public NewWorkoutPageVM()
