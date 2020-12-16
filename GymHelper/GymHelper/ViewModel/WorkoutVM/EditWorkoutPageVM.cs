@@ -40,13 +40,14 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value;
+                workout.Name = name;
+                EditWorkoutCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
 
         public async Task Update(Workout workout)
         {
-            workout.Name = Name;
             await unitOfWork.Repository<Workout>().Update(workout);
             await unitOfWork.Repository<Workout>().SaveChanges();
             await NavigateService.NavigateBack();

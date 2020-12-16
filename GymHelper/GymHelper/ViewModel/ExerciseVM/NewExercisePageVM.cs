@@ -19,6 +19,7 @@ namespace GymHelper.ViewModel
         {
             unitOfWork = App.Data.UnitOfWork;
             NewExerciseCommand = new NewExerciseCommand(this);
+            exercise = new Exercise { UserId = App.Data.User.UserId };
         }
 
         private Exercise exercise;
@@ -39,18 +40,14 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value.ToLower();
-                Exercise = new Exercise()
-                {
-                    Name = Name
-                };
+                exercise.Name = name;
+                NewExerciseCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
 
         public async Task AddExercise(Exercise exercise)
         {
-            exercise.UserId = App.Data.User.UserId;
-
             if (await ExerciseExist(exercise))
             {
                 await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Istnieje już takie ćwiczenie.", "Ok");

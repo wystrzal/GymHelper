@@ -20,6 +20,7 @@ namespace GymHelper.ViewModel
         {
             authService = App.Data.AuthService;
             LoginCommand = new LoginCommand(this);
+            user = new User();
         }
 
         private User user;
@@ -40,11 +41,8 @@ namespace GymHelper.ViewModel
             set
             {
                 login = value;
-                User = new User()
-                {
-                    Login = Login,
-                    Password = Password
-                };
+                user.Login = login;
+                LoginCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Login");
             }
         }
@@ -56,11 +54,8 @@ namespace GymHelper.ViewModel
             set
             {
                 password = value;
-                User = new User()
-                {
-                    Login = Login,
-                    Password = Password
-                };
+                user.Password = password;
+                LoginCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Password");
             }
         }
