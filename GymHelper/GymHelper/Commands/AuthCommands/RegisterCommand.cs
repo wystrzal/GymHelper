@@ -8,9 +8,8 @@ using System.Windows.Input;
 
 namespace GymHelper.ViewModel.Commands
 {
-    public class RegisterCommand : ICommand
+    public class RegisterCommand : BaseCommand
     {
-        public event EventHandler CanExecuteChanged;
         private readonly RegisterPageVM viewModel;
 
         public RegisterCommand(RegisterPageVM viewModel)
@@ -18,7 +17,7 @@ namespace GymHelper.ViewModel.Commands
             this.viewModel = viewModel;
         }
 
-        public bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter)
         {
             User user = (User)parameter;
 
@@ -40,7 +39,7 @@ namespace GymHelper.ViewModel.Commands
             return true;
         }
 
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             await viewModel.Register((User)parameter);
         }

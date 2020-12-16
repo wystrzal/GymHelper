@@ -7,9 +7,8 @@ using System.Windows.Input;
 
 namespace GymHelper.ViewModel.Commands
 {
-    public class NewWorkoutCommand : ICommand
+    public class NewWorkoutCommand : BaseCommand
     {
-        public event EventHandler CanExecuteChanged;
         private readonly NewWorkoutPageVM viewModel;
 
         public NewWorkoutCommand(NewWorkoutPageVM viewModel)
@@ -17,7 +16,7 @@ namespace GymHelper.ViewModel.Commands
             this.viewModel = viewModel;
         }
 
-        public bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter)
         {
             var workout = (Workout)parameter;
 
@@ -34,7 +33,7 @@ namespace GymHelper.ViewModel.Commands
             return true;
         }
 
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             await viewModel.AddWorkout((Workout)parameter);
         }

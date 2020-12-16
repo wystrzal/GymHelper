@@ -15,7 +15,7 @@ namespace GymHelper.ViewModel
 {
     public class RegisterPageVM : BaseViewModel
     {
-        public RegisterCommand RegisterCommand { get; set; }
+        public BaseCommand RegisterCommand { get; set; }
         public ICommand Cancel => new Command(async () => await NavigateService.NavigateBack());
 
         private readonly IAuthService authService;
@@ -24,6 +24,7 @@ namespace GymHelper.ViewModel
         {
             authService = App.Data.AuthService;
             RegisterCommand = new RegisterCommand(this);
+            user = new User();
         }
 
         private User user;
@@ -44,12 +45,8 @@ namespace GymHelper.ViewModel
             set
             {
                 login = value;
-                User = new User()
-                {
-                    Login = Login,
-                    Password = Password,
-                    RepeatPassword = RepeatPassword
-                };
+                user.Login = login;
+                RegisterCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Login");
             }
         }
@@ -61,12 +58,8 @@ namespace GymHelper.ViewModel
             set
             {
                 password = value;
-                User = new User()
-                {
-                    Login = Login,
-                    Password = Password,
-                    RepeatPassword = RepeatPassword
-                };
+                user.Password = password;
+                RegisterCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Password");
             }
         }
@@ -78,12 +71,8 @@ namespace GymHelper.ViewModel
             set
             {
                 repeatPassword = value;
-                User = new User()
-                {
-                    Login = Login,
-                    Password = Password,
-                    RepeatPassword = RepeatPassword
-                };
+                user.RepeatPassword = repeatPassword;
+                RegisterCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("RepeatPassword");
             }
         }

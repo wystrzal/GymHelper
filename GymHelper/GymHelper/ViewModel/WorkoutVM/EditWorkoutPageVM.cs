@@ -12,9 +12,9 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    class EditWorkoutPageVM : BaseViewModel
+    public class EditWorkoutPageVM : BaseViewModel
     {
-        public EditWorkoutCommand EditWorkoutCommand { get; private set; }
+        public BaseCommand EditWorkoutCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
         public EditWorkoutPageVM()
         {
@@ -40,13 +40,14 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value;
+                workout.Name = name;
+                EditWorkoutCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
 
         public async Task Update(Workout workout)
         {
-            workout.Name = Name;
             await unitOfWork.Repository<Workout>().Update(workout);
             await unitOfWork.Repository<Workout>().SaveChanges();
             await NavigateService.NavigateBack();

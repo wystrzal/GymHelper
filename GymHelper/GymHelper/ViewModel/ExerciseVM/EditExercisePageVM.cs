@@ -1,17 +1,19 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
 using GymHelper.Models;
+using GymHelper.ViewModel.Commands;
 using GymHelper.ViewModel.Commands.ExerciseCommands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    class EditExercisePageVM : BaseViewModel
+    public class EditExercisePageVM : BaseViewModel
     {
-        public EditExerciseCommand EditExerciseCommand { get; private set; }
+        public BaseCommand EditExerciseCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
 
         public EditExercisePageVM()
@@ -38,13 +40,14 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value;
+                exercise.Name = name;
+                EditExerciseCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
 
-        public async void Update(Exercise exercise)
+        public async Task Update(Exercise exercise)
         {
-            exercise.Name = Name;
             await unitOfWork.Repository<Exercise>().Update(exercise);
             await unitOfWork.Repository<Exercise>().SaveChanges();
             await NavigateService.NavigateBack();

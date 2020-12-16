@@ -12,13 +12,14 @@ namespace GymHelper.ViewModel
 {
     public class NewWorkoutPageVM : BaseViewModel
     {
-        public NewWorkoutCommand NewWorkoutCommand { get; private set; }
+        public BaseCommand NewWorkoutCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
 
         public NewWorkoutPageVM()
         {
             NewWorkoutCommand = new NewWorkoutCommand(this);
             unitOfWork = App.Data.UnitOfWork;
+            workout = new Workout { UserId = App.Data.User.UserId };
         }
 
         private Workout workout;
@@ -39,11 +40,8 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value.ToLower();
-                Workout = new Workout()
-                {
-                    Name = Name,
-                    UserId = App.Data.User.UserId
-                };
+                workout.Name = name;
+                NewWorkoutCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
