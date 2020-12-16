@@ -36,15 +36,7 @@ namespace GymHelper.ViewModel
             var workouts = await unitOfWork.Repository<Workout>()
                 .ReadAllByCondition(workout => workout.UserId == App.Data.User.UserId, x => x.Date, false);
 
-            Workouts.Clear();
-
-            if (workouts != null && workouts.Count > 0)
-            {
-                foreach (var workout in workouts)
-                {
-                    Workouts.Add(workout);
-                }
-            }
+            Workouts.FillCollection(workouts);
         }
 
         private async Task DeleteWorkout(Workout workout)
