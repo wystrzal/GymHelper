@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             x:Class="GymHelper.View.ExerciseView.ChooseExercisePage"
+             x:Name="ChooseExercise">
+
+    <ContentPage.BindingContext>
+        <viewModel:ChooseExercisePageVM/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="newExercise"
+                     Text="Nowe ćwiczenie"
+                     Command="{Binding NewExerciseNavCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ListView ItemsSource="{Binding Exercises}"
+              BackgroundColor="{DynamicResource blackOlive}"
+              HasUnevenRows="True"
+              SelectionMode="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Grid>
+                        <Label Text="{Binding Name}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="StartAndExpand"
+                               FontSize="16"
+                               Padding="5, 15, 0, 15"/>
+                            
+                        <CheckBox IsChecked="False"
+                                  HorizontalOptions="EndAndExpand"
+                                  VerticalOptions="CenterAndExpand" 
+                                  BindingContext="{Binding}"/>
+                        </Grid>
+
+                        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                    </StackLayout>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Usuń"
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.DeleteExerciseCommand,
+                                    Source={x:Reference ChooseExercise}}"
+                                  CommandParameter="{Binding}"/>
+                        <MenuItem Text="Edytuj"
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.EditExerciseNavCommand,
+                                    Source={x:Reference ChooseExercise}}"
+                                  CommandParameter="{Binding}"/>
+                    </ViewCell.ContextActions>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

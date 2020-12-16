@@ -1,4 +1,5 @@
-﻿using GymHelper.ViewModel;
+﻿using GymHelper.View.ExerciseView;
+using GymHelper.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace GymHelper.View.WorkoutView
         {
             base.OnAppearing();
             await viewModel.ReadWorkouts();
+        }
+
+        private void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            viewModel.NavigateService.Navigate<ChooseExercisePage>();
         }
     }
 }

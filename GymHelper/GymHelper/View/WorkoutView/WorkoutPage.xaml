@@ -17,7 +17,8 @@
     <ListView x:Name="workoutListView"
               HasUnevenRows="True"
               BackgroundColor="{DynamicResource blackOlive}"
-              ItemsSource="{Binding Workouts}">
+              ItemsSource="{Binding Workouts}"
+              ItemSelected="WorkoutListView_ItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
