@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    class NewExercisePageVM : BaseViewModel
+    public class NewExercisePageVM : BaseViewModel
     {
         public NewExerciseCommand NewExerciseCommand { get; private set; }
         private readonly IUnitOfWork unitOfWork;
