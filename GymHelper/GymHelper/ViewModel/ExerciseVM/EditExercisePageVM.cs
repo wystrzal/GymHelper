@@ -11,14 +11,12 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class EditExercisePageVM : BaseViewModel
+    public class EditExercisePageVM : EditDataViewModel
     {
         public BaseCommand EditExerciseCommand { get; private set; }
-        private readonly IUnitOfWork unitOfWork;
 
         public EditExercisePageVM()
         {
-            unitOfWork = App.Data.UnitOfWork;
             EditExerciseCommand = new EditExerciseCommand(this);
         }
 
@@ -44,13 +42,6 @@ namespace GymHelper.ViewModel
                 EditExerciseCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
-        }
-
-        public async Task Update(Exercise exercise)
-        {
-            await unitOfWork.Repository<Exercise>().Update(exercise);
-            await unitOfWork.Repository<Exercise>().SaveChanges();
-            await NavigateService.NavigateBack();
         }
     }
 }
