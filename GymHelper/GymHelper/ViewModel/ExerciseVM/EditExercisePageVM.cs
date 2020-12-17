@@ -38,7 +38,7 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value;
-                exercise.Name = name;
+                exercise.Name = name.ToLower();
                 EditExerciseCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
