@@ -36,7 +36,7 @@ namespace GymHelper.ViewModel.Commands.ExerciseCommands
 
         public override async void Execute(object parameter)
         {
-            await viewModel.AddExercise((Exercise)parameter);
+            await viewModel.AddData((Exercise)parameter);
         }
     }
 }
