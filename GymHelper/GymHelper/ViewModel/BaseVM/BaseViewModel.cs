@@ -11,9 +11,12 @@ namespace GymHelper.ViewModel
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public INavigateService NavigateService { get; private set; }
+        protected readonly IUnitOfWork unitOfWork;
+
         public BaseViewModel()
         {
             NavigateService = App.Data.NavigateService;
+            unitOfWork = App.Data.UnitOfWork;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
