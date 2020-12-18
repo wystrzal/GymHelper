@@ -2,6 +2,7 @@
 using GymHelper.Data.Services;
 using GymHelper.Models;
 using GymHelper.View;
+using GymHelper.ViewModel.BaseVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,35 +13,18 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    class ChooseExercisePageVM : BaseViewModel
+    public class ChooseExercisePageVM : DisplayDataViewModel<Exercise>
     {
-        public ObservableCollection<Exercise> Exercises { get; set; }
-        public ICommand DeleteExerciseCommand 
-            => new Command<Exercise>(async (exercise) => await DeleteExercise(exercise));
-        public ICommand NewExerciseNavCommand => new Command(async () => await NavigateService.Navigate<NewExercisePage>());
-        public ICommand EditExerciseNavCommand
+        public override ICommand NavigateToAddDataCommand 
+            => new Command(async () => await NavigateService.Navigate<NewExercisePage>());
+        public override ICommand NavigateToEditDataCommand 
             => new Command<Exercise>(async (exercise) => await NavigateService.Navigate<EditExercisePage>(exercise));
 
-        private readonly IUnitOfWork unitOfWork;
-
-        public ChooseExercisePageVM()
-        {
-            Exercises = new ObservableCollection<Exercise>();
-            unitOfWork = App.Data.UnitOfWork;
-        }
-
-        public async Task ReadExercises()
+        public override async Task ReadData()
         {
             var exercises = await unitOfWork.Repository<Exercise>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
 
-            Exercises.FillCollection(exercises);
-        }
-
-        private async Task DeleteExercise(Exercise exercise)
-        {
-            await unitOfWork.Repository<Exercise>().Delete(exercise);
-            await unitOfWork.Repository<Exercise>().SaveChanges();
-            await ReadExercises();
+            Collection.FillCollection(exercises);
         }
     }
 }

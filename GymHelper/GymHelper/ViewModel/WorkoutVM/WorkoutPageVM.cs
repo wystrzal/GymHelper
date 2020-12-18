@@ -3,6 +3,7 @@ using GymHelper.Data.Interfaces;
 using GymHelper.Data.Services;
 using GymHelper.Models;
 using GymHelper.View;
+using GymHelper.ViewModel.BaseVM;
 using GymHelper.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -15,35 +16,19 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    public class WorkoutPageVM : BaseViewModel
+    public class WorkoutPageVM : DisplayDataViewModel<Workout>
     {
-        public ObservableCollection<Workout> Workouts { get; set; }
-        public ICommand NewWorkoutNavCommand => new Command(async () => await NavigateService.Navigate<NewWorkoutPage>());
-        public ICommand DeleteWorkoutCommand
-            => new Command<Workout>(async (workout) => await DeleteWorkout(workout));
-        public ICommand EditWorkoutNavCommand
-            => new Command<Workout>(async (workout) => await NavigateService.Navigate<EditWorkoutPage>(workout));
+        public override ICommand NavigateToAddDataCommand 
+            => new Command(async () => await NavigateService.Navigate<NewWorkoutPage>());
+        public override ICommand NavigateToEditDataCommand
+             => new Command<Workout>(async (workout) => await NavigateService.Navigate<EditWorkoutPage>(workout));
 
-        private readonly IUnitOfWork unitOfWork;
-        public WorkoutPageVM()
-        {
-            Workouts = new ObservableCollection<Workout>();
-            unitOfWork = App.Data.UnitOfWork;
-        }
-
-        public async Task ReadWorkouts()
+        public override async Task ReadData()
         {
             var workouts = await unitOfWork.Repository<Workout>()
                 .ReadAllByCondition(workout => workout.UserId == App.Data.User.UserId, x => x.Date, false);
 
-            Workouts.FillCollection(workouts);
-        }
-
-        private async Task DeleteWorkout(Workout workout)
-        {
-            await unitOfWork.Repository<Workout>().Delete(workout);
-            await unitOfWork.Repository<Workout>().SaveChanges();
-            await ReadWorkouts();
+            Collection.FillCollection(workouts);
         }
     }
 }
