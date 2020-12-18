@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel.BaseVM
 {
-    public abstract class NewDataViewModel : BaseViewModel
+    public abstract class AddDataViewModel : BaseViewModel
     {
         public virtual async Task AddData<TEntity>(TEntity entity) where TEntity : class
         {

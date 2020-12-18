@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class NewWorkoutPageVM : NewDataViewModel
+    public class NewWorkoutPageVM : AddDataViewModel
     {
         public BaseCommand NewWorkoutCommand { get; private set; }
 
