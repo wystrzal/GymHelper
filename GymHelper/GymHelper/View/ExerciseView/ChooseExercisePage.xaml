@@ -12,10 +12,10 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="newExercise"
                      Text="Nowe ćwiczenie"
-                     Command="{Binding NewExerciseNavCommand}"/>
+                     Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <ListView ItemsSource="{Binding Exercises}"
+    <ListView ItemsSource="{Binding Collection}"
               BackgroundColor="{DynamicResource blackOlive}"
               HasUnevenRows="True"
               SelectionMode="None">
@@ -42,12 +42,12 @@
                     <ViewCell.ContextActions>
                         <MenuItem Text="Usuń"
                                   IsDestructive="True"
-                                  Command="{Binding Path=BindingContext.DeleteExerciseCommand,
+                                  Command="{Binding Path=BindingContext.DeleteDataCommand,
                                     Source={x:Reference ChooseExercise}}"
                                   CommandParameter="{Binding}"/>
                         <MenuItem Text="Edytuj"
                                   IsDestructive="True"
-                                  Command="{Binding Path=BindingContext.EditExerciseNavCommand,
+                                  Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
                                     Source={x:Reference ChooseExercise}}"
                                   CommandParameter="{Binding}"/>
                     </ViewCell.ContextActions>

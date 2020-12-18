@@ -25,7 +25,7 @@ namespace GymHelper.View.ExerciseView
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.ReadExercises();
+            await viewModel.ReadData();
         }
     }
 }

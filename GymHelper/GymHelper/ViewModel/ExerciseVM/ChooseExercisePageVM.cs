@@ -13,25 +13,18 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    public class ChooseExercisePageVM : DisplayDataViewModel
+    public class ChooseExercisePageVM : DisplayDataViewModel<Exercise>
     {
-        public ObservableCollection<Exercise> Exercises { get; set; }
-        public ICommand DeleteExerciseCommand 
-            => new Command<Exercise>(async (exercise) => await DeleteData(exercise));
-        public ICommand NewExerciseNavCommand => new Command(async () => await NavigateService.Navigate<NewExercisePage>());
-        public ICommand EditExerciseNavCommand
+        public override ICommand NavigateToAddDataCommand 
+            => new Command(async () => await NavigateService.Navigate<NewExercisePage>());
+        public override ICommand NavigateToEditDataCommand 
             => new Command<Exercise>(async (exercise) => await NavigateService.Navigate<EditExercisePage>(exercise));
-
-        public ChooseExercisePageVM()
-        {
-            Exercises = new ObservableCollection<Exercise>();
-        }
 
         public override async Task ReadData()
         {
             var exercises = await unitOfWork.Repository<Exercise>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
 
-            Exercises.FillCollection(exercises);
+            Collection.FillCollection(exercises);
         }
     }
 }

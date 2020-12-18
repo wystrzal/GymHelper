@@ -24,7 +24,7 @@ namespace GymHelper.View.WorkoutView
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.ReadWorkouts();
+            await viewModel.ReadData();
         }
 
         private void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
