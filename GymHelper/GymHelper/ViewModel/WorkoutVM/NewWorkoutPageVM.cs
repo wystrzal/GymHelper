@@ -1,6 +1,7 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
 using GymHelper.Models;
+using GymHelper.ViewModel.BaseVM;
 using GymHelper.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,13 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class NewWorkoutPageVM : BaseViewModel
+    public class NewWorkoutPageVM : NewDataViewModel
     {
         public BaseCommand NewWorkoutCommand { get; private set; }
-        private readonly IUnitOfWork unitOfWork;
 
         public NewWorkoutPageVM()
         {
             NewWorkoutCommand = new NewWorkoutCommand(this);
-            unitOfWork = App.Data.UnitOfWork;
             workout = new Workout { UserId = App.Data.User.UserId };
         }
 
@@ -43,16 +42,6 @@ namespace GymHelper.ViewModel
                 workout.Name = name.ToLower();
                 NewWorkoutCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
-            }
-        }
-
-        public async Task AddWorkout(Workout workout)
-        {
-            await unitOfWork.Repository<Workout>().Add(workout);
-
-            if (await unitOfWork.Repository<Workout>().SaveChanges())
-            {
-                await NavigateService.NavigateBack();
             }
         }
     }

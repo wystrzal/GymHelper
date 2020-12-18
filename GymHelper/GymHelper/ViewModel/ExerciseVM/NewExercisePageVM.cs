@@ -1,6 +1,7 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
 using GymHelper.Models;
+using GymHelper.ViewModel.BaseVM;
 using GymHelper.ViewModel.Commands;
 using GymHelper.ViewModel.Commands.ExerciseCommands;
 using System;
@@ -11,13 +12,11 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class NewExercisePageVM : BaseViewModel
+    public class NewExercisePageVM : NewDataViewModel
     {
         public BaseCommand NewExerciseCommand { get; private set; }
-        private readonly IUnitOfWork unitOfWork;
         public NewExercisePageVM()
         {
-            unitOfWork = App.Data.UnitOfWork;
             NewExerciseCommand = new NewExerciseCommand(this);
             exercise = new Exercise { UserId = App.Data.User.UserId };
         }
@@ -46,20 +45,15 @@ namespace GymHelper.ViewModel
             }
         }
 
-        public async Task AddExercise(Exercise exercise)
+        public override async Task AddData<TEntity>(TEntity entity)
         {
-            if (await ExerciseExist(exercise))
+            if (await ExerciseExist(entity as Exercise))
             {
                 await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Istnieje już takie ćwiczenie.", "Ok");
                 return;
             }
 
-            await unitOfWork.Repository<Exercise>().Add(exercise); 
-            
-            if (await unitOfWork.Repository<Exercise>().SaveChanges())
-            {
-                await NavigateService.NavigateBack();
-            }
+            await base.AddData(entity);
         }
 
         private async Task<bool> ExerciseExist(Exercise exercise)
