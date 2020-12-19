@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymHelper.ViewModel.Commands;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ namespace GymHelper.ViewModel.BaseVM
 {
     public abstract class AddDataViewModel : BaseViewModel
     {
+        public abstract BaseCommand AddDataCommand { get; }
+
         public virtual async Task AddData<TEntity>(TEntity entity) where TEntity : class
         {
             await unitOfWork.Repository<TEntity>().Add(entity);

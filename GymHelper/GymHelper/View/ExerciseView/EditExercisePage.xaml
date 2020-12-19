@@ -12,7 +12,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Zapisz"
-                     Command="{Binding EditExerciseCommand}"
+                     Command="{Binding EditDataCommand}"
                      CommandParameter="{Binding Exercise}"/>
     </ContentPage.ToolbarItems>
 

@@ -14,11 +14,12 @@ namespace GymHelper.ViewModel
 {
     public class EditWorkoutPageVM : EditDataViewModel
     {
-        public BaseCommand EditWorkoutCommand { get; private set; }
+        private readonly EditWorkoutCommand editWorkoutCommand;
+        public override BaseCommand EditDataCommand { get { return editWorkoutCommand; } }
 
         public EditWorkoutPageVM()
         {
-            EditWorkoutCommand = new EditWorkoutCommand(this);
+            editWorkoutCommand = new EditWorkoutCommand(this);
         }
 
         private Workout workout;
@@ -40,7 +41,7 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 workout.Name = name.ToLower();
-                EditWorkoutCommand.RaiseCanExecuteChanged();
+                EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }

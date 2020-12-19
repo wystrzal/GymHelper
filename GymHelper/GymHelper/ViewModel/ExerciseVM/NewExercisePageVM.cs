@@ -14,10 +14,12 @@ namespace GymHelper.ViewModel
 {
     public class NewExercisePageVM : AddDataViewModel
     {
-        public BaseCommand NewExerciseCommand { get; private set; }
+        private readonly NewExerciseCommand newExerciseCommand;
+        public override BaseCommand AddDataCommand { get { return newExerciseCommand; } }
+
         public NewExercisePageVM()
         {
-            NewExerciseCommand = new NewExerciseCommand(this);
+            newExerciseCommand = new NewExerciseCommand(this);
             exercise = new Exercise { UserId = App.Data.User.UserId };
         }
 
@@ -40,10 +42,11 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 exercise.Name = name.ToLower();
-                NewExerciseCommand.RaiseCanExecuteChanged();
+                AddDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
+
 
         public override async Task AddData<TEntity>(TEntity entity)
         {
