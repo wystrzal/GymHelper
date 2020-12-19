@@ -15,10 +15,8 @@ namespace GymHelper.Helpers
             {
                 return castValue.Capitalize();
             }
-            else
-            {
-                return value;
-            }
+
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
