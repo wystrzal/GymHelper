@@ -13,6 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:FirstLetterConverter x:Key="letterConverter"/>
+            <converter:DateTimeConverter x:Key="dateTimeConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -31,7 +32,7 @@
                 <ViewCell>
                     <StackLayout>
                         <Grid>
-                            <Label Text="{Binding Date}"
+                            <Label Text="{Binding Date, Converter={StaticResource dateTimeConverter}}"
                                    TextColor="{DynamicResource vividVermilion}"
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="StartAndExpand"
