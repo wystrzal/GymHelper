@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:converter="clr-namespace:GymHelper.Helpers"
              x:Class="GymHelper.View.ExerciseView.ChooseExercisePage"
              x:Name="ChooseExercise">
 
     <ContentPage.BindingContext>
         <viewModel:ChooseExercisePageVM/>
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FirstLetterConverter x:Key="letterConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="newExercise"
                      Text="Nowe ćwiczenie"
@@ -24,14 +31,14 @@
                 <ViewCell>
                     <StackLayout>
                         <Grid>
-                        <Label Text="{Binding Name}"
+                            <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
                                TextColor="{DynamicResource vividVermilion}"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="StartAndExpand"
                                FontSize="16"
                                Padding="5, 15, 0, 15"/>
-                            
-                        <CheckBox IsChecked="False"
+
+                            <CheckBox IsChecked="False"
                                   HorizontalOptions="EndAndExpand"
                                   VerticalOptions="CenterAndExpand" 
                                   BindingContext="{Binding}"/>
