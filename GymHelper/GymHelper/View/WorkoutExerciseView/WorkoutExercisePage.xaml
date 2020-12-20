@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GymHelper.Helpers"
+             x:Class="GymHelper.View.ExerciseView.WorkoutExercisePage"
+             x:Name="WorkoutExercise">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FirstLetterConverter x:Key="letterConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Dodaj"/>
+    </ContentPage.ToolbarItems>
+
+    <ListView ItemsSource="{Binding Collection}"
+              BackgroundColor="{DynamicResource blackOlive}"
+              HasUnevenRows="True"
+              SelectionMode="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    
+                    <StackLayout>
+                        <Label Text="{Binding Exercise.Name, Converter={StaticResource letterConverter}}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+
+                        <Label Text="{Binding Series, StringFormat='Serie: {0}'}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+
+                        <Label Text="{Binding Repetition, StringFormat='Powtórzenia: {0}'}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+
+                        <Label Text="{Binding Weight, StringFormat='Ciężar: {0}'}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+
+                        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                    </StackLayout>
+
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Usuń"
+                                  IsDestructive="True"/>
+                        <MenuItem Text="Edytuj"
+                                  IsDestructive="True"/>
+                    </ViewCell.ContextActions>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
