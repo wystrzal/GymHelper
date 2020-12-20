@@ -12,12 +12,13 @@ namespace GymHelper.Models
     {
         public int WorkoutId { get; set; }
 
-        public virtual User User { get; set; }
-        public int UserId { get; set; }
-
         [Required]
         public string Name { get; set; }
 
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+
         public DateTime Date { get; set; } = DateTime.Now;
+        public virtual ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
     }
 }
