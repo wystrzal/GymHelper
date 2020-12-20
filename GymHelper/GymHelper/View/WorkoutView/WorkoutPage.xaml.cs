@@ -28,7 +28,7 @@ namespace GymHelper.View.WorkoutView
             await viewModel.ReadData();
         }
 
-        private async Task WorkoutListView_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
+        private async void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var workout = (Workout)workoutListView.SelectedItem;
             if (workout != null)
