@@ -11,6 +11,7 @@ namespace GymHelper.Helpers
     public class DataStorage
     {
         public User User { get; set; }
+        public Workout Workout { get; set; }
         public DataContext DataContext { get; set; }
         public IAuthService AuthService { get; set; }
         public IUnitOfWork UnitOfWork { get; set; }
