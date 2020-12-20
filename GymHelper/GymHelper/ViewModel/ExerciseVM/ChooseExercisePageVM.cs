@@ -45,6 +45,7 @@ namespace GymHelper.ViewModel
             if (!await WorkoutExerciseExist(workoutExercise))
             {
                 await unitOfWork.Repository<WorkoutExercise>().Add(workoutExercise);
+                await unitOfWork.Repository<WorkoutExercise>().SaveChanges();
             }
         }
 

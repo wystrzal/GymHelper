@@ -40,7 +40,8 @@
 
                             <CheckBox IsChecked="False"
                                   HorizontalOptions="EndAndExpand"
-                                  VerticalOptions="CenterAndExpand" 
+                                  VerticalOptions="CenterAndExpand"
+                                  CheckedChanged="CheckBox_CheckedChanged"
                                   BindingContext="{Binding}"/>
                         </Grid>
 

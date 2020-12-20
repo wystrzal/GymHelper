@@ -65,9 +65,7 @@
                                   CommandParameter="{Binding}"/>
                         <MenuItem Text="Edytuj"
                                   IsDestructive="True"
-                                  Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
-                                    Source={x:Reference WorkoutExercise}}"
-                                  CommandParameter="{Binding}"/>
+                                  />
                     </ViewCell.ContextActions>
                 </ViewCell>
             </DataTemplate>
