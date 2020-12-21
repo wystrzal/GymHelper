@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
              x:Class="GymHelper.View.EditWorkoutExercisePage"
              BackgroundColor="{StaticResource blackOlive}">
 
+    <ContentPage.BindingContext>
+        <viewModel:EditWorkoutExercisePageVM/>
+    </ContentPage.BindingContext>
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Zapisz"/>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding EditDataCommand}"
+                     CommandParameter="{Binding WorkoutExercise}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
