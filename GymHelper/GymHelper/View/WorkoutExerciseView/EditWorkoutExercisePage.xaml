@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymHelper.View.EditWorkoutExercisePage"
+             BackgroundColor="{StaticResource blackOlive}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="seriesEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Series, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Serie"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+            <Entry x:Name="repetitionEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Repetition, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Powtórzenia"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+            <Entry x:Name="weightEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Weight, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Ciężar"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
