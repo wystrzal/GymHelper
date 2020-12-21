@@ -24,21 +24,6 @@ namespace GymHelper.ViewModel.Commands.WorkoutExerciseCommands
                 return false;
             }
 
-            if (string.IsNullOrEmpty(workoutExercise.Series.ToString()))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(workoutExercise.Repetition.ToString()))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(workoutExercise.Weight.ToString()))
-            {
-                return false;
-            }
-
             return true;
         }
 

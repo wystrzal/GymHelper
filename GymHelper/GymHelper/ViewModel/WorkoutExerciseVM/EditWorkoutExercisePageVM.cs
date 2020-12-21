@@ -37,6 +37,10 @@ namespace GymHelper.ViewModel
             set
             {
                 series = value;
+                if (workoutExercise != null)
+                {
+                    workoutExercise.Series = series;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Series");
             }
@@ -49,6 +53,10 @@ namespace GymHelper.ViewModel
             set
             {
                 repetition = value;
+                if (workoutExercise != null)
+                {
+                    workoutExercise.Repetition = repetition;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Repetition");
             }
@@ -61,6 +69,10 @@ namespace GymHelper.ViewModel
             set
             {
                 weight = value;
+                if (workoutExercise != null)
+                {
+                    workoutExercise.Weight = weight;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Weight");
             }
