@@ -11,10 +11,13 @@ namespace GymHelper.Models
     public class Exercise
     {
         public int ExerciseId { get; set; }
+
         [Required]
         public string Name { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
 
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+
+        public virtual ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
     }
 }

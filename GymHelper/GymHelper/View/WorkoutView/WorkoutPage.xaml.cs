@@ -1,4 +1,5 @@
-﻿using GymHelper.View.ExerciseView;
+﻿using GymHelper.Models;
+using GymHelper.View.ExerciseView;
 using GymHelper.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,16 @@ namespace GymHelper.View.WorkoutView
             await viewModel.ReadData();
         }
 
-        private void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            viewModel.NavigateService.Navigate<ChooseExercisePage>();
+            var workout = (Workout)workoutListView.SelectedItem;
+            if (workout != null)
+            {
+                App.Data.Workout = workout;
+                await viewModel.NavigateService.Navigate<WorkoutExercisePage>();
+            }
+
+            workoutListView.SelectedItem = null;
         }
     }
 }
