@@ -20,7 +20,8 @@ namespace GymHelper.ViewModel
     {
         public override ICommand NavigateToAddDataCommand
             => new Command(async () => await NavigateService.Navigate<ChooseExercisePage>());
-        public override ICommand NavigateToEditDataCommand => throw new NotImplementedException();
+        public override ICommand NavigateToEditDataCommand
+            => new Command(async (data) => await NavigateService.Navigate<EditWorkoutExercisePage>(data));
 
         public override async Task ReadData()
         {
