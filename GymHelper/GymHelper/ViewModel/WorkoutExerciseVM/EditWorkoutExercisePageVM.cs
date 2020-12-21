@@ -1,6 +1,7 @@
 ﻿using GymHelper.Data.Interfaces;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
+using GymHelper.ViewModel.Commands.WorkoutExerciseCommands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,13 @@ namespace GymHelper.ViewModel
 {
     public class EditWorkoutExercisePageVM : EditDataViewModel
     {
-        public override BaseCommand EditDataCommand => throw new NotImplementedException();
+        private readonly EditWorkoutExerciseCommand editWorkoutExerciseCommand;
+        public override BaseCommand EditDataCommand { get { return editWorkoutExerciseCommand; } }
+
+        public EditWorkoutExercisePageVM()
+        {
+            editWorkoutExerciseCommand = new EditWorkoutExerciseCommand(this);
+        }
 
         private WorkoutExercise workoutExercise;
         public WorkoutExercise WorkoutExercise
