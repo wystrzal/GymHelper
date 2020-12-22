@@ -20,7 +20,6 @@ namespace GymHelper.Models
 
         [Required]
         public string RepeatPassword { get; set; }
-
-        public virtual ICollection<Workout> Workouts { get; set; }
+        public virtual Diet Diet { get; set; }
     }
 }
