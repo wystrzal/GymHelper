@@ -10,5 +10,6 @@ namespace GymHelper.Models
         public int DietId { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
