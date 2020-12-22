@@ -13,9 +13,18 @@ namespace GymHelper.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DietPage : ContentPage
     {
+        private readonly DietPageVM viewModel;
+
         public DietPage()
         {
             InitializeComponent();
+            viewModel = BindingContext as DietPageVM;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.ReadData();
         }
     }
 }
