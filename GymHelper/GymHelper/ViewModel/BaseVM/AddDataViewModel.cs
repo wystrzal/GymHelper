@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel.BaseVM
 {
-    public abstract class AddDataViewModel : BaseViewModel
+    public abstract class AddDataViewModel<TEntity> : BaseViewModel
+        where TEntity : class
     {
         public abstract BaseCommand AddDataCommand { get; }
 
-        public virtual async Task AddData<TEntity>(TEntity entity) where TEntity : class
+        public virtual async Task AddData(TEntity entity)
         {
             await unitOfWork.Repository<TEntity>().Add(entity);
             await unitOfWork.Repository<TEntity>().SaveChanges();
