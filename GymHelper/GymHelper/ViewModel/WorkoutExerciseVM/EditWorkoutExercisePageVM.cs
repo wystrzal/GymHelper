@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class EditWorkoutExercisePageVM : EditDataViewModel
+    public class EditWorkoutExercisePageVM : EditDataViewModel<WorkoutExercise>
     {
         private readonly EditWorkoutExerciseCommand editWorkoutExerciseCommand;
         public override BaseCommand EditDataCommand { get { return editWorkoutExerciseCommand; } }

@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    public class EditWorkoutPageVM : EditDataViewModel
+    public class EditWorkoutPageVM : EditDataViewModel<Workout>
     {
         private readonly EditWorkoutCommand editWorkoutCommand;
         public override BaseCommand EditDataCommand { get { return editWorkoutCommand; } }
