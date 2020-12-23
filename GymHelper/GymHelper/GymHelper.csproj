@@ -28,6 +28,9 @@
     <EmbeddedResource Update="View\DietView\DietPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\DietView\EditDietProductPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\ExerciseView\ChooseExercisePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
