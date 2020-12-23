@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class NewExercisePageVM : AddDataViewModel
+    public class NewExercisePageVM : AddDataViewModel<Exercise>
     {
         private readonly NewExerciseCommand newExerciseCommand;
         public override BaseCommand AddDataCommand { get { return newExerciseCommand; } }
@@ -48,15 +48,15 @@ namespace GymHelper.ViewModel
         }
 
 
-        public override async Task AddData<TEntity>(TEntity entity)
+        public override async Task AddData(Exercise exercise)
         {
-            if (await ExerciseExist(entity as Exercise))
+            if (await ExerciseExist(exercise))
             {
                 await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Istnieje już takie ćwiczenie.", "Ok");
                 return;
             }
 
-            await base.AddData(entity);
+            await base.AddData(exercise);
         }
 
         private async Task<bool> ExerciseExist(Exercise exercise)

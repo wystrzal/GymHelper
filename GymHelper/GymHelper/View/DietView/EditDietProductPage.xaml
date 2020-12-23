@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             x:Class="GymHelper.View.EditDietProductPage"
+             BackgroundColor="{StaticResource blackOlive}">
+
+    <ContentPage.BindingContext>
+        <viewModel:EditDietProductPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="gramsEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Grams, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Gramy"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

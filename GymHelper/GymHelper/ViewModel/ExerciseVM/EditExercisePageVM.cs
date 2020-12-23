@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GymHelper.ViewModel
 {
-    public class EditExercisePageVM : EditDataViewModel
+    public class EditExercisePageVM : EditDataViewModel<Exercise>
     {
         private readonly EditExerciseCommand editExerciseCommand;
         public override BaseCommand EditDataCommand { get { return editExerciseCommand; } }

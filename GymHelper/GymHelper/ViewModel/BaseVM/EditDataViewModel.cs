@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public abstract class EditDataViewModel : BaseViewModel
+    public abstract class EditDataViewModel<TEntity> : BaseViewModel
+        where TEntity : class
     {
         public abstract BaseCommand EditDataCommand { get; }
 
-        public virtual async Task Update<TEntity>(TEntity entity) where TEntity : class
+        public virtual async Task Update(TEntity entity)
         {
             await unitOfWork.Repository<TEntity>().Update(entity);
             await unitOfWork.Repository<TEntity>().SaveChanges();
