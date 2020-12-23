@@ -16,7 +16,8 @@ namespace GymHelper.ViewModel
     public class DietPageVM : DisplayDataViewModel<Product>
     {
         public override ICommand NavigateToAddDataCommand => throw new NotImplementedException();
-        public override ICommand NavigateToEditDataCommand => throw new NotImplementedException();
+        public override ICommand NavigateToEditDataCommand
+            => new Command<Product>(async (product) => await NavigateService.Navigate<EditDietProductPage>(product));
 
         public override async Task ReadData()
         {

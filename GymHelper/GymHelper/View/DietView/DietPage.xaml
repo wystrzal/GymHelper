@@ -84,7 +84,10 @@
                                     Source={x:Reference Diet}}"
                                   CommandParameter="{Binding}"/>
                         <MenuItem Text="Edytuj"
-                                  IsDestructive="True"/>
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
+                                    Source={x:Reference Diet}}"
+                                  CommandParameter="{Binding}"/>
                     </ViewCell.ContextActions>
                 </ViewCell>
             </DataTemplate>
