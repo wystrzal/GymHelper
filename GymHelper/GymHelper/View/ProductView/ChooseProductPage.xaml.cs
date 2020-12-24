@@ -15,8 +15,18 @@ namespace GymHelper.View.ProductView
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChooseProductPage : ContentPage
     {
+        private readonly ChooseProductPageVM viewModel;
+
         public ChooseProductPage()
         {
+            InitializeComponent();
+            viewModel = BindingContext as ChooseProductPageVM;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.ReadData();
         }
     }
 }
