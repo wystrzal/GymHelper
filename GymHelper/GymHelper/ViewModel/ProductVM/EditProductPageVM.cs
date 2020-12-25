@@ -12,7 +12,13 @@ namespace GymHelper.ViewModel
 {
     public class EditProductPageVM : EditDataViewModel<Product>
     {
-        public override BaseCommand EditDataCommand => throw new NotImplementedException();
+        private readonly EditProductCommand editProductCommand;
+        public override BaseCommand EditDataCommand { get { return editProductCommand; } }
+
+        public EditProductPageVM()
+        {
+            editProductCommand = new EditProductCommand(this);
+        }
 
         private Product product;
         public Product Product
