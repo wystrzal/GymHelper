@@ -14,10 +14,12 @@ namespace GymHelper.ViewModel
 {
     public class NewProductPageVM : AddDataViewModel<Product>
     {
-        public override BaseCommand AddDataCommand => throw new NotImplementedException();
+        private readonly NewProductCommand newProductCommand;
+        public override BaseCommand AddDataCommand { get { return newProductCommand; } }
 
         public NewProductPageVM()
         {
+            newProductCommand = new NewProductCommand(this);
             product = new Product
             {
                 UserId = App.Data.User.UserId,
