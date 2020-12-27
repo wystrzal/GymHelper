@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             x:Class="GymHelper.View.ProductView.NewProductPage"
+             BackgroundColor="{StaticResource blackOlive}">
+
+    <ContentPage.BindingContext>
+        <viewModel:NewProductPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz" 
+                     Command="{Binding AddDataCommand}"
+                     CommandParameter="{Binding Product}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="nameEntry"
+                   Text="{Binding Name, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Nazwa"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+
+            <Entry x:Name="gramsEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Grams, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Gramy"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+
+            <Entry x:Name="caloriesEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Calories, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Kalorie"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+
+            <Entry x:Name="proteinEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Protein, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Białko"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+
+            <Entry x:Name="carbohydratesEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Carbohydrates, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Węglowodany"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+
+            <Entry x:Name="fatEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Fat, Mode=TwoWay}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="Tłuszcz"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+            </Entry>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
