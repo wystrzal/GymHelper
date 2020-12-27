@@ -17,7 +17,8 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Dodaj"/>
+        <ToolbarItem Text="Dodaj"
+                     Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ListView ItemsSource="{Binding Collection}"
