@@ -17,7 +17,7 @@ namespace GymHelper.ViewModel
 {
     public class ChooseProductPageVM : ChooseDataViewModel<Product>
     {
-        public override ICommand NavigateToAddDataCommand => throw new NotImplementedException();
+        public override ICommand NavigateToAddDataCommand => new Command(async () => await NavigateService.Navigate<NewProductPage>());
         public override ICommand NavigateToEditDataCommand => throw new NotImplementedException();
 
         public override async Task ReadData()

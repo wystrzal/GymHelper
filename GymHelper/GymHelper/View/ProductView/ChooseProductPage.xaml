@@ -18,7 +18,8 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="newProduct"
-                     Text="Nowy Produkt"/>
+                     Text="Nowy Produkt"
+                     Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ListView ItemsSource="{Binding Collection}"
