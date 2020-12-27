@@ -10,7 +10,9 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Zapisz"/>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding EditDataCommand}"
+                     CommandParameter="{Binding Product}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

@@ -1,4 +1,5 @@
-﻿using GymHelper.Data.Interfaces;
+﻿using GymHelper.Commands.DietCommand;
+using GymHelper.Data.Interfaces;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
 using GymHelper.ViewModel.Commands.WorkoutExerciseCommands;
@@ -13,7 +14,8 @@ namespace GymHelper.ViewModel
 {
     public class EditDietProductPageVM : EditDataViewModel<Product>
     {
-        public override BaseCommand EditDataCommand => throw new NotImplementedException();
+        private readonly EditDietProductCommand editDietProductCommand;
+        public override BaseCommand EditDataCommand { get { return editDietProductCommand; } }
 
         private Product product;
         public Product Product
@@ -33,6 +35,7 @@ namespace GymHelper.ViewModel
             set
             {
                 grams = value;
+                product.Grams = grams;
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Grams");
             }
