@@ -44,7 +44,7 @@ namespace GymHelper.ViewModel
             set
             {
                 name = value;
-                product.Name = name;
+                product.Name = name.ToLower();
                 AddDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
