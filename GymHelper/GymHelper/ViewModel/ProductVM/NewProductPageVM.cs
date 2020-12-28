@@ -22,8 +22,7 @@ namespace GymHelper.ViewModel
             newProductCommand = new NewProductCommand(this);
             product = new Product
             {
-                UserId = App.Data.User.UserId,
-                DietId = App.Data.User.Diet.DietId
+                UserId = App.Data.User.UserId
             };
         }
 

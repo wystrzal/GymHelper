@@ -49,7 +49,7 @@ namespace GymHelper.ViewModel
             
             if (!await ProductExistInDiet(product, diet))
             {
-                diet.Products.Add(product);
+                product.DietId = diet.DietId;
                 await unitOfWork.Repository<Diet>().SaveChanges();
             }
         }

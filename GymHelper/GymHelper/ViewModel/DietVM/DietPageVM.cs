@@ -31,11 +31,10 @@ namespace GymHelper.ViewModel
 
         public override async Task DeleteData(Product entity)
         {
-            var diet = await unitOfWork
-                .Repository<Diet>().ReadFirstByConditionWithInclude(x => x.DietId == App.Data.User.Diet.DietId, y => y.Products);
-
+            var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.DietId == App.Data.User.Diet.DietId);
             diet.Products.Remove(entity);
-            await unitOfWork.Repository<Diet>().SaveChanges();
+
+            await unitOfWork.Repository<Product>().SaveChanges();
 
             await ReadData();
         }
