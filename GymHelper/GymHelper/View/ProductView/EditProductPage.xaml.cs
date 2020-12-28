@@ -19,13 +19,13 @@ namespace GymHelper.View.ProductView
         {
             InitializeComponent();
             var viewModel = BindingContext as EditProductPageVM;
+            viewModel.Product = product;
             nameEntry.Text = product.Name;
             gramsEntry.Text = product.Grams.ToString();
             caloriesEntry.Text = product.Calories.ToString();
             proteinEntry.Text = product.Protein.ToString();
             carbohydratesEntry.Text = product.Carbohydrates.ToString();
             fatEntry.Text = product.Fat.ToString();
-            viewModel.Product = product;
         }
     }
 }

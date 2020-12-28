@@ -51,7 +51,10 @@ namespace GymHelper.ViewModel
             set
             {
                 grams = value;
-                product.Grams = grams;
+                if (product != null)
+                {
+                    product.Grams = grams;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Grams");
             }
@@ -64,7 +67,10 @@ namespace GymHelper.ViewModel
             set
             {
                 calories = value;
-                product.Calories = calories;
+                if (product != null)
+                {
+                    product.Calories = calories;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Calories");
             }
@@ -77,7 +83,10 @@ namespace GymHelper.ViewModel
             set
             {
                 carbohydrates = value;
-                product.Carbohydrates = carbohydrates;
+                if (product != null)
+                {
+                    product.Carbohydrates = carbohydrates;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Carbohydrates");
             }
@@ -90,7 +99,10 @@ namespace GymHelper.ViewModel
             set
             {
                 protein = value;
-                product.Protein = protein;
+                if (product != null)
+                {
+                    product.Protein = protein;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Protein");
             }
@@ -103,7 +115,10 @@ namespace GymHelper.ViewModel
             set
             {
                 fat = value;
-                product.Fat = fat;
+                if (product != null)
+                {
+                    product.Fat = fat;
+                }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Fat");
             }

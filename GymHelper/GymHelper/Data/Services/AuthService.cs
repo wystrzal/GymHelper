@@ -22,7 +22,8 @@ namespace GymHelper.Data
 
         public async Task<bool> LoginTo(string username, string password)
         {
-            var user = await unitOfWork.Repository<User>().ReadFirstByCondition(u => u.Login == username);
+            var user = await unitOfWork.Repository<User>()
+                .ReadFirstByConditionWithInclude(u => u.Login == username, y => y.Diet);
 
             if (user == null)
             {

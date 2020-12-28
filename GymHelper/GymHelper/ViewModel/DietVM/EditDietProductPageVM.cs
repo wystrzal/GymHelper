@@ -17,6 +17,11 @@ namespace GymHelper.ViewModel
         private readonly EditDietProductCommand editDietProductCommand;
         public override BaseCommand EditDataCommand { get { return editDietProductCommand; } }
 
+        public EditDietProductPageVM()
+        {
+            editDietProductCommand = new EditDietProductCommand(this);
+        }
+
         private Product product;
         public Product Product
         {
@@ -35,7 +40,6 @@ namespace GymHelper.ViewModel
             set
             {
                 grams = value;
-                product.Grams = grams;
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Grams");
             }
