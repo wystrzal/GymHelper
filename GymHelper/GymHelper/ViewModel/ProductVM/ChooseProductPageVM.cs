@@ -31,15 +31,7 @@ namespace GymHelper.ViewModel
 
         protected override async Task AddSelectedData()
         {
-            List<Task> tasks = new List<Task>();
-
-            foreach (var item in SelectedData)
-            {
-                tasks.Add(AddProductToDiet(item));
-            }
-
-            await Task.WhenAll(tasks);
-
+            await SelectedData.LoopAsync(AddProductToDiet);
             await NavigateService.NavigateBack();
         }
 

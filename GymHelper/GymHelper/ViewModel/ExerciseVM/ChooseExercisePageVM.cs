@@ -1,5 +1,6 @@
 ﻿using GymHelper.Data.Interfaces;
 using GymHelper.Data.Services;
+using GymHelper.Helpers.Extensions;
 using GymHelper.Models;
 using GymHelper.View;
 using GymHelper.ViewModel.BaseVM;
@@ -22,15 +23,7 @@ namespace GymHelper.ViewModel
 
         protected override async Task AddSelectedData()
         {
-            List<Task> tasks = new List<Task>();
-
-            foreach (var item in SelectedData)
-            {
-                tasks.Add(AddWorkoutExercise(item));
-            }
-
-            await Task.WhenAll(tasks);
-
+            await SelectedData.LoopAsync(AddWorkoutExercise);
             await NavigateService.NavigateBack();
         }
 
