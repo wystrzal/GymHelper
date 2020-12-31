@@ -165,6 +165,31 @@ namespace GymHelper.Data
             }
         }
 
+        public async Task<TEntity> ReadFirstByCondition<TKey>(Func<TEntity, bool> condition,
+            Func<TEntity, TKey> orderBy, bool orderASC = true)
+        {
+            try
+            {
+                TEntity data;
+
+                if (orderASC)
+                {
+                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).FirstOrDefault();
+                }
+                else
+                {
+                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).FirstOrDefault();
+                }
+
+                return data == null ? null : await Task.FromResult(data);
+            }
+            catch (Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                return null;
+            }
+        }
+
         public async Task<TEntity> ReadFirstByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include)
         {

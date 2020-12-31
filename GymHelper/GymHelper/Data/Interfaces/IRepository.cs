@@ -19,6 +19,8 @@ namespace GymHelper.Data.Interfaces
         Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include);
         Task<TEntity> ReadFirstByCondition(Func<TEntity, bool> condition);
+        Task<TEntity> ReadFirstByCondition<TKey>(Func<TEntity, bool> condition,
+            Func<TEntity, TKey> orderBy, bool orderASC = true);
         Task<TEntity> ReadFirstByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include);
         Task<bool> CheckIfExistByCondition(Func<TEntity, bool> condition);
