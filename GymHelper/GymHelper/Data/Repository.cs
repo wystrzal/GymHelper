@@ -110,6 +110,31 @@ namespace GymHelper.Data
             }
         }
 
+        public async Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
+            Func<TEntity, TKey> orderBy, int take, bool orderASC = true)
+        {
+            try
+            {
+                List<TEntity> data;
+
+                if (orderASC)
+                {
+                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).Take(take).ToList();
+                }
+                else
+                {
+                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Take(take).ToList();
+                }
+
+                return await Task.FromResult(data);
+            }
+            catch (Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                return null;
+            }
+        }
+
         public async Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include)
         {
