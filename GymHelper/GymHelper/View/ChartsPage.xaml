@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="GymHelper.View.ChartsPage"
+             BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.BindingContext>
+        <viewModel:ChartsPageVM/>
+    </ContentPage.BindingContext>
+
+        <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Margin="0, 0, 0, 15">
+                    <Picker Title="Wybierz ćwiczenie."
+                            TitleColor="{DynamicResource vividVermilion}"
+                            TextColor="{DynamicResource vividVermilion}"
+                            ItemsSource="{Binding Exercises}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged"
+                            ItemDisplayBinding="{Binding Name}"/>
+                </StackLayout>
+                
+                <StackLayout Margin="0, 0, 0, 15">
+                    <Label Text="Ciężar z ostatnich treningów."
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="{DynamicResource vividVermilion}"/>
+                    <forms:ChartView x:Name="lastWeightsChart"
+                                     HeightRequest="250"/>
+                </StackLayout>
+
+                <StackLayout Margin="0, 0, 0, 15">
+                    <Label Text="Powtórzenia z ostatnich treningów."
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="{DynamicResource vividVermilion}"/>
+                    <forms:ChartView x:Name="lastRepetitionsChart"
+                                     HeightRequest="250"/>
+                </StackLayout>
+
+                <StackLayout Margin="0, 0, 0, 15">
+                    <Label Text="Największy ciężar z każdego mięsiąca."
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="{DynamicResource vividVermilion}"/>
+                    <forms:ChartView x:Name="monthHighestWeightsChart"
+                                     HeightRequest="250"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>
