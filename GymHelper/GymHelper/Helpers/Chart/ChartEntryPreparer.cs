@@ -19,7 +19,7 @@ namespace GymHelper.Helpers.Chart
             unitOfWork = App.Data.UnitOfWork;
         }
 
-        public abstract Task<List<ChartEntry>> GetChartEntry(Exercise exercise);
+        public abstract Task<List<ChartEntry>> GetChartEntry();
 
         protected void FillChartEntryData(List<ChartEntry> chartEntries, float value, string label)
         {

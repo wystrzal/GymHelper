@@ -13,16 +13,18 @@ namespace GymHelper.Helpers.Chart
     {
         private readonly List<ChartEntry> LastWeights;
         private const int takeLastExercises = 8;
+        private readonly int exerciseId;
 
-        public LastWeightsEntryPreparer()
+        public LastWeightsEntryPreparer(int exerciseId)
         {
             LastWeights = new List<ChartEntry>();
+            this.exerciseId = exerciseId;
         }
 
-        public override async Task<List<ChartEntry>> GetChartEntry(Exercise exercise)
+        public override async Task<List<ChartEntry>> GetChartEntry()
         {
             var workoutExercises = await unitOfWork.Repository<WorkoutExercise>()
-                .ReadAllByCondition(x => x.ExerciseId == exercise.ExerciseId, x => x.Date, takeLastExercises, false);
+                .ReadAllByCondition(x => x.ExerciseId == exerciseId, x => x.Date, takeLastExercises, false);
 
             foreach (var workoutExercise in workoutExercises)
             {
