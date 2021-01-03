@@ -30,7 +30,9 @@
                 </StackLayout>
                 
                 <StackLayout Margin="0, 0, 0, 20">
-                    <Label Text="Ciężar z ostatnich treningów."
+                    <Label x:Name="lastWeightsLabel"
+                           IsVisible="false"
+                           Text="Ciężar z ostatnich treningów."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
                            TextColor="{DynamicResource vividVermilion}"
@@ -40,7 +42,9 @@
                 </StackLayout>
 
                 <StackLayout Margin="0, 0, 0, 20">
-                    <Label Text="Powtórzenia z ostatnich treningów."
+                    <Label x:Name="lastRepetitionsLabel"
+                           IsVisible="false"
+                           Text="Powtórzenia z ostatnich treningów."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
                            TextColor="{DynamicResource vividVermilion}"
@@ -50,7 +54,9 @@
                 </StackLayout>
 
                 <StackLayout Margin="0, 0, 0, 20">
-                    <Label Text="Największy ciężar z każdego mięsiąca."
+                    <Label x:Name="monthHighestWeightsLabel"
+                           IsVisible="false"
+                           Text="Największy ciężar z każdego mięsiąca."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
                            TextColor="{DynamicResource vividVermilion}"

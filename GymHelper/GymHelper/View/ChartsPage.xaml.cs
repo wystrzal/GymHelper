@@ -37,8 +37,16 @@ namespace GymHelper.View
             if (picker.SelectedItem is Exercise exercise)
             {
                 await viewModel.PrepareChartsEntries(exercise);
+                ShowChartLabels();
                 CreateNewCharts();
             }
+        }
+
+        private void ShowChartLabels()
+        {
+            lastRepetitionsLabel.IsVisible = true;
+            lastWeightsLabel.IsVisible = true;
+            monthHighestWeightsLabel.IsVisible = true;
         }
 
         private void CreateNewCharts()
