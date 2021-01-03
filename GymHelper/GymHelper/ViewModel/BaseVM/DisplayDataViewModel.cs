@@ -1,4 +1,5 @@
-﻿using GymHelper.Data.Services;
+﻿using GymHelper.Data.Interfaces;
+using GymHelper.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel.BaseVM
 {
-    public abstract class DisplayDataViewModel<TEntity> : BaseViewModel
+    public abstract class DisplayDataViewModel<TEntity> : BaseViewModel, IAsyncInitialization
         where TEntity : class
     {
         public ObservableCollection<TEntity> Collection { get; }
@@ -17,10 +18,12 @@ namespace GymHelper.ViewModel.BaseVM
         public abstract ICommand NavigateToEditDataCommand { get; }
         public ICommand DeleteDataCommand
             => new Command<TEntity>(async (data) => await DeleteData(data));
+        public Task Initialization { get; private set; }
 
         public DisplayDataViewModel()
         {
             Collection = new ObservableCollection<TEntity>();
+            Initialization = ReadData();
         }
 
         public abstract Task ReadData();
