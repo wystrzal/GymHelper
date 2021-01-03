@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:workoutView="clr-namespace:GymHelper.View.WorkoutView" 
-             xmlns:dietView="clr-namespace:GymHelper.View"
+             xmlns:local1="clr-namespace:GymHelper.View.WorkoutView" 
+             xmlns:local="clr-namespace:GymHelper.View"
              mc:Ignorable="d"
              x:Class="GymHelper.View.HomePage">
     
-    <workoutView:WorkoutPage Title="Treningi"/>
-    <dietView:DietPage Title="Dieta"/>
+    <local1:WorkoutPage Title="Treningi"/>
+    <local:DietPage Title="Dieta"/>
+    <local:ChartsPage Title="Diagramy"/>
 </TabbedPage>
