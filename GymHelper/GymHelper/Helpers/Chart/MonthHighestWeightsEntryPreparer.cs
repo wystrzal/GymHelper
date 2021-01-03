@@ -4,6 +4,7 @@ using Microcharts;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,24 +13,17 @@ namespace GymHelper.Helpers.Chart
     public class MonthHighestWeightsEntryPreparer : ChartEntryPreparer
     {
         private readonly List<ChartEntry> MonthHighestWeights;
-        private const int monthNumber = 12;
+        private readonly List<int> numberOfMonths;
 
         public MonthHighestWeightsEntryPreparer()
         {
             MonthHighestWeights = new List<ChartEntry>();
+            numberOfMonths = Enumerable.Range(1, 12).ToList(); 
         }
 
         public override async Task<List<ChartEntry>> GetChartEntry(Exercise exercise)
         {
-            List<Task> tasks = new List<Task>();
-
-            for (int i = 1; i <= monthNumber; i++)
-            {
-                tasks.Add(FillMonthHighestExercisesWeightEntry(exercise, i));
-            }
-
-            await Task.WhenAll(tasks);
-
+            await numberOfMonths.LoopAsync(x => FillMonthHighestExercisesWeightEntry(exercise, x));
             return MonthHighestWeights;
         }
 
