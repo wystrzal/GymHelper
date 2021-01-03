@@ -13,7 +13,7 @@
         <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <StackLayout Margin="0, 0, 0, 15">
+                <StackLayout Margin="0, 0, 0, 20">
                     <Picker Title="Wybierz ćwiczenie."
                             TitleColor="{DynamicResource vividVermilion}"
                             TextColor="{DynamicResource vividVermilion}"
@@ -22,29 +22,32 @@
                             ItemDisplayBinding="{Binding Name}"/>
                 </StackLayout>
                 
-                <StackLayout Margin="0, 0, 0, 15">
+                <StackLayout Margin="0, 0, 0, 20">
                     <Label Text="Ciężar z ostatnich treningów."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
-                           TextColor="{DynamicResource vividVermilion}"/>
+                           TextColor="{DynamicResource vividVermilion}"
+                           Margin="0, 10, 0, 25"/>
                     <forms:ChartView x:Name="lastWeightsChart"
                                      HeightRequest="250"/>
                 </StackLayout>
 
-                <StackLayout Margin="0, 0, 0, 15">
+                <StackLayout Margin="0, 0, 0, 20">
                     <Label Text="Powtórzenia z ostatnich treningów."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
-                           TextColor="{DynamicResource vividVermilion}"/>
+                           TextColor="{DynamicResource vividVermilion}"
+                           Margin="0, 10, 0, 25"/>
                     <forms:ChartView x:Name="lastRepetitionsChart"
                                      HeightRequest="250"/>
                 </StackLayout>
 
-                <StackLayout Margin="0, 0, 0, 15">
+                <StackLayout Margin="0, 0, 0, 20">
                     <Label Text="Największy ciężar z każdego mięsiąca."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
-                           TextColor="{DynamicResource vividVermilion}"/>
+                           TextColor="{DynamicResource vividVermilion}"
+                           Margin="0, 10, 0, 25"/>
                     <forms:ChartView x:Name="monthHighestWeightsChart"
                                      HeightRequest="250"/>
                 </StackLayout>

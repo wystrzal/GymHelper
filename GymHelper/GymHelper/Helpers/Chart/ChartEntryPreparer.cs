@@ -22,12 +22,14 @@ namespace GymHelper.Helpers.Chart
         public abstract Task<List<ChartEntry>> GetChartEntry(Exercise exercise);
 
         protected void FillChartEntryData(List<ChartEntry> chartEntries, float value, string label)
-        {     
+        {
             var chartEntry = new ChartEntry(value)
             {
-                Color = SKColor.Parse("#FF1493"),
+                Color = SKColor.Parse("#FF0000"),
                 ValueLabel = value.ToString(),
-                Label = label
+                Label = label,
+                TextColor = SKColor.Parse("#EB5E28"),
+                ValueLabelColor = SKColor.Parse("#EB5E28")
             };
 
             chartEntries.Add(chartEntry);

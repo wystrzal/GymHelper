@@ -27,9 +27,6 @@ namespace GymHelper.View
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            lastRepetitionsChart.Chart = new LineChart();
-            lastWeightsChart.Chart = new LineChart();
-            monthHighestWeightsChart.Chart = new LineChart();
             await viewModel.ReadExercises();
         }
 
@@ -56,8 +53,9 @@ namespace GymHelper.View
             return new LineChart
             {
                 Entries = chartEntries,
-                LabelTextSize = 42,
-                BackgroundColor = SKColor.Parse("#CCC5B9")
+                LabelTextSize = 48,
+                BackgroundColor = SKColors.Transparent,
+                LabelColor = SKColor.Parse("#EB5E28")
             };
         }
     }
