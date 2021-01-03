@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:converter="clr-namespace:GymHelper.Helpers"
              x:Class="GymHelper.View.ChartsPage"
              BackgroundColor="{DynamicResource blackOlive}">
 
@@ -10,7 +11,13 @@
         <viewModel:ChartsPageVM/>
     </ContentPage.BindingContext>
 
-        <ContentPage.Content>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FirstLetterConverter x:Key="letterConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <StackLayout Margin="0, 0, 0, 20">
@@ -19,7 +26,7 @@
                             TextColor="{DynamicResource vividVermilion}"
                             ItemsSource="{Binding Exercises}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged"
-                            ItemDisplayBinding="{Binding Name}"/>
+                            ItemDisplayBinding="{Binding Name, Converter={StaticResource letterConverter}}"/>
                 </StackLayout>
                 
                 <StackLayout Margin="0, 0, 0, 20">
