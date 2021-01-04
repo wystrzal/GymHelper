@@ -16,8 +16,10 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class ChartsPageVM : ReadDataViewModel<Exercise>
+    public class ChartsPageVM : ReadDataViewModel<Exercise>, IChartGenerator<Exercise>
     {
+        private ChartEntryPreparer chartEntryPreparer;
+
         private Chart lastWeightsChart;
         public Chart LastWeightsChart
         {
@@ -51,15 +53,13 @@ namespace GymHelper.ViewModel
             }
         }
 
-        private ChartEntryPreparer chartEntryPreparer;
-
         public override async Task ReadData()
         {
             var exercises = await unitOfWork.Repository<Exercise>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
             Collection.FillCollection(exercises);
         }
 
-        public async Task PrepareChartEntries(Exercise exercise)
+        public async Task GenerateCharts(Exercise exercise)
         {
             chartEntryPreparer = new LastWeightsEntryPreparer(exercise.ExerciseId);
             LastWeightsChart = CreateLineChart(await chartEntryPreparer.PrepareChartEntry());
