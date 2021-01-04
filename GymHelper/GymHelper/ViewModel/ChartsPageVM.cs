@@ -5,6 +5,7 @@ using GymHelper.Models;
 using GymHelper.View;
 using GymHelper.ViewModel.BaseVM;
 using Microcharts;
+using Microcharts.Forms;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,39 @@ namespace GymHelper.ViewModel
 {
     public class ChartsPageVM : ReadDataViewModel<Exercise>
     {
+        private Chart lastWeightsChart;
+        public Chart LastWeightsChart
+        {
+            get { return lastWeightsChart; }
+            set
+            {
+                lastWeightsChart = value;
+                OnPropertyChanged("LastWeightsChart");
+            }
+        }
+
+        private Chart lastRepetitionsChart;
+        public Chart LastRepetitionsChart
+        {
+            get { return lastRepetitionsChart; }
+            set
+            {
+                lastRepetitionsChart = value;
+                OnPropertyChanged("LastRepetitionsChart");
+            }
+        }
+
+        private Chart monthHighestWeightsChart;
+        public Chart MonthHighestWeightsChart
+        {
+            get { return monthHighestWeightsChart; }
+            set
+            {
+                monthHighestWeightsChart = value;
+                OnPropertyChanged("MonthHighestWeightsChart");
+            }
+        }
+
         public List<ChartEntry> LastWeights { get; set; }
         public List<ChartEntry> LastRepetitions { get; set; }
         public List<ChartEntry> MonthHighestWeights { get; set; }
@@ -35,7 +69,7 @@ namespace GymHelper.ViewModel
             {
                 ClearCharts();
             }
-          
+
             await PrepareChartEntries(exercise.ExerciseId);
         }
 
@@ -56,6 +90,26 @@ namespace GymHelper.ViewModel
 
             chartEntryPreparer = new MonthHighestWeightsEntryPreparer(exerciseId);
             MonthHighestWeights = await chartEntryPreparer.PrepareChartEntry();
+
+            CreateNewCharts();
+        }
+
+        private void CreateNewCharts()
+        {
+            LastWeightsChart = CreateLineChart(LastWeights);
+            LastRepetitionsChart = CreateLineChart(LastRepetitions);
+            MonthHighestWeightsChart = CreateLineChart(MonthHighestWeights);
+        }
+
+        private LineChart CreateLineChart(IEnumerable<ChartEntry> chartEntries)
+        {
+            return new LineChart
+            {
+                Entries = chartEntries,
+                LabelTextSize = 48,
+                BackgroundColor = SKColors.Transparent,
+                LabelColor = SKColor.Parse("#EB5E28")
+            };
         }
     }
 }

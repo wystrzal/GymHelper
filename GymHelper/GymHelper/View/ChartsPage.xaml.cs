@@ -38,7 +38,6 @@ namespace GymHelper.View
             {
                 await viewModel.GenerateChartEntries(exercise);
                 ShowChartLabels();
-                CreateNewCharts();
             }
         }
 
@@ -47,24 +46,6 @@ namespace GymHelper.View
             lastRepetitionsLabel.IsVisible = true;
             lastWeightsLabel.IsVisible = true;
             monthHighestWeightsLabel.IsVisible = true;
-        }
-
-        private void CreateNewCharts()
-        {
-            lastWeightsChart.Chart = CreateLineChart(viewModel.LastWeights);
-            lastRepetitionsChart.Chart = CreateLineChart(viewModel.LastRepetitions);
-            monthHighestWeightsChart.Chart = CreateLineChart(viewModel.MonthHighestWeights);
-        }
-
-        private LineChart CreateLineChart(IEnumerable<ChartEntry> chartEntries)
-        {
-            return new LineChart
-            {
-                Entries = chartEntries,
-                LabelTextSize = 48,
-                BackgroundColor = SKColors.Transparent,
-                LabelColor = SKColor.Parse("#EB5E28")
-            };
         }
     }
 }

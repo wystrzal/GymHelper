@@ -38,7 +38,8 @@
                            TextColor="{DynamicResource vividVermilion}"
                            Margin="0, 10, 0, 25"/>
                     <forms:ChartView x:Name="lastWeightsChart"
-                                     HeightRequest="250"/>
+                                     HeightRequest="250"
+                                     Chart="{Binding LastWeightsChart}"/>
                 </StackLayout>
 
                 <StackLayout Margin="0, 0, 0, 20">
@@ -50,7 +51,8 @@
                            TextColor="{DynamicResource vividVermilion}"
                            Margin="0, 10, 0, 25"/>
                     <forms:ChartView x:Name="lastRepetitionsChart"
-                                     HeightRequest="250"/>
+                                     HeightRequest="250"
+                                     Chart="{Binding LastRepetitionsChart}"/>
                 </StackLayout>
 
                 <StackLayout Margin="0, 0, 0, 20">
@@ -62,7 +64,8 @@
                            TextColor="{DynamicResource vividVermilion}"
                            Margin="0, 10, 0, 25"/>
                     <forms:ChartView x:Name="monthHighestWeightsChart"
-                                     HeightRequest="250"/>
+                                     HeightRequest="250"
+                                     Chart="{Binding MonthHighestWeightsChart}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
