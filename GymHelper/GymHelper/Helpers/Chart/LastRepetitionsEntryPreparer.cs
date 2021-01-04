@@ -22,7 +22,7 @@ namespace GymHelper.Helpers.Chart
             this.exerciseId = exerciseId;
         }
 
-        public override async Task<List<ChartEntry>> GetChartEntry()
+        public override async Task<List<ChartEntry>> PrepareChartEntry()
         {
             var workoutExercises = await unitOfWork.Repository<WorkoutExercise>()
                 .ReadAllByCondition(x => x.ExerciseId == exerciseId, x => x.Date, takeLastExercises, false);

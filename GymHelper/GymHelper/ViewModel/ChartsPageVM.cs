@@ -29,14 +29,14 @@ namespace GymHelper.ViewModel
             Collection.FillCollection(exercises);
         }
 
-        public async Task PrepareChartsEntries(Exercise exercise)
+        public async Task GenerateChartEntries(Exercise exercise)
         {
             if (LastRepetitions != null && LastWeights != null && MonthHighestWeights != null)
             {
                 ClearCharts();
             }
           
-            await GetChartsEntries(exercise.ExerciseId);
+            await PrepareChartEntries(exercise.ExerciseId);
         }
 
         private void ClearCharts()
@@ -46,16 +46,16 @@ namespace GymHelper.ViewModel
             MonthHighestWeights.Clear();
         }
 
-        private async Task GetChartsEntries(int exerciseId)
+        private async Task PrepareChartEntries(int exerciseId)
         {
             chartEntryPreparer = new LastWeightsEntryPreparer(exerciseId);
-            LastWeights = await chartEntryPreparer.GetChartEntry();
+            LastWeights = await chartEntryPreparer.PrepareChartEntry();
 
             chartEntryPreparer = new LastRepetitionsEntryPreparer(exerciseId);
-            LastRepetitions = await chartEntryPreparer.GetChartEntry();
+            LastRepetitions = await chartEntryPreparer.PrepareChartEntry();
 
             chartEntryPreparer = new MonthHighestWeightsEntryPreparer(exerciseId);
-            MonthHighestWeights = await chartEntryPreparer.GetChartEntry();
+            MonthHighestWeights = await chartEntryPreparer.PrepareChartEntry();
         }
     }
 }

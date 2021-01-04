@@ -23,7 +23,7 @@ namespace GymHelper.Helpers.Chart
             this.exerciseId = exerciseId;
         }
 
-        public override async Task<List<ChartEntry>> GetChartEntry()
+        public override async Task<List<ChartEntry>> PrepareChartEntry()
         {
             await numberOfMonths.LoopAsync(FillMonthHighestExercisesWeightEntry);
             return MonthHighestWeights;
