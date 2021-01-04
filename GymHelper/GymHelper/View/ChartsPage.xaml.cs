@@ -36,7 +36,7 @@ namespace GymHelper.View
 
             if (picker.SelectedItem is Exercise exercise)
             {
-                await viewModel.GenerateChartEntries(exercise);
+                await viewModel.PrepareChartEntries(exercise);
                 ShowChartLabels();
             }
         }
