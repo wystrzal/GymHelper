@@ -27,7 +27,7 @@ namespace GymHelper.View
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.ReadExercises();
+            await viewModel.ReadData();
         }
 
         private async void Picker_SelectedIndexChanged(object sender, EventArgs e)

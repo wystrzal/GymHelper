@@ -3,6 +3,7 @@ using GymHelper.Data.Services;
 using GymHelper.Helpers.Chart;
 using GymHelper.Models;
 using GymHelper.View;
+using GymHelper.ViewModel.BaseVM;
 using Microcharts;
 using SkiaSharp;
 using System;
@@ -14,24 +15,18 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class ChartsPageVM : BaseViewModel
+    public class ChartsPageVM : ReadDataViewModel<Exercise>
     {
-        public ObservableCollection<Exercise> Exercises { get; set; }
         public List<ChartEntry> LastWeights { get; set; }
         public List<ChartEntry> LastRepetitions { get; set; }
         public List<ChartEntry> MonthHighestWeights { get; set; }
 
         private ChartEntryPreparer chartEntryPreparer;
 
-        public ChartsPageVM()
-        {
-            Exercises = new ObservableCollection<Exercise>();
-        }
-
-        public async Task ReadExercises()
+        public override async Task ReadData()
         {
             var exercises = await unitOfWork.Repository<Exercise>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
-            Exercises.FillCollection(exercises);
+            Collection.FillCollection(exercises);
         }
 
         public async Task PrepareChartsEntries(Exercise exercise)

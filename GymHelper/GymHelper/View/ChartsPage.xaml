@@ -24,7 +24,7 @@
                     <Picker Title="Wybierz ćwiczenie."
                             TitleColor="{DynamicResource vividVermilion}"
                             TextColor="{DynamicResource vividVermilion}"
-                            ItemsSource="{Binding Exercises}"
+                            ItemsSource="{Binding Collection}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged"
                             ItemDisplayBinding="{Binding Name, Converter={StaticResource letterConverter}}"/>
                 </StackLayout>
