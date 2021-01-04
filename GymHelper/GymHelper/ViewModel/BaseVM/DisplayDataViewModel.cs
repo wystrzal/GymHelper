@@ -9,21 +9,14 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel.BaseVM
 {
-    public abstract class DisplayDataViewModel<TEntity> : BaseViewModel
+    public abstract class DisplayDataViewModel<TEntity> : ReadDataViewModel<TEntity>
         where TEntity : class
     {
-        public ObservableCollection<TEntity> Collection { get; }
         public abstract ICommand NavigateToAddDataCommand { get; }
         public abstract ICommand NavigateToEditDataCommand { get; }
         public ICommand DeleteDataCommand
             => new Command<TEntity>(async (data) => await DeleteData(data));
 
-        public DisplayDataViewModel()
-        {
-            Collection = new ObservableCollection<TEntity>();
-        }
-
-        public abstract Task ReadData();
         public virtual async Task DeleteData(TEntity entity) 
         {
             await unitOfWork.Repository<TEntity>().Delete(entity);
