@@ -33,10 +33,19 @@ namespace GymHelper.ViewModel
         {
             var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.DietId == App.Data.User.Diet.DietId);
             diet.Products.Remove(entity);
+            SubtractNutrients(entity, diet);
 
             await unitOfWork.Repository<Product>().SaveChanges();
 
             await ReadData();
+        }
+
+        private static void SubtractNutrients(Product entity, Diet diet)
+        {
+            diet.TotalCalories -= entity.Calories;
+            diet.TotalCarbohydrates -= entity.Carbohydrates;
+            diet.TotalFats -= entity.Fats;
+            diet.TotalProteins -= entity.Proteins;
         }
     }
 }

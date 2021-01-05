@@ -42,8 +42,17 @@ namespace GymHelper.ViewModel
             if (!await ProductExistInDiet(product, diet))
             {
                 product.DietId = diet.DietId;
+                AddNutrients(product, diet);
                 await unitOfWork.Repository<Diet>().SaveChanges();
             }
+        }
+
+        private static void AddNutrients(Product product, Diet diet)
+        {
+            diet.TotalCalories += product.Calories;
+            diet.TotalCarbohydrates += product.Carbohydrates;
+            diet.TotalFats += product.Fats;
+            diet.TotalProteins += product.Proteins;
         }
 
         private async Task<bool> ProductExistInDiet(Product product, Diet diet)
