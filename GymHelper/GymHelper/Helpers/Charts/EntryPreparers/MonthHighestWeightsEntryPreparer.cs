@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymHelper.Helpers.Chart
+namespace GymHelper.Helpers.Charts
 {
     public class MonthHighestWeightsEntryPreparer : ChartEntryPreparer
     {

@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymHelper.Helpers.Chart
+namespace GymHelper.Helpers.Charts
 {
     public abstract class ChartEntryPreparer
     {
