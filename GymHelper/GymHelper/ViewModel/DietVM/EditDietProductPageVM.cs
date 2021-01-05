@@ -54,13 +54,13 @@ namespace GymHelper.ViewModel
         private void ChangeProductParameters(Product product)
         {
             var caloriesPerGram = product.Calories / product.Grams;
-            var proteinsPerGram = product.Protein / product.Grams;
-            var fatPerGram = product.Fat / product.Grams;
+            var proteinsPerGram = product.Proteins / product.Grams;
+            var fatPerGram = product.Fats / product.Grams;
             var carbohydratesPerGram = product.Carbohydrates / product.Grams;
 
             product.Calories = caloriesPerGram * Grams;
-            product.Protein = proteinsPerGram * Grams;
-            product.Fat = fatPerGram * Grams;
+            product.Proteins = proteinsPerGram * Grams;
+            product.Fats = fatPerGram * Grams;
             product.Carbohydrates = carbohydratesPerGram * Grams;
             product.Grams = Grams;
         }

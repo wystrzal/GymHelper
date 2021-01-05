@@ -23,9 +23,9 @@ namespace GymHelper.View.ProductView
             nameEntry.Text = product.Name;
             gramsEntry.Text = product.Grams.ToString();
             caloriesEntry.Text = product.Calories.ToString();
-            proteinEntry.Text = product.Protein.ToString();
+            proteinEntry.Text = product.Proteins.ToString();
             carbohydratesEntry.Text = product.Carbohydrates.ToString();
-            fatEntry.Text = product.Fat.ToString();
+            fatEntry.Text = product.Fats.ToString();
         }
     }
 }

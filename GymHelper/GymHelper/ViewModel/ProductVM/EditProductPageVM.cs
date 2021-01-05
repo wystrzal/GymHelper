@@ -92,32 +92,32 @@ namespace GymHelper.ViewModel
             }
         }
 
-        private float protein;
-        public float Protein
+        private float proteins;
+        public float Proteins
         {
-            get { return protein; }
+            get { return proteins; }
             set
             {
-                protein = value;
+                proteins = value;
                 if (product != null)
                 {
-                    product.Protein = protein;
+                    product.Proteins = proteins;
                 }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Protein");
             }
         }
 
-        private float fat;
-        public float Fat
+        private float fats;
+        public float Fats
         {
-            get { return fat; }
+            get { return fats; }
             set
             {
-                fat = value;
+                fats = value;
                 if (product != null)
                 {
-                    product.Fat = fat;
+                    product.Fats = fats;
                 }
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Fat");
