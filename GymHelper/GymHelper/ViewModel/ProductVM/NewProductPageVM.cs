@@ -85,7 +85,7 @@ namespace GymHelper.ViewModel
                 proteins = value;
                 product.Proteins = proteins;
                 AddDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Protein");
+                OnPropertyChanged("Proteins");
             }
         }
 
@@ -111,7 +111,7 @@ namespace GymHelper.ViewModel
                 fats = value;
                 product.Fats = fats;
                 AddDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Fat");
+                OnPropertyChanged("Fats");
             }
         }
 

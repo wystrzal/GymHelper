@@ -42,7 +42,7 @@
 
             <Entry x:Name="proteinEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Protein, Mode=TwoWay}"
+                   Text="{Binding Proteins, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Białko"
                    PlaceholderColor="{DynamicResource vividVermilion}">
@@ -58,7 +58,7 @@
 
             <Entry x:Name="fatEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Fat, Mode=TwoWay}"
+                   Text="{Binding Fats, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Tłuszcz"
                    PlaceholderColor="{DynamicResource vividVermilion}">

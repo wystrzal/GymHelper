@@ -25,6 +25,10 @@ namespace GymHelper.View
         {
             base.OnAppearing();
             await viewModel.ReadData();
+
+            var diet = App.Data.User.Diet;
+            await viewModel.GenerateCharts(diet);
+            totalCalories.Text = $"Kalorie: {diet.TotalCalories}";
         }
     }
 }
