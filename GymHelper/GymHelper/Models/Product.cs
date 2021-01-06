@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GymHelper.Models
 {
-    public class Product
+    public class Product : ICloneable
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
@@ -17,5 +17,10 @@ namespace GymHelper.Models
         public User User { get; set; }
         public int? DietId { get; set; }
         public Diet Diet { get; set; }
+
+        public object Clone()
+        {
+            return (Product)MemberwiseClone();
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace GymHelper.View.ProductView
             InitializeComponent();
             var viewModel = BindingContext as EditProductPageVM;
             viewModel.Product = product;
+            viewModel.OldProduct = (Product)product.Clone();
             nameEntry.Text = product.Name;
             gramsEntry.Text = product.Grams.ToString();
             caloriesEntry.Text = product.Calories.ToString();

@@ -1,5 +1,6 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
+using GymHelper.Helpers;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
 using GymHelper.ViewModel.Commands.ExerciseCommands;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
@@ -19,6 +21,8 @@ namespace GymHelper.ViewModel
         {
             editProductCommand = new EditProductCommand(this);
         }
+
+        public Product OldProduct { get; set; }
 
         private Product product;
         public Product Product
@@ -124,5 +128,23 @@ namespace GymHelper.ViewModel
             }
         }
 
+        public override async Task Update(Product entity)
+        {
+            var diet = App.Data.User.Diet;
+
+            if (await ProductExistInDiet(entity, diet))
+            {
+                NutrientsManagement.SubtractNutrients(OldProduct, diet);
+                NutrientsManagement.AddNutrients(entity, diet);
+            }
+
+            await base.Update(entity);
+        }
+
+        private async Task<bool> ProductExistInDiet(Product product, Diet diet)
+        {
+            return await unitOfWork.Repository<Product>()
+                .CheckIfExistByCondition(x => x.DietId == diet.DietId && x.ProductId == product.ProductId);
+        }
     }
 }
