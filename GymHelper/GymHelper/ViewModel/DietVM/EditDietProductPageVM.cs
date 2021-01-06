@@ -1,5 +1,6 @@
 ﻿using GymHelper.Commands.DietCommand;
 using GymHelper.Data.Interfaces;
+using GymHelper.Helpers;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
 using GymHelper.ViewModel.Commands.WorkoutExerciseCommands;
@@ -47,7 +48,10 @@ namespace GymHelper.ViewModel
 
         public override async Task Update(Product product)
         {
+            var diet = App.Data.User.Diet;
+            NutrientsManagement.SubtractNutrients(product, diet);
             ChangeProductParameters(product);
+            NutrientsManagement.AddNutrients(product, diet);
             await base.Update(product);
         }
 

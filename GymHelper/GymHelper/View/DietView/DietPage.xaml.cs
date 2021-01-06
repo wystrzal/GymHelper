@@ -15,7 +15,7 @@ namespace GymHelper.View
     public partial class DietPage : ContentPage
     {
         private readonly DietPageVM viewModel;
-        private readonly Diet diet = App.Data.User.Diet;
+        private Diet diet;
 
         public DietPage()
         {
@@ -25,6 +25,8 @@ namespace GymHelper.View
 
         protected override async void OnAppearing()
         {
+            diet = App.Data.User.Diet;
+
             base.OnAppearing();
             await viewModel.ReadData();
 
