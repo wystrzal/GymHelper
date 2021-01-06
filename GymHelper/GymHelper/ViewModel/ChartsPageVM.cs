@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace GymHelper.ViewModel
 {
-    public class ChartsPageVM : ReadDataViewModel<Exercise>, IChartGenerator<Exercise>
+    public class ChartsPageVM : ReadDataViewModel<Exercise>, IChartPreparer<Exercise>
     {
         private readonly IChartCreator chartCreator;
 
@@ -64,7 +64,7 @@ namespace GymHelper.ViewModel
             Collection.FillCollection(exercises);
         }
 
-        public async Task GenerateCharts(Exercise exercise)
+        public async Task PrepareCharts(Exercise exercise)
         {
             LastWeightsChart = await chartCreator.CreateChart(new LastWeightsEntryPreparer(exercise.ExerciseId));
             LastRepetitionsChart = await chartCreator.CreateChart(new LastRepetitionsEntryPreparer(exercise.ExerciseId));

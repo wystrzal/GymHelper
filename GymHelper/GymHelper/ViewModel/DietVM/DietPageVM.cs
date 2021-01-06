@@ -18,7 +18,7 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    public class DietPageVM : DisplayDataViewModel<Product>, IChartGenerator<Diet>
+    public class DietPageVM : DisplayDataViewModel<Product>, IChartPreparer<Diet>
     {
         private readonly IChartCreator chartCreator;
         public override ICommand NavigateToAddDataCommand 
@@ -61,7 +61,7 @@ namespace GymHelper.ViewModel
             await ReadData();
         }
 
-        public async Task GenerateCharts(Diet entity)
+        public async Task PrepareCharts(Diet entity)
         {
             NutrientsChart = await chartCreator.CreateChart(new NutrientsEntryPreparer(entity.DietId));
         }
