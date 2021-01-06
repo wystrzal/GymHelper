@@ -1,5 +1,6 @@
 ﻿using GymHelper.Data.Interfaces;
 using GymHelper.Data.Services;
+using GymHelper.Helpers;
 using GymHelper.Helpers.Charts;
 using GymHelper.Helpers.Charts.EntryPreparers;
 using GymHelper.Models;
@@ -53,19 +54,11 @@ namespace GymHelper.ViewModel
         {
             var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.DietId == App.Data.User.Diet.DietId);
             diet.Products.Remove(entity);
-            SubtractNutrients(entity, diet);
+            NutrientsManagement.SubtractNutrients(entity, diet);
 
             await unitOfWork.Repository<Product>().SaveChanges();
 
             await ReadData();
-        }
-
-        private static void SubtractNutrients(Product entity, Diet diet)
-        {
-            diet.TotalCalories -= entity.Calories;
-            diet.TotalCarbohydrates -= entity.Carbohydrates;
-            diet.TotalFats -= entity.Fats;
-            diet.TotalProteins -= entity.Proteins;
         }
 
         public async Task GenerateCharts(Diet entity)
