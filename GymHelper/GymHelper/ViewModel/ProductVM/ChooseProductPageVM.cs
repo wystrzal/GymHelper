@@ -18,6 +18,7 @@ namespace GymHelper.ViewModel
 {
     public class ChooseProductPageVM : ChooseDataViewModel<Product>
     {
+        private readonly Diet diet = App.Data.User.Diet;
         public override ICommand NavigateToAddDataCommand 
             => new Command(async () => await NavigateService.Navigate<NewProductPage>());
         public override ICommand NavigateToEditDataCommand 
@@ -30,6 +31,16 @@ namespace GymHelper.ViewModel
             Collection.FillCollection(products);
         }
 
+        public override async Task DeleteData(Product entity)
+        {
+            if (await ProductExistInDiet(entity, diet))
+            {
+                NutrientsManagement.SubtractNutrients(entity, diet);
+            }
+
+            await base.DeleteData(entity);
+        }
+
         protected override async Task AddSelectedData()
         {
             await SelectedData.LoopAsync(AddProductToDiet);
@@ -37,9 +48,7 @@ namespace GymHelper.ViewModel
         }
 
         private async Task AddProductToDiet(Product product)
-        {
-            var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.UserId == App.Data.User.UserId);
-            
+        {          
             if (!await ProductExistInDiet(product, diet))
             {
                 product.DietId = diet.DietId;
