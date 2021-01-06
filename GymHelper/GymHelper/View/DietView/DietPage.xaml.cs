@@ -1,4 +1,5 @@
-﻿using GymHelper.ViewModel;
+﻿using GymHelper.Models;
+using GymHelper.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace GymHelper.View
     public partial class DietPage : ContentPage
     {
         private readonly DietPageVM viewModel;
+        private readonly Diet diet = App.Data.User.Diet;
 
         public DietPage()
         {
@@ -26,7 +28,12 @@ namespace GymHelper.View
             base.OnAppearing();
             await viewModel.ReadData();
 
-            var diet = App.Data.User.Diet;
+            await viewModel.GenerateCharts(diet);
+            totalCalories.Text = $"Kalorie: {diet.TotalCalories}";
+        }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
             await viewModel.GenerateCharts(diet);
             totalCalories.Text = $"Kalorie: {diet.TotalCalories}";
         }
