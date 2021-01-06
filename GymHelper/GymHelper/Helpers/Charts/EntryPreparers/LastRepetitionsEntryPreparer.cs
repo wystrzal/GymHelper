@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace GymHelper.Helpers.Chart
+namespace GymHelper.Helpers.Charts
 {
     public class LastRepetitionsEntryPreparer : ChartEntryPreparer
     {

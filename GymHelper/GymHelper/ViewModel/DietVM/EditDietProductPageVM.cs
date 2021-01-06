@@ -1,5 +1,6 @@
 ﻿using GymHelper.Commands.DietCommand;
 using GymHelper.Data.Interfaces;
+using GymHelper.Helpers;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
 using GymHelper.ViewModel.Commands.WorkoutExerciseCommands;
@@ -47,20 +48,23 @@ namespace GymHelper.ViewModel
 
         public override async Task Update(Product product)
         {
+            var diet = App.Data.User.Diet;
+            NutrientsManagement.SubtractNutrients(product, diet);
             ChangeProductParameters(product);
+            NutrientsManagement.AddNutrients(product, diet);
             await base.Update(product);
         }
 
         private void ChangeProductParameters(Product product)
         {
             var caloriesPerGram = product.Calories / product.Grams;
-            var proteinsPerGram = product.Protein / product.Grams;
-            var fatPerGram = product.Fat / product.Grams;
+            var proteinsPerGram = product.Proteins / product.Grams;
+            var fatPerGram = product.Fats / product.Grams;
             var carbohydratesPerGram = product.Carbohydrates / product.Grams;
 
             product.Calories = caloriesPerGram * Grams;
-            product.Protein = proteinsPerGram * Grams;
-            product.Fat = fatPerGram * Grams;
+            product.Proteins = proteinsPerGram * Grams;
+            product.Fats = fatPerGram * Grams;
             product.Carbohydrates = carbohydratesPerGram * Grams;
             product.Grams = Grams;
         }
