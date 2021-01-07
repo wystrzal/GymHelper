@@ -9,14 +9,10 @@ using System.Threading.Tasks;
 
 namespace GymHelper.Helpers.Charts.ChartPreparers
 {
-    public class ExerciseChartPreparer : IChartPreparer<Exercise>, INotifyPropertyChanged
+    public class ExerciseChartPreparer : ChartPreparer<Exercise>
     {
-        private readonly IChartCreator chartCreator;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ExerciseChartPreparer()
+        public ExerciseChartPreparer() : base(new LineChartCreator())
         {
-            chartCreator = new LineChartCreator();
         }
 
         private Chart lastWeightsChart;
@@ -52,12 +48,7 @@ namespace GymHelper.Helpers.Charts.ChartPreparers
             }
         }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public async Task PrepareCharts(Exercise entity)
+        public override async Task PrepareCharts(Exercise entity)
         {
             LastWeightsChart = await chartCreator.CreateChart(new LastWeightsEntryPreparer(entity.ExerciseId));
             LastRepetitionsChart = await chartCreator.CreateChart(new LastRepetitionsEntryPreparer(entity.ExerciseId));

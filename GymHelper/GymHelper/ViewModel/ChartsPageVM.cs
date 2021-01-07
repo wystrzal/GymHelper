@@ -19,7 +19,7 @@ namespace GymHelper.ViewModel
 {
     public class ChartsPageVM : ReadDataViewModel<Exercise>
     {
-        public IChartPreparer<Exercise> ChartPreparer { get; private set; }
+        public ChartPreparer<Exercise> ChartPreparer { get; private set; }
 
         public ChartsPageVM()
         {

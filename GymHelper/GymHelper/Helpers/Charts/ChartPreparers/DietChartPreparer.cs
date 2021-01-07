@@ -10,14 +10,10 @@ using System.Threading.Tasks;
 
 namespace GymHelper.Helpers.Charts.ChartPreparers
 {
-    public class DietChartPreparer : IChartPreparer<Diet>, INotifyPropertyChanged
+    public class DietChartPreparer : ChartPreparer<Diet>
     {
-        private readonly IChartCreator chartCreator;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public DietChartPreparer()
+        public DietChartPreparer() : base(new DonutChartCreator())
         {
-            chartCreator = new DonutChartCreator();
         }
 
         private Chart nutrientsChart;
@@ -31,12 +27,7 @@ namespace GymHelper.Helpers.Charts.ChartPreparers
             }
         }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public async Task PrepareCharts(Diet entity)
+        public override async Task PrepareCharts(Diet entity)
         {
             NutrientsChart = await chartCreator.CreateChart(new NutrientsEntryPreparer(entity.DietId));
         }
