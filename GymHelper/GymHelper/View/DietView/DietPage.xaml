@@ -31,7 +31,7 @@
                    TextColor="{DynamicResource vividVermilion}"
                    Margin="0, 10, 0, 25"/>
                 <forms:ChartView HeightRequest="150"
-                             Chart="{Binding NutrientsChart}"/>
+                             Chart="{Binding ChartPreparer.NutrientsChart}"/>
             </StackLayout>
             
             <ListView ItemsSource="{Binding Collection}"         

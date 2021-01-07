@@ -2,6 +2,7 @@
 using GymHelper.Data.Services;
 using GymHelper.Helpers;
 using GymHelper.Helpers.Charts;
+using GymHelper.Helpers.Charts.ChartPreparers;
 using GymHelper.Helpers.Charts.EntryPreparers;
 using GymHelper.Models;
 using GymHelper.View;
@@ -18,28 +19,17 @@ using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
-    public class DietPageVM : DisplayDataViewModel<Product>, IChartPreparer<Diet>
+    public class DietPageVM : DisplayDataViewModel<Product>
     {
-        private readonly IChartCreator chartCreator;
+        public IChartPreparer<Diet> ChartPreparer { get; private set; }
         public override ICommand NavigateToAddDataCommand 
             => new Command(async () => await NavigateService.Navigate<ChooseProductPage>());
         public override ICommand NavigateToEditDataCommand
             => new Command<Product>(async (product) => await NavigateService.Navigate<EditDietProductPage>(product));
 
-        private Chart nutrientsChart;
-        public Chart NutrientsChart
-        {
-            get { return nutrientsChart; }
-            set
-            {
-                nutrientsChart = value;
-                OnPropertyChanged("NutrientsChart");
-            }
-        }
-
         public DietPageVM()
         {
-            chartCreator = new DonutChartCreator();
+            ChartPreparer = new DietChartPreparer();
         }
 
         public override async Task ReadData()
@@ -59,11 +49,6 @@ namespace GymHelper.ViewModel
             await unitOfWork.Repository<Product>().SaveChanges();
 
             await ReadData();
-        }
-
-        public async Task PrepareCharts(Diet entity)
-        {
-            NutrientsChart = await chartCreator.CreateChart(new NutrientsEntryPreparer(entity.DietId));
         }
     }
 }
