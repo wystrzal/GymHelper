@@ -21,11 +21,6 @@ namespace GymHelper.View.ProductView
             InitializeComponent();
             ((EditProductPageVM)BindingContext).Product = product;
             nameEntry.Placeholder += $" ({product.Name.Capitalize()})";
-            gramsEntry.Text = "";
-            caloriesEntry.Text = "";
-            proteinsEntry.Text = "";
-            carbohydratesEntry.Text = "";
-            fatsEntry.Text = "";
         }
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
              x:Class="GymHelper.View.ProductView.EditProductPage"
              NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
@@ -9,6 +10,12 @@
     <ContentPage.BindingContext>
         <viewModel:EditProductPageVM/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"></local:CleanWhenAppearConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Zapisz"
@@ -28,35 +35,35 @@
 
             <Entry x:Name="gramsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Product.Grams, Mode=TwoWay}"
+                   Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
             <Entry x:Name="caloriesEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Product.Calories, Mode=TwoWay}"
+                   Text="{Binding Product.Calories, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Calories, StringFormat='Kalorie ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
             <Entry x:Name="proteinsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Product.Proteins, Mode=TwoWay}"
+                   Text="{Binding Product.Proteins, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Proteins, StringFormat='Białko ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
             <Entry x:Name="carbohydratesEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Product.Carbohydrates, Mode=TwoWay}"
+                   Text="{Binding Product.Carbohydrates, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Carbohydrates, StringFormat='Węglowodany ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
             <Entry x:Name="fatsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Product.Fats, Mode=TwoWay}"
+                   Text="{Binding Product.Fats, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Fats, StringFormat='Tłuszcz ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
