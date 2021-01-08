@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              x:Class="GymHelper.View.ProductView.EditProductPage"
+             NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
 
     <ContentPage.BindingContext>
@@ -27,37 +28,37 @@
 
             <Entry x:Name="gramsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Grams, Mode=TwoWay}"
+                   Text="{Binding Product.Grams, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Gramy"
+                   Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
             <Entry x:Name="caloriesEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Calories, Mode=TwoWay}"
+                   Text="{Binding Product.Calories, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Kalorie"
+                   Placeholder="{Binding Product.Calories, StringFormat='Kalorie ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
-            <Entry x:Name="proteinEntry"
+            <Entry x:Name="proteinsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Proteins, Mode=TwoWay}"
+                   Text="{Binding Product.Proteins, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Białko"
+                   Placeholder="{Binding Product.Proteins, StringFormat='Białko ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
             <Entry x:Name="carbohydratesEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Carbohydrates, Mode=TwoWay}"
+                   Text="{Binding Product.Carbohydrates, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Węglowodany"
+                   Placeholder="{Binding Product.Carbohydrates, StringFormat='Węglowodany ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
-            <Entry x:Name="fatEntry"
+            <Entry x:Name="fatsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Fats, Mode=TwoWay}"
+                   Text="{Binding Product.Fats, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Tłuszcz"
+                   Placeholder="{Binding Product.Fats, StringFormat='Tłuszcz ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}"/>
 
         </StackLayout>

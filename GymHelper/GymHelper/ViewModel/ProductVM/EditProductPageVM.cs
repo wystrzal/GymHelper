@@ -31,6 +31,10 @@ namespace GymHelper.ViewModel
             set
             {
                 product = value;
+                if (OldProduct == null)
+                {
+                    OldProduct = (Product)product.Clone();
+                }
                 OnPropertyChanged("Product");
             }
         }
@@ -45,86 +49,6 @@ namespace GymHelper.ViewModel
                 product.Name = name;
                 EditDataCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
-            }
-        }
-
-        private int grams;
-        public int Grams
-        {
-            get { return grams; }
-            set
-            {
-                grams = value;
-                if (product != null)
-                {
-                    product.Grams = grams;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Grams");
-            }
-        }
-
-        private float calories;
-        public float Calories
-        {
-            get { return calories; }
-            set
-            {
-                calories = value;
-                if (product != null)
-                {
-                    product.Calories = calories;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Calories");
-            }
-        }
-
-        private float carbohydrates;
-        public float Carbohydrates
-        {
-            get { return carbohydrates; }
-            set
-            {
-                carbohydrates = value;
-                if (product != null)
-                {
-                    product.Carbohydrates = carbohydrates;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Carbohydrates");
-            }
-        }
-
-        private float proteins;
-        public float Proteins
-        {
-            get { return proteins; }
-            set
-            {
-                proteins = value;
-                if (product != null)
-                {
-                    product.Proteins = proteins;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Proteins");
-            }
-        }
-
-        private float fats;
-        public float Fats
-        {
-            get { return fats; }
-            set
-            {
-                fats = value;
-                if (product != null)
-                {
-                    product.Fats = fats;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Fats");
             }
         }
 
