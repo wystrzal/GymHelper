@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
              x:Class="GymHelper.View.EditDietProductPage"
+             NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
 
     <ContentPage.BindingContext>
         <viewModel:EditDietProductPageVM/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"></local:CleanWhenAppearConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Zapisz"
@@ -19,9 +27,9 @@
         <StackLayout>
             <Entry x:Name="gramsEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Grams, Mode=TwoWay}"
+                   Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Gramy"
+                   Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
         </StackLayout>

@@ -25,11 +25,6 @@ namespace GymHelper.Commands.DietCommand
                 return false;
             }
 
-            if (product.Grams <= 0)
-            {
-                return false;
-            }
-
             return true;
         }
 

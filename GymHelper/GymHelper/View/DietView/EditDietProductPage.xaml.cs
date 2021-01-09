@@ -16,9 +16,7 @@ namespace GymHelper.View
         public EditDietProductPage(Product product)
         {
             InitializeComponent();
-            var viewModel = BindingContext as EditDietProductPageVM;
-            viewModel.Product = product;
-            gramsEntry.Text = product.Grams.ToString();
+            ((EditDietProductPageVM)BindingContext).Product = product;
         }
     }
 }

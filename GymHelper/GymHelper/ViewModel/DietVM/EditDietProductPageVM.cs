@@ -23,6 +23,8 @@ namespace GymHelper.ViewModel
             editDietProductCommand = new EditDietProductCommand(this);
         }
 
+        private Product OldProduct;
+
         private Product product;
         public Product Product
         {
@@ -30,19 +32,11 @@ namespace GymHelper.ViewModel
             set
             {
                 product = value;
+                if (OldProduct == null)
+                {
+                    OldProduct = (Product)Product.Clone();
+                }
                 OnPropertyChanged("Product");
-            }
-        }
-
-        private int grams;
-        public int Grams
-        {
-            get { return grams; }
-            set
-            {
-                grams = value;
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Grams");
             }
         }
 
@@ -57,16 +51,15 @@ namespace GymHelper.ViewModel
 
         private void ChangeProductParameters(Product product)
         {
-            var caloriesPerGram = product.Calories / product.Grams;
-            var proteinsPerGram = product.Proteins / product.Grams;
-            var fatPerGram = product.Fats / product.Grams;
-            var carbohydratesPerGram = product.Carbohydrates / product.Grams;
+            var caloriesPerGram = product.Calories / OldProduct.Grams;
+            var proteinsPerGram = product.Proteins / OldProduct.Grams;
+            var fatPerGram = product.Fats / OldProduct.Grams;
+            var carbohydratesPerGram = product.Carbohydrates / OldProduct.Grams;
 
-            product.Calories = caloriesPerGram * Grams;
-            product.Proteins = proteinsPerGram * Grams;
-            product.Fats = fatPerGram * Grams;
-            product.Carbohydrates = carbohydratesPerGram * Grams;
-            product.Grams = Grams;
+            product.Calories = caloriesPerGram * product.Grams;
+            product.Proteins = proteinsPerGram * product.Grams;
+            product.Fats = fatPerGram * product.Grams;
+            product.Carbohydrates = carbohydratesPerGram * product.Grams;
         }
     }
 }
