@@ -29,53 +29,5 @@ namespace GymHelper.ViewModel
                 OnPropertyChanged("WorkoutExercise");
             }
         }
-
-        private int series;
-        public int Series
-        {
-            get { return series; }
-            set
-            {
-                series = value;
-                if (workoutExercise != null)
-                {
-                    workoutExercise.Series = series;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Series");
-            }
-        }
-
-        private int repetition;
-        public int Repetition
-        {
-            get { return repetition; }
-            set
-            {
-                repetition = value;
-                if (workoutExercise != null)
-                {
-                    workoutExercise.Repetition = repetition;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Repetition");
-            }
-        }
-
-        private int weight;
-        public int Weight
-        {
-            get { return weight; }
-            set
-            {
-                weight = value;
-                if (workoutExercise != null)
-                {
-                    workoutExercise.Weight = weight;
-                }
-                EditDataCommand.RaiseCanExecuteChanged();
-                OnPropertyChanged("Weight");
-            }
-        }
     }
 }

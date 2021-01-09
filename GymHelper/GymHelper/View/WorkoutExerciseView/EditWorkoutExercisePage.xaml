@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
              x:Class="GymHelper.View.EditWorkoutExercisePage"
+             NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
 
     <ContentPage.BindingContext>
         <viewModel:EditWorkoutExercisePageVM/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"></local:CleanWhenAppearConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Zapisz"
@@ -19,23 +27,23 @@
         <StackLayout>
             <Entry x:Name="seriesEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Series, Mode=TwoWay}"
+                   Text="{Binding WorkoutExercise.Series, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Serie"
+                   Placeholder="{Binding WorkoutExercise.Series, StringFormat='Serie ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
             <Entry x:Name="repetitionEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Repetition, Mode=TwoWay}"
+                   Text="{Binding WorkoutExercise.Repetition, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Powtórzenia"
+                   Placeholder="{Binding WorkoutExercise.Repetition, StringFormat='Powtórzenia ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
             <Entry x:Name="weightEntry"
                    Keyboard="Numeric"
-                   Text="{Binding Weight, Mode=TwoWay}"
+                   Text="{Binding WorkoutExercise.Weight, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Ciężar"
+                   Placeholder="{Binding WorkoutExercise.Weight, StringFormat='Ciężar ({0})'}"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
         </StackLayout>
