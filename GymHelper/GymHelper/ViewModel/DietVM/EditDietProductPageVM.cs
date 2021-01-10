@@ -1,5 +1,4 @@
-﻿using GymHelper.Commands.DietCommand;
-using GymHelper.Data.Interfaces;
+﻿using GymHelper.Data.Interfaces;
 using GymHelper.Helpers;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
@@ -15,13 +14,8 @@ namespace GymHelper.ViewModel
 {
     public class EditDietProductPageVM : EditDataViewModel<Product>
     {
-        private readonly EditDietProductCommand editDietProductCommand;
-        public override ICommand EditDataCommand => editDietProductCommand;
-
-        public EditDietProductPageVM()
-        {
-            editDietProductCommand = new EditDietProductCommand(this);
-        }
+        public override ICommand EditDataCommand =>
+            new Command<Product>(async (product) => await Update(product));
 
         private Product OldProduct;
 
