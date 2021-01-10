@@ -23,8 +23,8 @@ namespace GymHelper.Helpers.Charts.EntryPreparers
             var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.DietId == dietId);
 
             FillChartEntryData(nutrients, diet.TotalCarbohydrates, "Węglowodany");
-            FillChartEntryData(nutrients, diet.TotalFats, "Tłuszcze");
-            FillChartEntryData(nutrients, diet.TotalProteins, "Białko");
+            FillChartEntryData(nutrients, diet.TotalFats, "Tłuszcze", "#0000FF");
+            FillChartEntryData(nutrients, diet.TotalProteins, "Białko", "#00FF00");
 
             return nutrients;
         }

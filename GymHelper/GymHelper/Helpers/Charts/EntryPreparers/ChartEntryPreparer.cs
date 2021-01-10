@@ -21,11 +21,11 @@ namespace GymHelper.Helpers.Charts
 
         public abstract Task<List<ChartEntry>> PrepareChartEntry();
 
-        protected void FillChartEntryData(List<ChartEntry> chartEntries, float value, string label)
+        protected void FillChartEntryData(List<ChartEntry> chartEntries, float value, string label, string color = null)
         {
             var chartEntry = new ChartEntry(value)
             {
-                Color = SKColor.Parse("#FF0000"),
+                Color = SKColor.Parse(color ?? "#FF0000"),
                 ValueLabel = value.ToString(),
                 Label = label,
                 TextColor = SKColor.Parse("#EB5E28"),
