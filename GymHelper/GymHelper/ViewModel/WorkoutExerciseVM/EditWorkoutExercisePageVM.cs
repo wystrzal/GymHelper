@@ -1,24 +1,19 @@
 ﻿using GymHelper.Data.Interfaces;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
-using GymHelper.ViewModel.Commands.WorkoutExerciseCommands;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
     public class EditWorkoutExercisePageVM : EditDataViewModel<WorkoutExercise>
     {
-        private readonly EditWorkoutExerciseCommand editWorkoutExerciseCommand;
-        public override ICommand EditDataCommand => editWorkoutExerciseCommand;
-
-        public EditWorkoutExercisePageVM()
-        {
-            editWorkoutExerciseCommand = new EditWorkoutExerciseCommand(this);
-        }
+        public override ICommand EditDataCommand =>
+            new Command<WorkoutExercise>(async (workoutExercise) => await Update(workoutExercise));
 
         private WorkoutExercise workoutExercise;
         public WorkoutExercise WorkoutExercise

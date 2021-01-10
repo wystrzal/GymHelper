@@ -2,7 +2,6 @@
 using GymHelper.Helpers;
 using GymHelper.Models;
 using GymHelper.ViewModel.Commands;
-using GymHelper.ViewModel.Commands.WorkoutExerciseCommands;
 using System;
 using System.Collections.Generic;
 using System.Text;
