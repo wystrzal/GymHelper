@@ -11,13 +11,9 @@ namespace GymHelper.Models
     public class Exercise : ICloneable
     {
         public int ExerciseId { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
         public int UserId { get; set; }
         public User User { get; set; }
-
         public ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
 
         public object Clone()
