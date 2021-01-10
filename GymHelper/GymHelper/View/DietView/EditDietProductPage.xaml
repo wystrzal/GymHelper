@@ -25,12 +25,13 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="gramsEntry"
+            <Entry x:Name="GramsEntry"
                    Keyboard="Numeric"
                    Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}">
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="GramsEntry_TextChanged">
             </Entry>
         </StackLayout>
     </ContentPage.Content>

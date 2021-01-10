@@ -16,7 +16,7 @@ namespace GymHelper.ViewModel
         public override ICommand EditDataCommand =>
             new Command<Product>(async (product) => await Update(product));
 
-        private Product OldProduct;
+        public Product OldProduct { get; private set; }
 
         private Product product;
         public Product Product
