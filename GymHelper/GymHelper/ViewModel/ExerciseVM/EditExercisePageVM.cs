@@ -33,5 +33,11 @@ namespace GymHelper.ViewModel
                 OnPropertyChanged("Exercise");
             }
         }
+
+        public override async Task Update(Exercise entity)
+        {
+            entity.Name = entity.Name.ToLower();
+            await base.Update(entity);
+        }
     }
 }
