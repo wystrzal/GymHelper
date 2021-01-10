@@ -9,13 +9,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GymHelper.ViewModel
 {
     public class NewProductPageVM : AddDataViewModel<Product>
     {
         private readonly NewProductCommand newProductCommand;
-        public override BaseCommand AddDataCommand { get { return newProductCommand; } }
+        public override ICommand AddDataCommand => newProductCommand;
 
         public NewProductPageVM()
         {
@@ -45,7 +46,7 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 product.Name = name.ToLower();
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
@@ -58,7 +59,7 @@ namespace GymHelper.ViewModel
             {
                 calories = value;
                 product.Calories = calories;
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Calories");
             }
         }
@@ -71,7 +72,7 @@ namespace GymHelper.ViewModel
             {
                 grams = value;
                 product.Grams = grams;
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Grams");
             }
         }
@@ -84,7 +85,7 @@ namespace GymHelper.ViewModel
             {
                 proteins = value;
                 product.Proteins = proteins;
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Proteins");
             }
         }
@@ -97,7 +98,7 @@ namespace GymHelper.ViewModel
             {
                 carbohydrates = value;
                 product.Carbohydrates = carbohydrates;
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Carbohydrates");
             }
         }
@@ -110,7 +111,7 @@ namespace GymHelper.ViewModel
             {
                 fats = value;
                 product.Fats = fats;
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Fats");
             }
         }

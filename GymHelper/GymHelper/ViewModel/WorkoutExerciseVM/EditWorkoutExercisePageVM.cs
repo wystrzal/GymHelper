@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GymHelper.ViewModel
 {
     public class EditWorkoutExercisePageVM : EditDataViewModel<WorkoutExercise>
     {
         private readonly EditWorkoutExerciseCommand editWorkoutExerciseCommand;
-        public override BaseCommand EditDataCommand { get { return editWorkoutExerciseCommand; } }
+        public override ICommand EditDataCommand => editWorkoutExerciseCommand;
 
         public EditWorkoutExercisePageVM()
         {

@@ -8,13 +8,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GymHelper.ViewModel
 {
     public class NewWorkoutPageVM : AddDataViewModel<Workout>
     {
         private readonly NewWorkoutCommand newWorkoutCommand;
-        public override BaseCommand AddDataCommand { get { return newWorkoutCommand; } }
+        public override ICommand AddDataCommand => newWorkoutCommand;
 
         public NewWorkoutPageVM()
         {
@@ -41,7 +42,7 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 workout.Name = name.ToLower();
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }

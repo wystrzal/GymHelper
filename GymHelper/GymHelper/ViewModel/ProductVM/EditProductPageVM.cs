@@ -9,13 +9,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GymHelper.ViewModel
 {
     public class EditProductPageVM : EditDataViewModel<Product>
     {
         private readonly EditProductCommand editProductCommand;
-        public override BaseCommand EditDataCommand { get { return editProductCommand; } }
+        public override ICommand EditDataCommand => editProductCommand;
 
         public EditProductPageVM()
         {
@@ -47,7 +48,7 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 product.Name = name;
-                EditDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)EditDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }

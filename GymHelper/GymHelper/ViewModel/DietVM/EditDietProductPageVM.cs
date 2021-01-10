@@ -16,7 +16,7 @@ namespace GymHelper.ViewModel
     public class EditDietProductPageVM : EditDataViewModel<Product>
     {
         private readonly EditDietProductCommand editDietProductCommand;
-        public override BaseCommand EditDataCommand { get { return editDietProductCommand; } }
+        public override ICommand EditDataCommand => editDietProductCommand;
 
         public EditDietProductPageVM()
         {

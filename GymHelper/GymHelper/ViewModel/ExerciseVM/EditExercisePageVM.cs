@@ -15,7 +15,7 @@ namespace GymHelper.ViewModel
     public class EditExercisePageVM : EditDataViewModel<Exercise>
     {
         private readonly EditExerciseCommand editExerciseCommand;
-        public override BaseCommand EditDataCommand { get { return editExerciseCommand; } }
+        public override ICommand EditDataCommand => editExerciseCommand;
 
         public EditExercisePageVM()
         {
@@ -41,7 +41,7 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 exercise.Name = name.ToLower();
-                EditDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)EditDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }

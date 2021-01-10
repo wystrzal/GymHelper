@@ -9,13 +9,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GymHelper.ViewModel
 {
     public class NewExercisePageVM : AddDataViewModel<Exercise>
     {
         private readonly NewExerciseCommand newExerciseCommand;
-        public override BaseCommand AddDataCommand { get { return newExerciseCommand; } }
+        public override ICommand AddDataCommand => newExerciseCommand;
 
         public NewExercisePageVM()
         {
@@ -42,7 +43,7 @@ namespace GymHelper.ViewModel
             {
                 name = value;
                 exercise.Name = name.ToLower();
-                AddDataCommand.RaiseCanExecuteChanged();
+                ((BaseCommand)AddDataCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged("Name");
             }
         }
