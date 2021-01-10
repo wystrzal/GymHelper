@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GymHelper.Models
 {
-    public class Exercise
+    public class Exercise : ICloneable
     {
         public int ExerciseId { get; set; }
 
@@ -19,5 +19,10 @@ namespace GymHelper.Models
         public User User { get; set; }
 
         public ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
+
+        public object Clone()
+        {
+            return (Exercise)MemberwiseClone();
+        }
     }
 }

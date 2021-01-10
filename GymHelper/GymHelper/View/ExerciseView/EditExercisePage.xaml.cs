@@ -18,9 +18,15 @@ namespace GymHelper.View
         public EditExercisePage(Exercise exercise)
         {
             InitializeComponent();
-            var viewModel = BindingContext as EditExercisePageVM;
-            viewModel.Exercise = exercise;
-            nameEntry.Text = exercise.Name;
+            ((EditExercisePageVM)BindingContext).Exercise = exercise;
+        }
+
+        private void NameEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(((Entry)sender).Text))
+            {
+                ((EditExercisePageVM)BindingContext).Exercise.Name = ((EditExercisePageVM)BindingContext).OldExercise.Name;
+            }
         }
     }
 }

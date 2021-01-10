@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:local="clr-namespace:GymHelper.Helpers" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
              x:Class="GymHelper.View.EditExercisePage"
+             NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
 
     <ContentPage.BindingContext>
         <viewModel:EditExercisePageVM/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Zapisz"
@@ -18,14 +25,12 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="nameEntry"
-                   Text="{Binding Name, Mode=TwoWay}"
+            <Entry x:Name="NameEntry"
+                   Text="{Binding Exercise.Name, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Nazwa"
-                   PlaceholderColor="{DynamicResource vividVermilion}">
-                <Entry.Behaviors>
-                    <local:RequiredValidationBehavior />
-                </Entry.Behaviors>
+                   Placeholder="{Binding Exercise.Name, StringFormat='Nazwa ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="NameEntry_TextChanged">
             </Entry>
         </StackLayout>
     </ContentPage.Content>
