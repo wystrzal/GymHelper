@@ -23,7 +23,10 @@ namespace GymHelper.View
 
         private void NameEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ((EditWorkoutPageVM)BindingContext).Workout.Name = ((EditWorkoutPageVM)BindingContext).OldWorkout.Name;
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
+            {
+                ((EditWorkoutPageVM)BindingContext).Workout.Name = ((EditWorkoutPageVM)BindingContext).OldWorkout.Name;
+            }
         }
     }
 }
