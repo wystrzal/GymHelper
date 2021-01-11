@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
-             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters" 
+             xmlns:local1="clr-namespace:GymHelper.Helpers"
              x:Class="GymHelper.View.ProductView.NewProductPage"
              BackgroundColor="{StaticResource blackOlive}">
 
@@ -29,6 +30,9 @@
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Nazwa"
                    PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <local1:RequiredValidationBehavior />
+                </Entry.Behaviors>
             </Entry>
 
             <Entry x:Name="GramsEntry"
