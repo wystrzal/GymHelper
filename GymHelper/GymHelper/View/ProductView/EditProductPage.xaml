@@ -26,47 +26,53 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Entry x:Name="nameEntry"
-                   Text="{Binding Name, Mode=TwoWay}"
+            <Entry x:Name="NameEntry"
+                   Text="{Binding Product.Name, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
-                   Placeholder="Nazwa"
-                   PlaceholderColor="{DynamicResource vividVermilion}">
+                   Placeholder="{Binding Product.Name, StringFormat='Nazwa ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="NameEntry_TextChanged">
             </Entry>
 
-            <Entry x:Name="gramsEntry"
+            <Entry x:Name="GramsEntry"
                    Keyboard="Numeric"
                    Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"/>
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="GramsEntry_TextChanged"/>
 
-            <Entry x:Name="caloriesEntry"
+            <Entry x:Name="CaloriesEntry"
                    Keyboard="Numeric"
                    Text="{Binding Product.Calories, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Calories, StringFormat='Kalorie ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"/>
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="CaloriesEntry_TextChanged"/>
 
-            <Entry x:Name="proteinsEntry"
+            <Entry x:Name="ProteinsEntry"
                    Keyboard="Numeric"
                    Text="{Binding Product.Proteins, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Proteins, StringFormat='Białko ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"/>
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="ProteinsEntry_TextChanged"/>
 
-            <Entry x:Name="carbohydratesEntry"
+            <Entry x:Name="CarbohydratesEntry"
                    Keyboard="Numeric"
                    Text="{Binding Product.Carbohydrates, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Carbohydrates, StringFormat='Węglowodany ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"/>
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="CarbohydratesEntry_TextChanged"/>
 
-            <Entry x:Name="fatsEntry"
+            <Entry x:Name="FatsEntry"
                    Keyboard="Numeric"
                    Text="{Binding Product.Fats, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Fats, StringFormat='Tłuszcz ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"/>
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="FatsEntry_TextChanged"/>
 
         </StackLayout>
     </ContentPage.Content>

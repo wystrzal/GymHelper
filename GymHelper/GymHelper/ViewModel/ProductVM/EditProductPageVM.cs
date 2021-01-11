@@ -10,18 +10,14 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
     public class EditProductPageVM : EditDataViewModel<Product>
     {
-        private readonly EditProductCommand editProductCommand;
-        public override ICommand EditDataCommand => editProductCommand;
-
-        public EditProductPageVM()
-        {
-            editProductCommand = new EditProductCommand(this);
-        }
+        public override ICommand EditDataCommand
+            => new Command<Product>(async (product) => await Update(product));
 
         public Product OldProduct { get; set; }
 
@@ -37,19 +33,6 @@ namespace GymHelper.ViewModel
                     OldProduct = (Product)product.Clone();
                 }
                 OnPropertyChanged("Product");
-            }
-        }
-
-        private string name;
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                product.Name = name;
-                ((BaseCommand)EditDataCommand).RaiseCanExecuteChanged();
-                OnPropertyChanged("Name");
             }
         }
 
