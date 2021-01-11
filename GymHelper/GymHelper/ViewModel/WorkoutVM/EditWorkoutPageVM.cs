@@ -14,13 +14,10 @@ namespace GymHelper.ViewModel
 {
     public class EditWorkoutPageVM : EditDataViewModel<Workout>
     {
-        private readonly EditWorkoutCommand editWorkoutCommand;
-        public override ICommand EditDataCommand => editWorkoutCommand;
+        public override ICommand EditDataCommand
+            => new Command<Workout>(async (workout) => await Update(workout));
 
-        public EditWorkoutPageVM()
-        {
-            editWorkoutCommand = new EditWorkoutCommand(this);
-        }
+        public Workout OldWorkout { get; private set; }
 
         private Workout workout;
         public Workout Workout
@@ -29,21 +26,18 @@ namespace GymHelper.ViewModel
             set
             {
                 workout = value;
+                if (OldWorkout == null)
+                {
+                    OldWorkout = (Workout)workout.Clone();
+                }
                 OnPropertyChanged("Workout");
             }
         }
 
-        private string name;
-        public string Name
+        public override Task Update(Workout entity)
         {
-            get { return name; }
-            set
-            {
-                name = value;
-                workout.Name = name.ToLower();
-                ((BaseCommand)EditDataCommand).RaiseCanExecuteChanged();
-                OnPropertyChanged("Name");
-            }
+            entity.Name = entity.Name.ToLower();
+            return base.Update(entity);
         }
     }
 }
