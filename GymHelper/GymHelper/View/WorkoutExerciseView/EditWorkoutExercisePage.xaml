@@ -25,26 +25,29 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="seriesEntry"
+            <Entry x:Name="SeriesEntry"
                    Keyboard="Numeric"
                    Text="{Binding WorkoutExercise.Series, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding WorkoutExercise.Series, StringFormat='Serie ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}">
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="SeriesEntry_TextChanged">
             </Entry>
-            <Entry x:Name="repetitionEntry"
+            <Entry x:Name="RepetitionEntry"
                    Keyboard="Numeric"
                    Text="{Binding WorkoutExercise.Repetition, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding WorkoutExercise.Repetition, StringFormat='Powtórzenia ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}">
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="RepetitionEntry_TextChanged">
             </Entry>
-            <Entry x:Name="weightEntry"
+            <Entry x:Name="WeightEntry"
                    Keyboard="Numeric"
                    Text="{Binding WorkoutExercise.Weight, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding WorkoutExercise.Weight, StringFormat='Ciężar ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}">
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextChanged="WeightEntry_TextChanged">
             </Entry>
         </StackLayout>
     </ContentPage.Content>

@@ -15,6 +15,8 @@ namespace GymHelper.ViewModel
         public override ICommand EditDataCommand =>
             new Command<WorkoutExercise>(async (workoutExercise) => await Update(workoutExercise));
 
+        public WorkoutExercise OldWorkoutExercise { get; private set; }
+
         private WorkoutExercise workoutExercise;
         public WorkoutExercise WorkoutExercise
         {
@@ -22,6 +24,10 @@ namespace GymHelper.ViewModel
             set
             {
                 workoutExercise = value;
+                if (OldWorkoutExercise == null)
+                {
+                    OldWorkoutExercise = (WorkoutExercise)workoutExercise.Clone();
+                }
                 OnPropertyChanged("WorkoutExercise");
             }
         }

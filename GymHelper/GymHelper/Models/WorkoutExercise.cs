@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GymHelper.Models
 {
-    public class WorkoutExercise
+    public class WorkoutExercise : ICloneable
     {
         public int Id { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
@@ -16,5 +16,10 @@ namespace GymHelper.Models
         public Exercise Exercise { get; set; }
         public int WorkoutId { get; set; }
         public Workout Workout { get; set; }
+
+        public object Clone()
+        {
+            return (WorkoutExercise)MemberwiseClone();
+        }
     }
 }
