@@ -92,7 +92,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -117,7 +117,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
@@ -172,7 +172,7 @@ namespace GymHelper.Data
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
         }
