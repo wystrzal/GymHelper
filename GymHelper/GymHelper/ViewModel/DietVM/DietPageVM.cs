@@ -46,7 +46,7 @@ namespace GymHelper.ViewModel
             diet.Products.Remove(entity);
             NutrientsManagement.SubtractNutrients(entity, diet);
 
-            await unitOfWork.Repository<Product>().SaveChanges();
+            await unitOfWork.SaveChanges();
 
             await ReadData();
         }

@@ -14,23 +14,10 @@ namespace GymHelper.Data
         private readonly DataContext dataContext;
         private readonly IAlertService alertService;
 
-        public Repository()
+        public Repository(DataContext dataContext)
         {
-            dataContext = App.Data.DataContext;
+            this.dataContext = dataContext;
             alertService = App.Data.AlertService;
-        }
-
-        public async Task<bool> SaveChanges()
-        {
-            try
-            {
-                return await dataContext.SaveChangesAsync() > 0;
-            }
-            catch (Exception)
-            {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się zapisać danych.", "Ok");
-                return false;
-            }
         }
 
         public async Task Add(TEntity entity)

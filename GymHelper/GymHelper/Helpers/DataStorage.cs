@@ -21,16 +21,15 @@ namespace GymHelper.Helpers
         public DataStorage(string dbPath)
         {
             DataContext = new DataContext(dbPath);
-            ProvideServices();
         }
 
-        private void ProvideServices()
+        public void ProvideServices()
         {
             var serviceProvider = AppServiceProvider.BuildServiceProvider();
-            AuthService = serviceProvider.GetRequiredService<IAuthService>();
-            UnitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
-            NavigateService = serviceProvider.GetRequiredService<INavigateService>();
             AlertService = serviceProvider.GetRequiredService<IAlertService>();
+            NavigateService = serviceProvider.GetRequiredService<INavigateService>();
+            UnitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
+            AuthService = serviceProvider.GetRequiredService<IAuthService>();
         }
     }
 }

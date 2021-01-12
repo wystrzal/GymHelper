@@ -17,6 +17,7 @@ namespace GymHelper
         {
             InitializeComponent();
             Data = new DataStorage(dbPath);
+            Data.ProvideServices();
             MainPage = new NavigationPage(new LoginPage());
         }
 

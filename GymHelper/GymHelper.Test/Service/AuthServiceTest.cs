@@ -140,7 +140,7 @@ namespace GymHelper.Test.Service
             unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Func<User, bool>>()))
                 .Returns(Task.FromResult(false));
 
-            unitOfWork.Setup(x => x.Repository<User>().SaveChanges()).Returns(Task.FromResult(false));
+            unitOfWork.Setup(x => x.SaveChanges()).Returns(Task.FromResult(false));
 
             //Act
             var action = await authService.Register(user);
@@ -157,7 +157,7 @@ namespace GymHelper.Test.Service
             unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Func<User, bool>>()))
                 .Returns(Task.FromResult(false));
 
-            unitOfWork.Setup(x => x.Repository<User>().SaveChanges()).Returns(Task.FromResult(true));
+            unitOfWork.Setup(x => x.SaveChanges()).Returns(Task.FromResult(true));
 
             //Act
             var action = await authService.Register(user);

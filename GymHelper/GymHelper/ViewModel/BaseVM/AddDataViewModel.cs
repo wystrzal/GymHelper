@@ -15,7 +15,7 @@ namespace GymHelper.ViewModel.BaseVM
         public virtual async Task AddData(TEntity entity)
         {
             await unitOfWork.Repository<TEntity>().Add(entity);
-            await unitOfWork.Repository<TEntity>().SaveChanges();
+            await unitOfWork.SaveChanges();
             await NavigateService.NavigateBack();
         }
     }

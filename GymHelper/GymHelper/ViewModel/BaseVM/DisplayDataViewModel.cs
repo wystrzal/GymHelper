@@ -20,7 +20,7 @@ namespace GymHelper.ViewModel.BaseVM
         public virtual async Task DeleteData(TEntity entity) 
         {
             await unitOfWork.Repository<TEntity>().Delete(entity);
-            await unitOfWork.Repository<TEntity>().SaveChanges();
+            await unitOfWork.SaveChanges();
             await ReadData();
         }
     }

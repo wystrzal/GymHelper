@@ -8,7 +8,6 @@ namespace GymHelper.Data.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<bool> SaveChanges();
         Task Add(TEntity entity);
         Task Delete(TEntity entity);
         Task<List<TEntity>> ReadAll();

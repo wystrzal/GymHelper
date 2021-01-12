@@ -16,7 +16,7 @@ namespace GymHelper.ViewModel
         public virtual async Task Update(TEntity entity)
         {
             await unitOfWork.Repository<TEntity>().Update(entity);
-            await unitOfWork.Repository<TEntity>().SaveChanges();
+            await unitOfWork.SaveChanges();
             await NavigateService.NavigateBack();
         }
     }

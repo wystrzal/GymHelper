@@ -53,7 +53,7 @@ namespace GymHelper.ViewModel
             {
                 product.DietId = diet.DietId;
                 NutrientsManagement.AddNutrients(product, diet);
-                await unitOfWork.Repository<Diet>().SaveChanges();
+                await unitOfWork.SaveChanges();
             }
         }
 
