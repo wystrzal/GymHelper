@@ -19,14 +19,22 @@ namespace GymHelper.ViewModel
     public class ChooseProductPageVM : ChooseDataViewModel<Product>
     {
         private readonly Diet diet = App.Data.User.Diet;
-        public override ICommand NavigateToAddDataCommand 
+        public override ICommand NavigateToAddDataCommand
             => new Command(async () => await NavigateService.Navigate<NewProductPage>());
-        public override ICommand NavigateToEditDataCommand 
+        public override ICommand NavigateToEditDataCommand
             => new Command<Product>(async (product) => await NavigateService.Navigate<EditProductPage>(product));
 
         public override async Task ReadData()
         {
             var products = await unitOfWork.Repository<Product>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
+
+            Collection.FillCollection(products);
+        }
+
+        public override async Task SearchData(string query)
+        {
+            var products = await unitOfWork.Repository<Product>()
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query));
 
             Collection.FillCollection(products);
         }
@@ -48,7 +56,7 @@ namespace GymHelper.ViewModel
         }
 
         private async Task AddProductToDiet(Product product)
-        {          
+        {
             if (!await ProductExistInDiet(product, diet))
             {
                 product.DietId = diet.DietId;
