@@ -24,7 +24,11 @@
                     <SearchBar x:Name="SearchBar"
                        Placeholder="Wyszukaj ćwiczenia."
                        SearchCommand="{Binding PerformSearchCommand}"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"/>
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                       BackgroundColor="{DynamicResource blackOlive}"
+                       PlaceholderColor="{DynamicResource vividVermilion}"
+                       TextColor="{DynamicResource vividVermilion}"
+                       CancelButtonColor="{DynamicResource vividVermilion}"/>
                     <ListView x:Name="ExerciseListView"
                               HasUnevenRows="True"
                               BackgroundColor="{DynamicResource blackOlive}"

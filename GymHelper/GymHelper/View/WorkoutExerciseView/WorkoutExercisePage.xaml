@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:GymHelper.Helpers" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel"
              x:Class="GymHelper.View.ExerciseView.WorkoutExercisePage"
-             x:Name="WorkoutExercise">
+             x:Name="WorkoutExercise"
+             BackgroundColor="{DynamicResource blackOlive}">
 
     <ContentPage.BindingContext>
         <viewModel:WorkoutExercisePageVM/>
@@ -25,7 +26,11 @@
         <SearchBar x:Name="SearchBar"
                        Placeholder="Wyszukaj ćwiczenia."
                        SearchCommand="{Binding PerformSearchCommand}"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"/>
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                       BackgroundColor="{DynamicResource blackOlive}"
+                       PlaceholderColor="{DynamicResource vividVermilion}"
+                       TextColor="{DynamicResource vividVermilion}"
+                       CancelButtonColor="{DynamicResource vividVermilion}"/>
         <ListView ItemsSource="{Binding Collection}"
               BackgroundColor="{DynamicResource blackOlive}"
               HasUnevenRows="True"
