@@ -29,6 +29,8 @@
                        PlaceholderColor="{DynamicResource vividVermilion}"
                        TextColor="{DynamicResource vividVermilion}"
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
+                    <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                    
                     <ListView x:Name="ExerciseListView"
                               HasUnevenRows="True"
                               BackgroundColor="{DynamicResource blackOlive}"

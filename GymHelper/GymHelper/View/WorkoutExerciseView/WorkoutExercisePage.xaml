@@ -31,6 +31,8 @@
                        PlaceholderColor="{DynamicResource vividVermilion}"
                        TextColor="{DynamicResource vividVermilion}"
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
+        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+        
         <ListView ItemsSource="{Binding Collection}"
               BackgroundColor="{DynamicResource blackOlive}"
               HasUnevenRows="True"
