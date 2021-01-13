@@ -22,48 +22,53 @@
                      Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <ListView x:Name="workoutListView"
+    <StackLayout>
+        <SearchBar x:Name="SearchBar"
+                       Placeholder="Wyszukaj treningi."
+                       SearchCommand="{Binding PerformSearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"/>
+        <ListView x:Name="workoutListView"
               HasUnevenRows="True"
               BackgroundColor="{DynamicResource blackOlive}"
               ItemsSource="{Binding Collection}"
               ItemSelected="WorkoutListView_ItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout>
-                        <Grid>
-                            <Label Text="{Binding Date, Converter={StaticResource dateTimeConverter}}"
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Grid>
+                                <Label Text="{Binding Date, Converter={StaticResource dateTimeConverter}}"
                                    TextColor="{DynamicResource vividVermilion}"
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="StartAndExpand"
                                    Padding="5, 15, 5, 15"
                                    FontSize="16"/>
 
-                            <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
+                                <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
                                    TextColor="{DynamicResource vividVermilion}"
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="CenterAndExpand"
                                    Padding="0, 15, 0, 15"
                                    FontSize="16"/>
-                        </Grid>
+                            </Grid>
 
-                        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
-                    </StackLayout>
+                            <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                        </StackLayout>
 
-                    <ViewCell.ContextActions>
-                        <MenuItem Text="Usuń"
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Usuń"
                                   IsDestructive="True"
                                   Command="{Binding Path=BindingContext.DeleteDataCommand,
                                     Source={x:Reference Workout}}"
                                   CommandParameter="{Binding}"/>
-                        <MenuItem Text="Edytuj"
+                            <MenuItem Text="Edytuj"
                                   Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
                                     Source={x:Reference Workout}}"
                                   CommandParameter="{Binding}"/>
-                    </ViewCell.ContextActions>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-
+                        </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>
