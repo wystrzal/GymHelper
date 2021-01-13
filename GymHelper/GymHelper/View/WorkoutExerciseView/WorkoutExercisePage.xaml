@@ -21,7 +21,12 @@
                      Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <ListView ItemsSource="{Binding Collection}"
+    <StackLayout>
+        <SearchBar x:Name="SearchBar"
+                       Placeholder="Wyszukaj ćwiczenia."
+                       SearchCommand="{Binding PerformSearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"/>
+        <ListView ItemsSource="{Binding Collection}"
               BackgroundColor="{DynamicResource blackOlive}"
               HasUnevenRows="True"
               SelectionMode="None">
@@ -73,4 +78,5 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+    </StackLayout>
 </ContentPage>
