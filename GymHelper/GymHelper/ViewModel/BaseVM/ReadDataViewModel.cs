@@ -13,7 +13,7 @@ namespace GymHelper.ViewModel.BaseVM
     {
         public ObservableCollection<TEntity> Collection { get; }
         public ICommand PerformSearchCommand
-            => new Command<string>(async (query) => await SearchData(query));
+            => new Command<string>(async (query) => await SearchData(query.ToLower()));
 
         public ReadDataViewModel()
         {
