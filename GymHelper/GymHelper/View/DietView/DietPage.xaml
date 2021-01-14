@@ -34,6 +34,16 @@
                 <forms:ChartView HeightRequest="150"
                              Chart="{Binding ChartPreparer.NutrientsChart}"/>
             </StackLayout>
+
+            <SearchBar x:Name="SearchBar"
+                       Placeholder="Wyszukaj produkty."
+                       SearchCommand="{Binding PerformSearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                       BackgroundColor="{DynamicResource blackOlive}"
+                       PlaceholderColor="{DynamicResource vividVermilion}"
+                       TextColor="{DynamicResource vividVermilion}"
+                       CancelButtonColor="{DynamicResource vividVermilion}"/>
+            <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
             
             <ListView ItemsSource="{Binding Collection}"         
               HasUnevenRows="True"

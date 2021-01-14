@@ -54,5 +54,13 @@ namespace GymHelper.ViewModel
 
             Collection.FillCollection(exercises);
         }
+
+        public override async Task SearchData(string query)
+        {
+            var exercises = await unitOfWork.Repository<Exercise>()
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query));
+
+            Collection.FillCollection(exercises);
+        }
     }
 }

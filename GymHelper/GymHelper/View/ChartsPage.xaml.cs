@@ -30,22 +30,27 @@ namespace GymHelper.View
             await viewModel.ReadData();
         }
 
-        private async void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        private async void ExerciseListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var picker = (Picker)sender;
+            var exercise = (Exercise)ExerciseListView.SelectedItem;
 
-            if (picker.SelectedItem is Exercise exercise)
+            if (exercise != null)
             {
                 await viewModel.ChartPreparer.PrepareCharts(exercise);
-                ShowChartLabels();
+                SwitchCurrentView();
             }
         }
 
-        private void ShowChartLabels()
+        private void SelectExerciseButton_Clicked(object sender, EventArgs e)
         {
-            lastRepetitionsLabel.IsVisible = true;
-            lastWeightsLabel.IsVisible = true;
-            monthHighestWeightsLabel.IsVisible = true;
+            SwitchCurrentView();
+            ExerciseListView.SelectedItem = null;
+        }
+
+        private void SwitchCurrentView()
+        {
+            ExerciseSelector.IsVisible = !ExerciseSelector.IsVisible;
+            Charts.IsVisible = !Charts.IsVisible;
         }
     }
 }

@@ -50,5 +50,13 @@ namespace GymHelper.ViewModel
 
             await ReadData();
         }
+
+        public override async Task SearchData(string query)
+        {
+            var products = await unitOfWork.Repository<Product>()
+                .ReadAllByCondition(x => x.DietId == App.Data.User.Diet.DietId && x.Name.Contains(query));
+
+            Collection.FillCollection(products);
+        }
     }
 }

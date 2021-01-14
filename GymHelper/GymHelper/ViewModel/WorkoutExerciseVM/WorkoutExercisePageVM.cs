@@ -30,5 +30,13 @@ namespace GymHelper.ViewModel
 
             Collection.FillCollection(workoutExercises);
         }
+
+        public override async Task SearchData(string query)
+        {
+            var workoutExercises = await unitOfWork.Repository<WorkoutExercise>()
+                .ReadAllByConditionWithInclude(x => x.WorkoutId == App.Data.Workout.WorkoutId && x.Exercise.Name.Contains(query), y => y.Exercise);
+
+            Collection.FillCollection(workoutExercises);
+        }
     }
 }

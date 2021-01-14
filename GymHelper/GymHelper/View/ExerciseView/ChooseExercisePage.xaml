@@ -4,7 +4,8 @@
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:converter="clr-namespace:GymHelper.Helpers"
              x:Class="GymHelper.View.ExerciseView.ChooseExercisePage"
-             x:Name="ChooseExercise">
+             x:Name="ChooseExercise"
+             BackgroundColor="{DynamicResource blackOlive}">
 
     <ContentPage.BindingContext>
         <viewModel:ChooseExercisePageVM/>
@@ -22,46 +23,57 @@
                      Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <ListView ItemsSource="{Binding Collection}"
+    <StackLayout>
+        <SearchBar x:Name="SearchBar"
+                       Placeholder="Wyszukaj ćwiczenia."
+                       SearchCommand="{Binding PerformSearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                       BackgroundColor="{DynamicResource blackOlive}"
+                       PlaceholderColor="{DynamicResource vividVermilion}"
+                       TextColor="{DynamicResource vividVermilion}"
+                       CancelButtonColor="{DynamicResource vividVermilion}"/>
+        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+        
+        <ListView ItemsSource="{Binding Collection}"
               BackgroundColor="{DynamicResource blackOlive}"
               HasUnevenRows="True"
               SelectionMode="None">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout>
-                        <Grid>
-                            <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Grid>
+                                <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
                                TextColor="{DynamicResource vividVermilion}"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="StartAndExpand"
                                FontSize="16"
                                Padding="5, 15, 0, 15"/>
 
-                            <CheckBox IsChecked="False"
+                                <CheckBox IsChecked="False"
                                   HorizontalOptions="EndAndExpand"
                                   VerticalOptions="CenterAndExpand"
                                   CheckedChanged="CheckBox_CheckedChanged"
                                   BindingContext="{Binding}"/>
-                        </Grid>
+                            </Grid>
 
-                        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
-                    </StackLayout>
-                    <ViewCell.ContextActions>
-                        <MenuItem Text="Usuń"
+                            <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                        </StackLayout>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Usuń"
                                   IsDestructive="True"
                                   Command="{Binding Path=BindingContext.DeleteDataCommand,
                                     Source={x:Reference ChooseExercise}}"
                                   CommandParameter="{Binding}"/>
-                        <MenuItem Text="Edytuj"
+                            <MenuItem Text="Edytuj"
                                   IsDestructive="True"
                                   Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
                                     Source={x:Reference ChooseExercise}}"
                                   CommandParameter="{Binding}"/>
-                    </ViewCell.ContextActions>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-
+                        </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

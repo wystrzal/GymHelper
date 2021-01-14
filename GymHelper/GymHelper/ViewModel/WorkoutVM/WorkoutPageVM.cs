@@ -26,7 +26,15 @@ namespace GymHelper.ViewModel
         public override async Task ReadData()
         {
             var workouts = await unitOfWork.Repository<Workout>()
-                .ReadAllByCondition(workout => workout.UserId == App.Data.User.UserId, x => x.Date, false);
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId, y => y.Date, false);
+
+            Collection.FillCollection(workouts);
+        }
+
+        public override async Task SearchData(string query)
+        {
+            var workouts = await unitOfWork.Repository<Workout>()
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query), y => y.Date, false);
 
             Collection.FillCollection(workouts);
         }
