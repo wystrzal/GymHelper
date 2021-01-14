@@ -25,8 +25,7 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="NameEntry"
-                   Text="{Binding Name, Mode=TwoWay}"
+            <Entry Text="{Binding Name, Mode=TwoWay}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Nazwa"
                    PlaceholderColor="{DynamicResource vividVermilion}">
@@ -35,40 +34,35 @@
                 </Entry.Behaviors>
             </Entry>
 
-            <Entry x:Name="GramsEntry"
-                   Keyboard="Numeric"
+            <Entry Keyboard="Numeric"
                    Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Gramy"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
 
-            <Entry x:Name="CaloriesEntry"
-                   Keyboard="Numeric"
+            <Entry Keyboard="Numeric"
                    Text="{Binding Product.Calories, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Kalorie"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
 
-            <Entry x:Name="ProteinEntry"
-                   Keyboard="Numeric"
+            <Entry Keyboard="Numeric"
                    Text="{Binding Product.Proteins, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Białko"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
 
-            <Entry x:Name="CarbohydratesEntry"
-                   Keyboard="Numeric"
+            <Entry Keyboard="Numeric"
                    Text="{Binding Product.Carbohydrates, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Węglowodany"
                    PlaceholderColor="{DynamicResource vividVermilion}">
             </Entry>
 
-            <Entry x:Name="FatEntry"
-                   Keyboard="Numeric"
+            <Entry Keyboard="Numeric"
                    Text="{Binding Product.Fats, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="Tłuszcz"

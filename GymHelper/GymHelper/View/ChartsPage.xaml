@@ -30,7 +30,7 @@
                        TextColor="{DynamicResource vividVermilion}"
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
                     <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
-                    
+
                     <ListView x:Name="ExerciseListView"
                               HasUnevenRows="True"
                               BackgroundColor="{DynamicResource blackOlive}"
@@ -65,38 +65,32 @@
                             Clicked="SelectExerciseButton_Clicked"/>
 
                     <StackLayout Margin="0, 0, 0, 20">
-                        <Label x:Name="lastWeightsLabel"
-                           Text="Ciężar z ostatnich treningów."
+                        <Label Text="Ciężar z ostatnich treningów."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
                            TextColor="{DynamicResource vividVermilion}"
                            Margin="0, 10, 0, 25"/>
-                        <forms:ChartView x:Name="lastWeightsChart"
-                                     HeightRequest="250"
+                        <forms:ChartView HeightRequest="250"
                                      Chart="{Binding ChartPreparer.LastWeightsChart}"/>
                     </StackLayout>
 
                     <StackLayout Margin="0, 0, 0, 20">
-                        <Label x:Name="lastRepetitionsLabel"
-                           Text="Powtórzenia z ostatnich treningów."
+                        <Label Text="Powtórzenia z ostatnich treningów."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
                            TextColor="{DynamicResource vividVermilion}"
                            Margin="0, 10, 0, 25"/>
-                        <forms:ChartView x:Name="lastRepetitionsChart"
-                                     HeightRequest="250"
+                        <forms:ChartView HeightRequest="250"
                                      Chart="{Binding ChartPreparer.LastRepetitionsChart}"/>
                     </StackLayout>
 
                     <StackLayout Margin="0, 0, 0, 20">
-                        <Label x:Name="monthHighestWeightsLabel"
-                           Text="Największy ciężar z każdego mięsiąca."
+                        <Label Text="Największy ciężar z każdego mięsiąca."
                            FontSize="20"
                            HorizontalOptions="CenterAndExpand"
                            TextColor="{DynamicResource vividVermilion}"
                            Margin="0, 10, 0, 25"/>
-                        <forms:ChartView x:Name="monthHighestWeightsChart"
-                                     HeightRequest="250"
+                        <forms:ChartView HeightRequest="250"
                                      Chart="{Binding ChartPreparer.MonthHighestWeightsChart}"/>
                     </StackLayout>
                 </StackLayout>

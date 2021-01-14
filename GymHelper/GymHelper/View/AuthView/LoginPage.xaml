@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" xmlns:local="clr-namespace:GymHelper.Helpers"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers"
              x:Class="GymHelper.LoginPage"
              BackgroundImageSource="gymBg.jpg"
              NavigationPage.HasNavigationBar="False">
@@ -36,7 +37,7 @@
                     <local:RequiredValidationBehavior />
                 </Entry.Behaviors>
             </Entry>
-            
+
             <Button Text="Zaloguj"
                     TextColor="{StaticResource vividVermilion}"
                     Margin="30,5,30,5"

@@ -18,7 +18,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="newProduct"
+        <ToolbarItem x:Name="NewProduct"
                      Text="Nowy Produkt"
                      Command="{Binding NavigateToAddDataCommand}"/>
     </ContentPage.ToolbarItems>

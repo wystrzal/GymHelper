@@ -49,7 +49,7 @@ namespace GymHelper.View.ProductView
             if (!checkbox.IsChecked)
             {
                 ToolbarItems.Clear();
-                ToolbarItems.Add(newProduct);
+                ToolbarItems.Add(NewProduct);
                 viewModel.SelectedData.Remove(product);
             }
         }

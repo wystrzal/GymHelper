@@ -48,7 +48,7 @@ namespace GymHelper.View.ExerciseView
             if (!checkbox.IsChecked)
             {
                 ToolbarItems.Clear();
-                ToolbarItems.Add(newExercise);
+                ToolbarItems.Add(NewExercise);
                 viewModel.SelectedData.Remove(exercise);
             }
         }

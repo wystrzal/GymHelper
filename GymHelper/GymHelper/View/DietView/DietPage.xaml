@@ -26,7 +26,7 @@
     <ScrollView>
         <StackLayout>
             <StackLayout Margin="0, 0, 0, 10">
-                <Label x:Name="totalCalories"
+                <Label x:Name="TotalCalories"
                    FontSize="20"
                    HorizontalOptions="CenterAndExpand"
                    TextColor="{DynamicResource vividVermilion}"
@@ -44,7 +44,7 @@
                        TextColor="{DynamicResource vividVermilion}"
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
             <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
-            
+
             <ListView ItemsSource="{Binding Collection}"         
               HasUnevenRows="True"
               SelectionMode="None">

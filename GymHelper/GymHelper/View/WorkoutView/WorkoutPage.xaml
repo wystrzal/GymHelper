@@ -34,7 +34,7 @@
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
         <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
         
-        <ListView x:Name="workoutListView"
+        <ListView x:Name="WorkoutListView"
               HasUnevenRows="True"
               BackgroundColor="{DynamicResource blackOlive}"
               ItemsSource="{Binding Collection}"

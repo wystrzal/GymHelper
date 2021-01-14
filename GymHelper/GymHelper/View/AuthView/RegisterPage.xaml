@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" xmlns:local="clr-namespace:GymHelper.Helpers"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers"
              BackgroundImageSource="gymBg.jpg"
              NavigationPage.HasNavigationBar="False"
              x:Class="GymHelper.View.RegisterPage">
@@ -36,7 +37,7 @@
                     <local:RequiredValidationBehavior />
                 </Entry.Behaviors>
             </Entry>
-            
+
             <Entry Text="{Binding RepeatPassword, Mode=TwoWay}"
                    Placeholder="Powtórz hasło"
                    Margin="10,0,10,5"
@@ -47,7 +48,7 @@
                     <local:RequiredValidationBehavior />
                 </Entry.Behaviors>
             </Entry>
-            
+
             <Button Command="{Binding RegisterCommand}"
                     CommandParameter="{Binding User}"
                     Text="Stwórz"

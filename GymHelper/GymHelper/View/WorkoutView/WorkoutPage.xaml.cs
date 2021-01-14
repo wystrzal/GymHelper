@@ -30,14 +30,14 @@ namespace GymHelper.View.WorkoutView
 
         private async void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var workout = (Workout)workoutListView.SelectedItem;
+            var workout = (Workout)WorkoutListView.SelectedItem;
             if (workout != null)
             {
                 App.Data.Workout = workout;
                 await viewModel.NavigateService.Navigate<WorkoutExercisePage>();
             }
 
-            workoutListView.SelectedItem = null;
+            WorkoutListView.SelectedItem = null;
         }
     }
 }

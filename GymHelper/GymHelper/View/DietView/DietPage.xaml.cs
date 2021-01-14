@@ -31,13 +31,13 @@ namespace GymHelper.View
             await viewModel.ReadData();
 
             await viewModel.ChartPreparer.PrepareCharts(diet);
-            totalCalories.Text = $"Kalorie: {diet.TotalCalories}";
+            TotalCalories.Text = $"Kalorie: {diet.TotalCalories}";
         }
 
         private async void MenuItem_Clicked(object sender, EventArgs e)
         {
             await viewModel.ChartPreparer.PrepareCharts(diet);
-            totalCalories.Text = $"Kalorie: {diet.TotalCalories}";
+            TotalCalories.Text = $"Kalorie: {diet.TotalCalories}";
         }
     }
 }
