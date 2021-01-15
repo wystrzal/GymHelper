@@ -97,8 +97,24 @@ namespace GymHelper.Data
             }
         }
 
+
+        public async Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition, int take, int skip = 0)
+        {
+            try
+            {
+                var data = dataContext.Set<TEntity>().Where(condition).Skip(skip).Take(take).ToList();
+
+                return await Task.FromResult(data);
+            }
+            catch (Exception)
+            {
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                return null;
+            }
+        }
+
         public async Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
-            Func<TEntity, TKey> orderBy, int take, int skip = 0, bool orderASC = true)
+            Func<TEntity, TKey> orderBy, int take, bool orderASC = true)
         {
             try
             {
@@ -106,11 +122,11 @@ namespace GymHelper.Data
 
                 if (orderASC)
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).Skip(skip).Take(take).ToList();
+                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).Take(take).ToList();
                 }
                 else
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Skip(skip).Take(take).ToList();
+                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Take(take).ToList();
                 }
 
                 return await Task.FromResult(data);
