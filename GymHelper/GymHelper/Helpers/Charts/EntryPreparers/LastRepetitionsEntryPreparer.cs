@@ -25,7 +25,7 @@ namespace GymHelper.Helpers.Charts
         public override async Task<List<ChartEntry>> PrepareChartEntry()
         {
             var workoutExercises = await unitOfWork.Repository<WorkoutExercise>()
-                .ReadAllByCondition(x => x.ExerciseId == exerciseId, x => x.Date, takeLastExercises, false);
+                .ReadAllByCondition(x => x.ExerciseId == exerciseId, x => x.Date, takeLastExercises, orderASC: false);
 
             foreach (var workoutExercise in workoutExercises)
             {
