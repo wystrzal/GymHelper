@@ -18,6 +18,8 @@ namespace GymHelper.Data.Interfaces
             Func<TEntity, TKey> orderBy, int take, int skip = 0, bool orderASC = true);
         Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include);
+        Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
+            Expression<Func<TEntity, TProp>> include, int take, int skip = 0);
         Task<TEntity> ReadFirstByCondition(Func<TEntity, bool> condition);
         Task<TEntity> ReadFirstByCondition<TKey>(Func<TEntity, bool> condition,
             Func<TEntity, TKey> orderBy, bool orderASC = true);

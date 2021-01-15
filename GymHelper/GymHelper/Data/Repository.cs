@@ -154,6 +154,22 @@ namespace GymHelper.Data
             }
         }
 
+        public async Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
+            Expression<Func<TEntity, TProp>> include, int take, int skip = 0)
+        {
+            try
+            {
+                var data = dataContext.Set<TEntity>().Include(include).Where(condition).Skip(skip).Take(take).ToList();
+
+                return await Task.FromResult(data);
+            }
+            catch (Exception)
+            {
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                return null;
+            }
+        }
+
         public async Task<TEntity> ReadFirstByCondition(Func<TEntity, bool> condition)
         {
             try
