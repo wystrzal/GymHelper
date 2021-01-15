@@ -114,7 +114,7 @@ namespace GymHelper.Data
         }
 
         public async Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
-            Func<TEntity, TKey> orderBy, int take, bool orderASC = true)
+            Func<TEntity, TKey> orderBy, int take, int skip = 0, bool orderASC = true)
         {
             try
             {

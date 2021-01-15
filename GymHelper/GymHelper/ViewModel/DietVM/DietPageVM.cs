@@ -32,12 +32,10 @@ namespace GymHelper.ViewModel
             ChartPreparer = new DietChartPreparer();
         }
 
-        public override async Task ReadData()
+        public override async Task<IEnumerable<Product>> GetData(int pageIndex, int pageSize = 10)
         {
-            var products = await unitOfWork.Repository<Product>()
-                .ReadAllByCondition(x => x.DietId == App.Data.User.Diet.DietId);
-
-            Collection.FillCollection(products);
+            return await unitOfWork.Repository<Product>()
+                .ReadAllByCondition(x => x.DietId == App.Data.User.Diet.DietId, pageSize, pageIndex * pageSize);
         }
 
         public override async Task DeleteData(Product entity)

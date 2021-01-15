@@ -24,11 +24,10 @@ namespace GymHelper.ViewModel
         public override ICommand NavigateToEditDataCommand
             => new Command<Product>(async (product) => await NavigateService.Navigate<EditProductPage>(product));
 
-        public override async Task ReadData()
+        public override async Task<IEnumerable<Product>> GetData(int pageIndex, int pageSize = 10)
         {
-            var products = await unitOfWork.Repository<Product>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
-
-            Collection.FillCollection(products);
+            return await unitOfWork.Repository<Product>()
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId, pageSize, pageIndex * pageSize);
         }
 
         public override async Task SearchData(string query)
