@@ -26,7 +26,7 @@ namespace GymHelper.ViewModel
         public override async Task<IEnumerable<Workout>> GetData(int pageIndex, int pageSize = 10)
         {
             return await unitOfWork.Repository<Workout>()
-                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId, y => y.Date, pageSize, pageIndex * pageSize, false);
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId, y => y.Date, take: pageSize, skip: pageIndex * pageSize);
         }
 
         public override async Task SearchData(string query)
