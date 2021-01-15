@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymHelper.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -58,7 +59,7 @@ namespace GymHelper.ViewModel.BaseVM
         public async Task ReadData()
         {
             var items = await GetData(pageIndex: 0);
-            Collection.AddRange(items);
+            Collection.FillCollection(items as List<TEntity>);
         }
     }
 }
