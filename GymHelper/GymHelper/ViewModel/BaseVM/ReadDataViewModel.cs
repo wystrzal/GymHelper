@@ -15,6 +15,7 @@ namespace GymHelper.ViewModel.BaseVM
     {
         private bool isBusy;
         private const int pageSize = 10;
+        protected string query = "";
 
         public InfiniteScrollCollection<TEntity> Collection { get; }
 
@@ -30,8 +31,7 @@ namespace GymHelper.ViewModel.BaseVM
                     IsBusy = true;
 
                     var page = Collection.Count / pageSize;
-                    var data = await GetData(page);
-                    
+                    var data = await GetData(page);              
 
                     IsBusy = false;
 
@@ -39,7 +39,7 @@ namespace GymHelper.ViewModel.BaseVM
                 },
                 OnCanLoadMore = () =>
                 {
-                    return Collection.Count < unitOfWork.Repository<TEntity>().ReadDataCount().Result;
+                    return Collection.Count < GetDataCount().Result;
                 }
             };
         }
@@ -54,13 +54,21 @@ namespace GymHelper.ViewModel.BaseVM
             }
         }
 
-        public abstract Task<IEnumerable<TEntity>> GetData(int pageIndex, int pageSize = pageSize);
-        public abstract Task SearchData(string query);
-
         public async Task ReadData()
         {
             var items = await GetData(pageIndex: 0);
             Collection.FillCollection(items as List<TEntity>);
         }
+
+        private async Task SearchData(string query)
+        {
+            this.query = query;
+
+            var data = await GetData(pageIndex: 0);
+            Collection.FillCollection(data as List<TEntity>);
+        }
+
+        protected abstract Task<IEnumerable<TEntity>> GetData(int pageIndex, int pageSize = pageSize);
+        protected abstract Task<int> GetDataCount();
     }
 }

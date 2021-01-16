@@ -24,20 +24,6 @@ namespace GymHelper.ViewModel
         public override ICommand NavigateToEditDataCommand
             => new Command<Product>(async (product) => await NavigateService.Navigate<EditProductPage>(product));
 
-        public override async Task<IEnumerable<Product>> GetData(int pageIndex, int pageSize = 10)
-        {
-            return await unitOfWork.Repository<Product>()
-                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId, pageSize, pageIndex * pageSize);
-        }
-
-        public override async Task SearchData(string query)
-        {
-            var products = await unitOfWork.Repository<Product>()
-                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query));
-
-            Collection.FillCollection(products);
-        }
-
         public override async Task DeleteData(Product entity)
         {
             if (await ProductExistInDiet(entity, diet))
@@ -46,6 +32,18 @@ namespace GymHelper.ViewModel
             }
 
             await base.DeleteData(entity);
+        }
+
+        protected override async Task<int> GetDataCount()
+        {
+            return await unitOfWork.Repository<Product>().ReadDataCount(x => x.Name.Contains(query));
+        }
+
+        protected override async Task<IEnumerable<Product>> GetData(int pageIndex, int pageSize = 10)
+        {
+            return await unitOfWork.Repository<Product>()
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query),
+                pageSize, pageIndex * pageSize);
         }
 
         protected override async Task AddSelectedData()

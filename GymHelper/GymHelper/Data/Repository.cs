@@ -224,9 +224,10 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<int> ReadDataCount()
+        public async Task<int> ReadDataCount(Func<TEntity, bool> condition)
         {
-            return await dataContext.Set<TEntity>().CountAsync();
+            var dataCount = dataContext.Set<TEntity>().Where(condition).Count();
+            return await Task.FromResult(dataCount);
         }
 
         public async Task<bool> CheckIfExistByCondition(Func<TEntity, bool> condition)
