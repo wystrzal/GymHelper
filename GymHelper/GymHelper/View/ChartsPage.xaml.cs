@@ -24,12 +24,6 @@ namespace GymHelper.View
             viewModel = BindingContext as ChartsPageVM;
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await viewModel.ReadData();
-        }
-
         private async void ExerciseListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var exercise = (Exercise)ExerciseListView.SelectedItem;

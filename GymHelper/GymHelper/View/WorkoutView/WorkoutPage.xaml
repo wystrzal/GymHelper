@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:converter="clr-namespace:GymHelper.Helpers" 
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
              x:Class="GymHelper.View.WorkoutView.WorkoutPage"
              x:Name="Workout"
              BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
 
     <ContentPage.BindingContext>
         <viewModel:WorkoutPageVM/>
@@ -34,7 +39,7 @@
                        TextColor="{DynamicResource vividVermilion}"
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
         <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
-        
+
         <ListView x:Name="WorkoutListView"
               HasUnevenRows="True"
               BackgroundColor="{DynamicResource blackOlive}"

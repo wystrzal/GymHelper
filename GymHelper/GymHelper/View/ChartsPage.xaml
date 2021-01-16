@@ -4,9 +4,14 @@
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
              xmlns:converter="clr-namespace:GymHelper.Helpers" 
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
              x:Class="GymHelper.View.ChartsPage"
              BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
 
     <ContentPage.BindingContext>
         <viewModel:ChartsPageVM/>

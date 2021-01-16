@@ -26,9 +26,7 @@ namespace GymHelper.View
         protected override async void OnAppearing()
         {
             diet = App.Data.User.Diet;
-
             base.OnAppearing();
-            await viewModel.ReadData();
 
             await viewModel.ChartPreparer.PrepareCharts(diet);
             TotalCalories.Text = $"Kalorie: {diet.TotalCalories}";

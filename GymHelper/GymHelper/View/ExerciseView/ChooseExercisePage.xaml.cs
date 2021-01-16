@@ -25,12 +25,11 @@ namespace GymHelper.View.ExerciseView
             addSelectedExercises = new ToolbarItem();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             addSelectedExercises.Text = "Dodaj";
             addSelectedExercises.Command = viewModel.AddSelectedDataCommand;
-            await viewModel.ReadData();
         }
 
         private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)

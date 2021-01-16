@@ -4,10 +4,15 @@
              xmlns:local="clr-namespace:GymHelper.Helpers" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
              x:Class="GymHelper.View.DietPage"
              x:Name="Diet"
              BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
 
     <ContentPage.BindingContext>
         <viewModel:DietPageVM/>
