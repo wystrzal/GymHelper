@@ -26,19 +26,16 @@ namespace GymHelper.ViewModel
             ChartPreparer = new ExerciseChartPreparer();
         }
 
-        public override async Task ReadData()
+        protected override async Task<IEnumerable<Exercise>> GetData(int pageIndex, int pageSize = 10)
         {
-            var exercises = await unitOfWork.Repository<Exercise>().ReadAllByCondition(x => x.UserId == App.Data.User.UserId);
-
-            Collection.FillCollection(exercises);
+            return await unitOfWork.Repository<Exercise>()
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query),
+                pageSize, pageIndex * pageSize);
         }
 
-        public override async Task SearchData(string query)
+        protected override async Task<int> GetDataCount()
         {
-            var exercises = await unitOfWork.Repository<Exercise>()
-                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query));
-
-            Collection.FillCollection(exercises);
+            return await unitOfWork.Repository<Exercise>().ReadDataCount(x => x.Name.Contains(query));
         }
     }
 }

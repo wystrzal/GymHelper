@@ -97,6 +97,22 @@ namespace GymHelper.Data
             }
         }
 
+
+        public async Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition, int take, int skip = 0)
+        {
+            try
+            {
+                var data = dataContext.Set<TEntity>().Where(condition).Skip(skip).Take(take).ToList();
+
+                return await Task.FromResult(data);
+            }
+            catch (Exception)
+            {
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                return null;
+            }
+        }
+
         public async Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
             Func<TEntity, TKey> orderBy, int take, int skip = 0, bool orderASC = true)
         {
@@ -128,6 +144,22 @@ namespace GymHelper.Data
             try
             {
                 var data = dataContext.Set<TEntity>().Include(include).Where(condition).ToList();
+
+                return await Task.FromResult(data);
+            }
+            catch (Exception)
+            {
+                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
+                return null;
+            }
+        }
+
+        public async Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
+            Expression<Func<TEntity, TProp>> include, int take, int skip = 0)
+        {
+            try
+            {
+                var data = dataContext.Set<TEntity>().Include(include).Where(condition).Skip(skip).Take(take).ToList();
 
                 return await Task.FromResult(data);
             }
@@ -190,6 +222,12 @@ namespace GymHelper.Data
                 await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
+        }
+
+        public async Task<int> ReadDataCount(Func<TEntity, bool> condition)
+        {
+            var dataCount = dataContext.Set<TEntity>().Where(condition).Count();
+            return await Task.FromResult(dataCount);
         }
 
         public async Task<bool> CheckIfExistByCondition(Func<TEntity, bool> condition)

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
-             xmlns:converter="clr-namespace:GymHelper.Helpers"
+             xmlns:converter="clr-namespace:GymHelper.Helpers" 
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Class="GymHelper.View.ChartsPage"
              BackgroundColor="{DynamicResource blackOlive}">
 
@@ -36,6 +37,11 @@
                               BackgroundColor="{DynamicResource blackOlive}"
                               ItemsSource="{Binding Collection}"
                               ItemSelected="ExerciseListView_ItemSelected">
+
+                        <ListView.Behaviors>
+                            <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+                        </ListView.Behaviors>
+
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -52,6 +58,22 @@
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+
+                        <ListView.Footer>
+                            <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                                <Grid.Triggers>
+                                    <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                        <Setter Property="HeightRequest" Value="0"/>
+                                    </Trigger>
+                                </Grid.Triggers>
+                                <Label Text="Ładowanie..." 
+                           TextColor="{DynamicResource vividVermilion}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                            </Grid>
+                        </ListView.Footer>
                     </ListView>
                 </StackLayout>
 

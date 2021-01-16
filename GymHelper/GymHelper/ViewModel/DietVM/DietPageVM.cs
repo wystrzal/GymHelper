@@ -32,14 +32,6 @@ namespace GymHelper.ViewModel
             ChartPreparer = new DietChartPreparer();
         }
 
-        public override async Task ReadData()
-        {
-            var products = await unitOfWork.Repository<Product>()
-                .ReadAllByCondition(x => x.DietId == App.Data.User.Diet.DietId);
-
-            Collection.FillCollection(products);
-        }
-
         public override async Task DeleteData(Product entity)
         {
             var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.DietId == App.Data.User.Diet.DietId);
@@ -51,12 +43,16 @@ namespace GymHelper.ViewModel
             await ReadData();
         }
 
-        public override async Task SearchData(string query)
+        protected override async Task<IEnumerable<Product>> GetData(int pageIndex, int pageSize = 10)
         {
-            var products = await unitOfWork.Repository<Product>()
-                .ReadAllByCondition(x => x.DietId == App.Data.User.Diet.DietId && x.Name.Contains(query));
+            return await unitOfWork.Repository<Product>()
+                .ReadAllByCondition(x => x.DietId == App.Data.User.Diet.DietId && x.Name.Contains(query),
+                pageSize, pageIndex * pageSize);
+        }
 
-            Collection.FillCollection(products);
+        protected override async Task<int> GetDataCount()
+        {
+            return await unitOfWork.Repository<Product>().ReadDataCount(x => x.Name.Contains(query));
         }
     }
 }
