@@ -122,11 +122,11 @@ namespace GymHelper.Data
 
                 if (orderASC)
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).Take(take).ToList();
+                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).Skip(skip).Take(take).ToList();
                 }
                 else
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Take(take).ToList();
+                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Skip(skip).Take(take).ToList();
                 }
 
                 return await Task.FromResult(data);
@@ -222,6 +222,11 @@ namespace GymHelper.Data
                 await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
                 return null;
             }
+        }
+
+        public async Task<int> ReadDataCount()
+        {
+            return await dataContext.Set<TEntity>().CountAsync();
         }
 
         public async Task<bool> CheckIfExistByCondition(Func<TEntity, bool> condition)

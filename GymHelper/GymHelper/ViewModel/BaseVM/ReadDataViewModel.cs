@@ -30,15 +30,16 @@ namespace GymHelper.ViewModel.BaseVM
                     IsBusy = true;
 
                     var page = Collection.Count / pageSize;
-                    var items = await GetData(page);
+                    var data = await GetData(page);
+                    
 
                     IsBusy = false;
 
-                    return items;
+                    return data;
                 },
                 OnCanLoadMore = () =>
                 {
-                    return Collection.Count < 11;
+                    return Collection.Count < unitOfWork.Repository<TEntity>().ReadDataCount().Result;
                 }
             };
         }
