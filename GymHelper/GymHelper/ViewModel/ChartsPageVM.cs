@@ -14,6 +14,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace GymHelper.ViewModel
 {
@@ -21,9 +23,62 @@ namespace GymHelper.ViewModel
     {
         public ChartPreparer<Exercise> ChartPreparer { get; private set; }
 
+        public ICommand SwitchViewCommand => new Command(() => SwitchCurrentView());
+
         public ChartsPageVM()
         {
             ChartPreparer = new ExerciseChartPreparer();
+        }
+
+        private bool exerciseSelectorIsVisible = true;
+        public bool ExerciseSelectorIsVisible
+        {
+            get
+            {
+                return exerciseSelectorIsVisible;
+            }
+            set
+            {
+                exerciseSelectorIsVisible = value;
+                OnPropertyChanged("ExerciseSelectorIsVisible");
+            }
+        }
+
+        private bool chartsIsVisible = false;
+        public bool ChartsIsVisible
+        {
+            get
+            {
+                return chartsIsVisible;
+            }
+            set
+            {
+                chartsIsVisible = value;
+                OnPropertyChanged("ChartsIsVisible");
+            }
+        }
+
+        public Exercise SelectedExercise
+        {
+            get
+            {
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    ChartPreparer.PrepareCharts(value);
+                    SwitchCurrentView();
+                }
+                OnPropertyChanged("SelectedExercise");
+            }
+        }
+
+        private void SwitchCurrentView()
+        {
+            ChartsIsVisible = !ChartsIsVisible;
+            ExerciseSelectorIsVisible = !ExerciseSelectorIsVisible;
         }
 
         protected override async Task<IEnumerable<Exercise>> GetData(int pageIndex, int pageSize = 10)

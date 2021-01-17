@@ -16,35 +16,9 @@ namespace GymHelper.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartsPage : ContentPage
     {
-        private readonly ChartsPageVM viewModel;
-
         public ChartsPage()
         {
             InitializeComponent();
-            viewModel = BindingContext as ChartsPageVM;
-        }
-
-        private async void ExerciseListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var exercise = (Exercise)ExerciseListView.SelectedItem;
-
-            if (exercise != null)
-            {
-                await viewModel.ChartPreparer.PrepareCharts(exercise);
-                SwitchCurrentView();
-            }
-        }
-
-        private void SelectExerciseButton_Clicked(object sender, EventArgs e)
-        {
-            SwitchCurrentView();
-            ExerciseListView.SelectedItem = null;
-        }
-
-        private void SwitchCurrentView()
-        {
-            ExerciseSelector.IsVisible = !ExerciseSelector.IsVisible;
-            Charts.IsVisible = !Charts.IsVisible;
         }
     }
 }
