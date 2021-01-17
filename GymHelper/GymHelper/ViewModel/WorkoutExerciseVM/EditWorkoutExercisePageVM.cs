@@ -14,6 +14,12 @@ namespace GymHelper.ViewModel
     {
         public override ICommand EditDataCommand =>
             new Command<WorkoutExercise>(async (workoutExercise) => await Update(workoutExercise));
+        public ICommand SeriesChangedCommand
+            => new Command<string>((text) => WorkoutExercise.Series = (int)RestoreOldValue(text, OldWorkoutExercise.Series, WorkoutExercise.Series));
+        public ICommand RepetitionChangedCommand
+            => new Command<string>((text) => WorkoutExercise.Repetition = (int)RestoreOldValue(text, OldWorkoutExercise.Repetition, WorkoutExercise.Repetition));
+        public ICommand WeightChangedCommand
+            => new Command<string>((text) => WorkoutExercise.Weight = (int)RestoreOldValue(text, OldWorkoutExercise.Weight, WorkoutExercise.Weight));
 
         public WorkoutExercise OldWorkoutExercise { get; private set; }
 

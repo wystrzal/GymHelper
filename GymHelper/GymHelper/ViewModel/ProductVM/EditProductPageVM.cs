@@ -18,6 +18,18 @@ namespace GymHelper.ViewModel
     {
         public override ICommand EditDataCommand
             => new Command<Product>(async (product) => await Update(product));
+        public ICommand NameChangedCommand
+            => new Command<string>((text) => Product.Name = (string)RestoreOldValue(text, OldProduct.Name, Product.Name));
+        public ICommand GramsChangedCommand
+            => new Command<string>((text) => Product.Grams = (int)RestoreOldValue(text, OldProduct.Grams, Product.Grams));
+        public ICommand CaloriesChangedCommand
+            => new Command<string>((text) => Product.Calories = (float)RestoreOldValue(text, OldProduct.Calories, Product.Calories));
+        public ICommand ProteinsChangedCommand
+            => new Command<string>((text) => Product.Proteins = (float)RestoreOldValue(text, OldProduct.Proteins, Product.Proteins));
+        public ICommand CarbohydratesChangedCommand
+            => new Command<string>((text) => Product.Carbohydrates = (float)RestoreOldValue(text, OldProduct.Carbohydrates, Product.Carbohydrates));
+        public ICommand FatsChangedCommand
+            => new Command<string>((text) => Product.Fats = (float)RestoreOldValue(text, OldProduct.Fats, Product.Fats));
 
         public Product OldProduct { get; set; }
 

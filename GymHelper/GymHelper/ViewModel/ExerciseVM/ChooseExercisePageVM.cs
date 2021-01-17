@@ -23,14 +23,13 @@ namespace GymHelper.ViewModel
 
         protected override async Task<int> GetDataCount()
         {
-            return await unitOfWork.Repository<Exercise>().ReadDataCount(x => x.Name.Contains(query));
+            return await unitOfWork.Repository<Exercise>().ReadDataCount(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query));
         }
 
         protected override async Task<IEnumerable<Exercise>> GetData(int pageIndex, int pageSize = 10)
         {
             return await unitOfWork.Repository<Exercise>()
-                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query),
-                pageSize, pageIndex * pageSize);
+                .ReadAllByCondition(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query), pageSize, pageIndex * pageSize);
         }
 
         protected override async Task AddSelectedData()

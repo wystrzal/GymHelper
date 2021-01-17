@@ -19,32 +19,5 @@ namespace GymHelper.View
             InitializeComponent();
             ((EditWorkoutExercisePageVM)BindingContext).WorkoutExercise = workoutExercise;
         }
-
-        private void SeriesEntry_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
-            {
-                ((EditWorkoutExercisePageVM)BindingContext).WorkoutExercise.Series
-                    = ((EditWorkoutExercisePageVM)BindingContext).OldWorkoutExercise.Series;
-            }
-        }
-
-        private void RepetitionEntry_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
-            {
-                ((EditWorkoutExercisePageVM)BindingContext).WorkoutExercise.Repetition
-                    = ((EditWorkoutExercisePageVM)BindingContext).OldWorkoutExercise.Repetition;
-            }
-        }
-
-        private void WeightEntry_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
-            {
-                ((EditWorkoutExercisePageVM)BindingContext).WorkoutExercise.Weight
-                    = ((EditWorkoutExercisePageVM)BindingContext).OldWorkoutExercise.Weight;
-            }
-        }
     }
 }

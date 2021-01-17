@@ -4,9 +4,14 @@
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
              xmlns:converter="clr-namespace:GymHelper.Helpers" 
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
              x:Class="GymHelper.View.ChartsPage"
              BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
 
     <ContentPage.BindingContext>
         <viewModel:ChartsPageVM/>
@@ -21,7 +26,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <StackLayout x:Name="ExerciseSelector" IsVisible="True">
+                <StackLayout x:Name="ExerciseSelector" IsVisible="{Binding ExerciseSelectorIsVisible}">
                     <SearchBar x:Name="SearchBar"
                        Placeholder="Wyszukaj ćwiczenia."
                        SearchCommand="{Binding PerformSearchCommand}"
@@ -32,11 +37,10 @@
                        CancelButtonColor="{DynamicResource vividVermilion}"/>
                     <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
 
-                    <ListView x:Name="ExerciseListView"
-                              HasUnevenRows="True"
+                    <ListView HasUnevenRows="True"
                               BackgroundColor="{DynamicResource blackOlive}"
                               ItemsSource="{Binding Collection}"
-                              ItemSelected="ExerciseListView_ItemSelected">
+                              SelectedItem="{Binding SelectedExercise, Mode=TwoWay}">
 
                         <ListView.Behaviors>
                             <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
@@ -77,14 +81,13 @@
                     </ListView>
                 </StackLayout>
 
-                <StackLayout x:Name="Charts" IsVisible="False">
+                <StackLayout x:Name="Charts" IsVisible="{Binding ChartsIsVisible}">
                     <Button Text="Wybór Ćwiczenia"
-                            x:Name="SelectExerciseButton"
                             TextColor="{StaticResource vividVermilion}"
                             Margin="30,5,30,5"
                             CornerRadius="15"
                             BackgroundColor="{StaticResource raisinBlack}"
-                            Clicked="SelectExerciseButton_Clicked"/>
+                            Command="{Binding SwitchViewCommand}"/>
 
                     <StackLayout Margin="0, 0, 0, 20">
                         <Label Text="Ciężar z ostatnich treningów."

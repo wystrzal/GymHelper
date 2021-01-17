@@ -18,13 +18,5 @@ namespace GymHelper.View
             InitializeComponent();
             ((EditDietProductPageVM)BindingContext).Product = product;
         }
-        
-        private void GramsEntry_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
-            {
-                ((EditDietProductPageVM)BindingContext).Product.Grams = ((EditDietProductPageVM)BindingContext).OldProduct.Grams;
-            }
-        }
     }
 }

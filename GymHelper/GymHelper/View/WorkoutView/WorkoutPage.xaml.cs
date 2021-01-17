@@ -15,29 +15,9 @@ namespace GymHelper.View.WorkoutView
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkoutPage : ContentPage
     {
-        private readonly WorkoutPageVM viewModel;
         public WorkoutPage()
         {
             InitializeComponent();
-            viewModel = BindingContext as WorkoutPageVM;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await viewModel.ReadData();
-        }
-
-        private async void WorkoutListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var workout = (Workout)WorkoutListView.SelectedItem;
-            if (workout != null)
-            {
-                App.Data.Workout = workout;
-                await viewModel.NavigateService.Navigate<WorkoutExercisePage>();
-            }
-
-            WorkoutListView.SelectedItem = null;
         }
     }
 }

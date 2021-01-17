@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
              xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
              x:Class="GymHelper.View.EditExercisePage"
              NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
@@ -29,8 +30,12 @@
                    Text="{Binding Exercise.Name, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Exercise.Name, StringFormat='Nazwa ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"
-                   TextChanged="NameEntry_TextChanged">
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding NameChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference NameEntry}, Path=Text}"/>
+                </Entry.Behaviors>
             </Entry>
         </StackLayout>
     </ContentPage.Content>
