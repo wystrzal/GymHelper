@@ -31,20 +31,20 @@
 
     <StackLayout>
         <SearchBar x:Name="SearchBar"
-                       Placeholder="Wyszukaj treningi."
-                       SearchCommand="{Binding PerformSearchCommand}"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
-                       BackgroundColor="{DynamicResource blackOlive}"
-                       PlaceholderColor="{DynamicResource vividVermilion}"
-                       TextColor="{DynamicResource vividVermilion}"
-                       CancelButtonColor="{DynamicResource vividVermilion}"/>
+                   Placeholder="Wyszukaj treningi."
+                   SearchCommand="{Binding PerformSearchCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                   BackgroundColor="{DynamicResource blackOlive}"
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   CancelButtonColor="{DynamicResource vividVermilion}"/>
+        
         <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
 
-        <ListView x:Name="WorkoutListView"
-              HasUnevenRows="True"
-              BackgroundColor="{DynamicResource blackOlive}"
-              ItemsSource="{Binding Collection}"
-              ItemSelected="WorkoutListView_ItemSelected">
+        <ListView HasUnevenRows="True"
+                  BackgroundColor="{DynamicResource blackOlive}"
+                  ItemsSource="{Binding Collection}"
+                  SelectedItem="{Binding SelectedWorkout, Mode=TwoWay}">
 
             <ListView.Behaviors>
                 <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
@@ -56,18 +56,18 @@
                         <StackLayout>
                             <Grid>
                                 <Label Text="{Binding Date, Converter={StaticResource dateTimeConverter}}"
-                                   TextColor="{DynamicResource vividVermilion}"
-                                   VerticalOptions="CenterAndExpand"
-                                   HorizontalOptions="StartAndExpand"
-                                   Padding="5, 15, 5, 15"
-                                   FontSize="16"/>
+                                       TextColor="{DynamicResource vividVermilion}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="StartAndExpand"
+                                       Padding="5, 15, 5, 15"
+                                       FontSize="16"/>
 
                                 <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
-                                   TextColor="{DynamicResource vividVermilion}"
-                                   VerticalOptions="CenterAndExpand"
-                                   HorizontalOptions="CenterAndExpand"
-                                   Padding="0, 15, 0, 15"
-                                   FontSize="16"/>
+                                       TextColor="{DynamicResource vividVermilion}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       Padding="0, 15, 0, 15"
+                                       FontSize="16"/>
                             </Grid>
 
                             <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
@@ -75,14 +75,12 @@
 
                         <ViewCell.ContextActions>
                             <MenuItem Text="Usuń"
-                                  IsDestructive="True"
-                                  Command="{Binding Path=BindingContext.DeleteDataCommand,
-                                    Source={x:Reference Workout}}"
-                                  CommandParameter="{Binding}"/>
+                                      IsDestructive="True"
+                                      Command="{Binding Path=BindingContext.DeleteDataCommand, Source={x:Reference Workout}}"
+                                      CommandParameter="{Binding}"/>
                             <MenuItem Text="Edytuj"
-                                  Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
-                                    Source={x:Reference Workout}}"
-                                  CommandParameter="{Binding}"/>
+                                      Command="{Binding Path=BindingContext.NavigateToEditDataCommand, Source={x:Reference Workout}}"
+                                      CommandParameter="{Binding}"/>
                         </ViewCell.ContextActions>
                     </ViewCell>
                 </DataTemplate>

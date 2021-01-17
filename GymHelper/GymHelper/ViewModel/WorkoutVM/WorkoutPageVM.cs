@@ -3,6 +3,7 @@ using GymHelper.Data.Interfaces;
 using GymHelper.Data.Services;
 using GymHelper.Models;
 using GymHelper.View;
+using GymHelper.View.ExerciseView;
 using GymHelper.ViewModel.BaseVM;
 using GymHelper.ViewModel.Commands;
 using System;
@@ -18,10 +19,27 @@ namespace GymHelper.ViewModel
 {
     public class WorkoutPageVM : DisplayDataViewModel<Workout>
     {
-        public override ICommand NavigateToAddDataCommand 
+        public override ICommand NavigateToAddDataCommand
             => new Command(async () => await NavigateService.Navigate<NewWorkoutPage>());
         public override ICommand NavigateToEditDataCommand
              => new Command<Workout>(async (workout) => await NavigateService.Navigate<EditWorkoutPage>(workout));
+
+        public Workout SelectedWorkout
+        {
+            get
+            {
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    App.Data.Workout = value;
+                    NavigateService.Navigate<WorkoutExercisePage>();
+                }
+                OnPropertyChanged("SelectedWorkout");
+            }
+        }
 
         protected override async Task<IEnumerable<Workout>> GetData(int pageIndex, int pageSize = 10)
         {
