@@ -15,6 +15,8 @@ namespace GymHelper.ViewModel
     {
         public override ICommand EditDataCommand =>
             new Command<Product>(async (product) => await Update(product));
+        public ICommand GramsChangedCommand
+            => new Command<string>((text) => Product.Grams = (int)RestoreOldValue(text, OldProduct.Grams, Product.Grams));
 
         public Product OldProduct { get; private set; }
 

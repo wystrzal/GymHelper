@@ -16,6 +16,8 @@ namespace GymHelper.ViewModel
     {
         public override ICommand EditDataCommand
             => new Command<Exercise>(async (exercise) => await Update(exercise));
+        public ICommand NameChangedCommand => new Command<string>((text)
+            => Exercise.Name = (string)RestoreOldValue(text, OldExercise.Name, Exercise.Name));
 
         public Exercise OldExercise { get; private set; }
 

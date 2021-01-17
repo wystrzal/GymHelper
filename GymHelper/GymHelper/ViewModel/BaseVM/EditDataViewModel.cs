@@ -19,5 +19,15 @@ namespace GymHelper.ViewModel
             await unitOfWork.SaveChanges();
             await NavigateService.NavigateBack();
         }
+
+        protected object RestoreOldValue(string text, object oldValue, object currentValue)
+        {
+            if (string.IsNullOrWhiteSpace(text) && oldValue.GetType() == currentValue.GetType())
+            {
+                return oldValue;
+            }
+
+            return currentValue;
+        }
     }
 }

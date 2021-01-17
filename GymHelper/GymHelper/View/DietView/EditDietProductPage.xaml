@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
-             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
              x:Class="GymHelper.View.EditDietProductPage"
              NavigationPage.HasBackButton="False"
              BackgroundColor="{StaticResource blackOlive}">
@@ -13,7 +14,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"></local:CleanWhenAppearConverter>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -30,8 +31,12 @@
                    Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
                    TextColor="{DynamicResource vividVermilion}"
                    Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
-                   PlaceholderColor="{DynamicResource vividVermilion}"
-                   TextChanged="GramsEntry_TextChanged">
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding GramsChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference GramsEntry}, Path=Text}"/>
+                </Entry.Behaviors>
             </Entry>
         </StackLayout>
     </ContentPage.Content>
