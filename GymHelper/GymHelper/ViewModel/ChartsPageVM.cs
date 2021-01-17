@@ -35,7 +35,7 @@ namespace GymHelper.ViewModel
 
         protected override async Task<int> GetDataCount()
         {
-            return await unitOfWork.Repository<Exercise>().ReadDataCount(x => x.Name.Contains(query));
+            return await unitOfWork.Repository<Exercise>().ReadDataCount(x => x.UserId == App.Data.User.UserId && x.Name.Contains(query));
         }
     }
 }
