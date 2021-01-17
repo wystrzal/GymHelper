@@ -22,25 +22,53 @@ namespace GymHelper.ViewModel
     public class DietPageVM : DisplayDataViewModel<Product>
     {
         public ChartPreparer<Diet> ChartPreparer { get; private set; }
-        public override ICommand NavigateToAddDataCommand 
+        public override ICommand NavigateToAddDataCommand
             => new Command(async () => await NavigateService.Navigate<ChooseProductPage>());
         public override ICommand NavigateToEditDataCommand
             => new Command<Product>(async (product) => await NavigateService.Navigate<EditDietProductPage>(product));
+
+        private Diet diet;
 
         public DietPageVM()
         {
             ChartPreparer = new DietChartPreparer();
         }
 
+        private float totalCalories;
+        public float TotalCalories
+        {
+            get
+            {
+                return totalCalories;
+            }
+            set
+            {
+                totalCalories = value;
+                OnPropertyChanged("TotalCalories");
+            }
+        }
+
         public override async Task DeleteData(Product entity)
         {
-            var diet = await unitOfWork.Repository<Diet>().ReadFirstByCondition(x => x.DietId == App.Data.User.Diet.DietId);
             diet.Products.Remove(entity);
             NutrientsManagement.SubtractNutrients(entity, diet);
 
             await unitOfWork.SaveChanges();
-
             await ReadData();
+            await PrepareChartView();
+        }
+
+        protected override async Task Refresh()
+        {
+            diet = App.Data.User.Diet;
+            await PrepareChartView();
+            await base.Refresh();
+        }
+
+        private async Task PrepareChartView()
+        {
+            await ChartPreparer.PrepareCharts(diet);
+            TotalCalories = diet.TotalCalories;
         }
 
         protected override async Task<IEnumerable<Product>> GetData(int pageIndex, int pageSize = 10)

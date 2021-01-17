@@ -14,28 +14,9 @@ namespace GymHelper.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DietPage : ContentPage
     {
-        private readonly DietPageVM viewModel;
-        private Diet diet;
-
         public DietPage()
         {
             InitializeComponent();
-            viewModel = BindingContext as DietPageVM;
-        }
-
-        protected override async void OnAppearing()
-        {
-            diet = App.Data.User.Diet;
-            base.OnAppearing();
-
-            await viewModel.ChartPreparer.PrepareCharts(diet);
-            TotalCalories.Text = $"Kalorie: {diet.TotalCalories}";
-        }
-
-        private async void MenuItem_Clicked(object sender, EventArgs e)
-        {
-            await viewModel.ChartPreparer.PrepareCharts(diet);
-            TotalCalories.Text = $"Kalorie: {diet.TotalCalories}";
         }
     }
 }
