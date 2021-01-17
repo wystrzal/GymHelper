@@ -17,6 +17,9 @@ namespace GymHelper.Helpers.Behaviors
         public static readonly BindableProperty CommandProperty
             = BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior), null);
 
+        public static readonly BindableProperty CommandParameterProperty
+            = BindableProperty.Create("CommandParameter", typeof(object), typeof(EventToCommandBehavior), null);
+
         public string EventName
         {
             get { return (string)GetValue(EventNameProperty); }
@@ -27,6 +30,12 @@ namespace GymHelper.Helpers.Behaviors
         {
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
+        }
+
+        public object CommandParameter
+        {
+            get { return GetValue(CommandParameterProperty); }
+            set { SetValue(CommandParameterProperty, value); }
         }
 
         protected override void OnAttachedTo(VisualElement bindable)
@@ -98,7 +107,15 @@ namespace GymHelper.Helpers.Behaviors
                 return;
             }
 
-            object resolvedParameter = eventArgs;
+            object resolvedParameter;
+            if (CommandParameter != null)
+            {
+                resolvedParameter = CommandParameter;
+            }
+            else
+            {
+                resolvedParameter = eventArgs;
+            }
 
             if (Command.CanExecute(resolvedParameter))
             {
