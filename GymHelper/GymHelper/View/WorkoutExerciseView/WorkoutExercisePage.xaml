@@ -26,6 +26,8 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Dodaj"
                      Command="{Binding NavigateToAddDataCommand}"/>
+        <ToolbarItem Text="Kopiuj"
+                     Command="{Binding CopyDataCommand}"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout>
