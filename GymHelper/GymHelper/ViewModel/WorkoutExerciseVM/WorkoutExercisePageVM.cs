@@ -49,7 +49,7 @@ namespace GymHelper.ViewModel
 
             if (await unitOfWork.SaveChanges())
             {
-                CopyWorkoutExercises(workout, workoutCopy);
+                await CopyWorkoutExercises(workout, workoutCopy);
 
                 if (await unitOfWork.SaveChanges())
                 {
@@ -68,20 +68,22 @@ namespace GymHelper.ViewModel
             return workoutCopy;
         }
 
-        private void CopyWorkoutExercises(Workout workout, Workout workoutCopy)
+        private async Task CopyWorkoutExercises(Workout workout, Workout workoutCopy)
         {
-            foreach (var workoutExercise in workout.WorkoutsExercises)
-            {
-                var workoutExerciseCopy = new WorkoutExercise
+            await Task.Run(() => {
+                foreach (var workoutExercise in workout.WorkoutsExercises)
                 {
-                    Repetition = workoutExercise.Repetition,
-                    Series = workoutExercise.Series,
-                    Weight = workoutExercise.Weight,
-                    WorkoutId = workoutExercise.WorkoutId,
-                    ExerciseId = workoutExercise.ExerciseId
-                };
-                workoutCopy.WorkoutsExercises.Add(workoutExerciseCopy);
-            }
+                    var workoutExerciseCopy = new WorkoutExercise
+                    {
+                        Repetition = workoutExercise.Repetition,
+                        Series = workoutExercise.Series,
+                        Weight = workoutExercise.Weight,
+                        WorkoutId = workoutExercise.WorkoutId,
+                        ExerciseId = workoutExercise.ExerciseId
+                    };
+                    workoutCopy.WorkoutsExercises.Add(workoutExerciseCopy);
+                }
+            });
         }
     }
 }
