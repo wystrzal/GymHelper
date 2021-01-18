@@ -18,19 +18,17 @@ namespace GymHelper.ViewModel
         public BaseCommand RegisterCommand { get; set; }
         public ICommand Cancel => new Command(async () => await NavigateService.NavigateBack());
 
-        private readonly IAuthService authService;
+        private readonly IAuthService authService = App.Data.AuthService;
 
         public RegisterPageVM()
         {
-            authService = App.Data.AuthService;
             RegisterCommand = new RegisterCommand(this);
-            user = new User();
         }
 
-        private User user;
+        private User user = new User();
         public User User
         {
-            get { return user; }
+            get => user;
             set
             {
                 user = value;
@@ -41,7 +39,7 @@ namespace GymHelper.ViewModel
         private string login;
         public string Login
         {
-            get { return login; }
+            get => login;
             set
             {
                 login = value;
@@ -54,7 +52,7 @@ namespace GymHelper.ViewModel
         private string password;
         public string Password
         {
-            get { return password; }
+            get => password;
             set
             {
                 password = value;
@@ -67,7 +65,7 @@ namespace GymHelper.ViewModel
         private string repeatPassword;
         public string RepeatPassword
         {
-            get { return repeatPassword; }
+            get => repeatPassword;
             set
             {
                 repeatPassword = value;

@@ -26,10 +26,7 @@ namespace GymHelper.ViewModel
 
         public Workout SelectedWorkout
         {
-            get
-            {
-                return null;
-            }
+            get => null;
             set
             {
                 if (value != null)

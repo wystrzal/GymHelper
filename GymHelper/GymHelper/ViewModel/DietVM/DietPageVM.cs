@@ -37,10 +37,7 @@ namespace GymHelper.ViewModel
         private float totalCalories;
         public float TotalCalories
         {
-            get
-            {
-                return totalCalories;
-            }
+            get => totalCalories;
             set
             {
                 totalCalories = value;

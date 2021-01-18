@@ -36,7 +36,7 @@ namespace GymHelper.ViewModel
         private Product product;
         public Product Product
         {
-            get { return product; }
+            get => product;
             set
             {
                 product = value;

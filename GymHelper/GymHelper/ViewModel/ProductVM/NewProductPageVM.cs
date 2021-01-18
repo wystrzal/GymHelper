@@ -30,7 +30,7 @@ namespace GymHelper.ViewModel
         private Product product;
         public Product Product
         {
-            get { return product; }
+            get => product;
             set
             {
                 product = value;
@@ -41,7 +41,7 @@ namespace GymHelper.ViewModel
         private string name;
         public string Name
         {
-            get { return name; }
+            get => name;
             set
             {
                 name = value;

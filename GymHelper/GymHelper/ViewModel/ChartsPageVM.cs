@@ -33,10 +33,7 @@ namespace GymHelper.ViewModel
         private bool exerciseSelectorIsVisible = true;
         public bool ExerciseSelectorIsVisible
         {
-            get
-            {
-                return exerciseSelectorIsVisible;
-            }
+            get => exerciseSelectorIsVisible;
             set
             {
                 exerciseSelectorIsVisible = value;
@@ -47,10 +44,7 @@ namespace GymHelper.ViewModel
         private bool chartsIsVisible = false;
         public bool ChartsIsVisible
         {
-            get
-            {
-                return chartsIsVisible;
-            }
+            get => chartsIsVisible;
             set
             {
                 chartsIsVisible = value;
@@ -60,10 +54,7 @@ namespace GymHelper.ViewModel
 
         public Exercise SelectedExercise
         {
-            get
-            {
-                return null;
-            }
+            get => null;
             set
             {
                 if (value != null)

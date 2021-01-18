@@ -24,7 +24,7 @@ namespace GymHelper.ViewModel
         private Exercise exercise;
         public Exercise Exercise
         {
-            get { return exercise; }
+            get => exercise;
             set
             {
                 exercise = value;

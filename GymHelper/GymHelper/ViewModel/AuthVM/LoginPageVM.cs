@@ -26,7 +26,7 @@ namespace GymHelper.ViewModel
         private User user;
         public User User
         {
-            get { return user; }
+            get => user;
             set
             {
                 user = value;
@@ -37,7 +37,7 @@ namespace GymHelper.ViewModel
         private string login;
         public string Login
         {
-            get { return login; }
+            get => login;
             set
             {
                 login = value;
@@ -50,7 +50,7 @@ namespace GymHelper.ViewModel
         private string password;
         public string Password
         {
-            get { return password; }
+            get => password;
             set
             {
                 password = value;
@@ -59,7 +59,7 @@ namespace GymHelper.ViewModel
                 OnPropertyChanged("Password");
             }
         }
-        
+
         public async Task LoginTo(User user)
         {
             var loggedSuccessfully = await authService.LoginTo(user.Login, user.Password);

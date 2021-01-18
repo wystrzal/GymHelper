@@ -26,7 +26,7 @@ namespace GymHelper.ViewModel
         private Workout workout;
         public Workout Workout
         {
-            get { return workout; }
+            get => workout;
             set
             {
                 workout = value;
@@ -37,7 +37,7 @@ namespace GymHelper.ViewModel
         private string name;
         public string Name
         {
-            get { return name; }
+            get => name;
             set
             {
                 name = value;

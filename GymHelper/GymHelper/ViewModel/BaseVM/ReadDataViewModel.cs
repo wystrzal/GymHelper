@@ -46,7 +46,7 @@ namespace GymHelper.ViewModel.BaseVM
 
         public bool IsBusy
         {
-            get { return isBusy; }
+            get => isBusy;
             set
             {
                 isBusy = value;
