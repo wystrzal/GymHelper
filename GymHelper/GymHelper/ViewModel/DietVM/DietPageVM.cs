@@ -45,7 +45,7 @@ namespace GymHelper.ViewModel
             }
         }
 
-        public override async Task DeleteData(Product entity)
+        protected override async Task DeleteData(Product entity)
         {
             diet.Products.Remove(entity);
             NutrientsManagement.SubtractNutrients(entity, diet);

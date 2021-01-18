@@ -24,7 +24,7 @@ namespace GymHelper.ViewModel
         public override ICommand NavigateToEditDataCommand
             => new Command<Product>(async (product) => await NavigateService.Navigate<EditProductPage>(product));
 
-        public override async Task DeleteData(Product entity)
+        protected override async Task DeleteData(Product entity)
         {
             if (await ProductExistInDiet(entity, diet))
             {

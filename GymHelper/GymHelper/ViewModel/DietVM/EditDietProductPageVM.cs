@@ -35,7 +35,7 @@ namespace GymHelper.ViewModel
             }
         }
 
-        public override async Task Update(Product product)
+        protected override async Task Update(Product product)
         {
             var diet = App.Data.User.Diet;
             NutrientsManagement.SubtractNutrients(product, diet);

@@ -13,7 +13,7 @@ namespace GymHelper.ViewModel
     {
         public abstract ICommand EditDataCommand { get; }
 
-        public virtual async Task Update(TEntity entity)
+        protected virtual async Task Update(TEntity entity)
         {
             await unitOfWork.Repository<TEntity>().Update(entity);
             await unitOfWork.SaveChanges();

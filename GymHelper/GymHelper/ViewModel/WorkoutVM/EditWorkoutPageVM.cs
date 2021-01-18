@@ -36,10 +36,10 @@ namespace GymHelper.ViewModel
             }
         }
 
-        public override Task Update(Workout entity)
+        protected override async Task Update(Workout entity)
         {
             entity.Name = entity.Name.ToLower();
-            return base.Update(entity);
+            await base.Update(entity);
         }
     }
 }

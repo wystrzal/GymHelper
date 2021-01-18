@@ -17,7 +17,7 @@ namespace GymHelper.ViewModel.BaseVM
         public ICommand DeleteDataCommand
             => new Command<TEntity>(async (data) => await DeleteData(data));
 
-        public virtual async Task DeleteData(TEntity entity) 
+        protected virtual async Task DeleteData(TEntity entity) 
         {
             await unitOfWork.Repository<TEntity>().Delete(entity);
             await unitOfWork.SaveChanges();

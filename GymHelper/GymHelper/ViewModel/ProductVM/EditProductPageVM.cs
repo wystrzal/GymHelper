@@ -48,7 +48,7 @@ namespace GymHelper.ViewModel
             }
         }
 
-        public override async Task Update(Product entity)
+        protected override async Task Update(Product entity)
         {
             entity.Name = entity.Name.ToLower();
             var diet = App.Data.User.Diet;
