@@ -1,10 +1,12 @@
 ﻿using GymHelper.Data;
 using GymHelper.Data.Interfaces;
+using GymHelper.Data.Services;
 using GymHelper.Helpers;
 using GymHelper.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -15,6 +17,7 @@ namespace GymHelper.Test.Service
     {
         private const string username = "test";
         private const string password = "Test123";
+        private const string repeatPassword = "Test123";
 
         private readonly Mock<IUnitOfWork> unitOfWork;
         private readonly Mock<IAlertService> alertService;
@@ -23,11 +26,15 @@ namespace GymHelper.Test.Service
 
         public AuthServiceTest()
         {
-            App.Data = new DataStorage(It.IsAny<string>());
+            App.Data = new DataStorage(It.IsAny<string>())
+            {
+                DataContext = new DataContext(It.IsAny<string>()),
+                AlertService = new AlertService()
+            };
             unitOfWork = new Mock<IUnitOfWork>();
             alertService = new Mock<IAlertService>();
             authService = new AuthService(unitOfWork.Object, alertService.Object);
-            user = new User { Login = username, Password = password };
+            user = new User { Login = username, Password = password, RepeatPassword = repeatPassword, UserId = 1 };
         }
 
         [Fact]
@@ -66,7 +73,8 @@ namespace GymHelper.Test.Service
         public async Task LoginTo_Success_ReturnTrue()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<User>().ReadFirstByCondition(It.IsAny<Func<User, bool>>()))
+            unitOfWork.Setup(x => x.Repository<User>()
+                .ReadFirstByConditionWithInclude(It.IsAny<Func<User, bool>>(), It.IsAny<Expression<Func<User, Diet>>>()))
                 .Returns(Task.FromResult(user));
 
             //Act
@@ -141,12 +149,15 @@ namespace GymHelper.Test.Service
                 .Returns(Task.FromResult(false));
 
             unitOfWork.Setup(x => x.SaveChanges()).Returns(Task.FromResult(false));
+            unitOfWork.Setup(x => x.Repository<User>().Add(user));
+            unitOfWork.Setup(x => x.Repository<Diet>().Add(It.IsAny<Diet>()));
 
             //Act
             var action = await authService.Register(user);
 
             //Assert
             unitOfWork.Verify(x => x.Repository<User>().Add(user), Times.Once);
+            unitOfWork.Verify(x => x.Repository<Diet>().Add(It.IsAny<Diet>()), Times.Once);
             Assert.False(action);
         }
 
@@ -158,12 +169,15 @@ namespace GymHelper.Test.Service
                 .Returns(Task.FromResult(false));
 
             unitOfWork.Setup(x => x.SaveChanges()).Returns(Task.FromResult(true));
+            unitOfWork.Setup(x => x.Repository<User>().Add(user));
+            unitOfWork.Setup(x => x.Repository<Diet>().Add(It.IsAny<Diet>()));
 
             //Act
             var action = await authService.Register(user);
 
             //Assert
             unitOfWork.Verify(x => x.Repository<User>().Add(user), Times.Once);
+            unitOfWork.Verify(x => x.Repository<Diet>().Add(It.IsAny<Diet>()), Times.Once);
             Assert.True(action);
         }
     }
