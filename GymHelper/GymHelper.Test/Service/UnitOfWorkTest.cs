@@ -7,6 +7,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GymHelper.Test.Service
@@ -17,8 +18,12 @@ namespace GymHelper.Test.Service
 
         public UnitOfWorkTest()
         {
+            App.Data = new DataStorage(It.IsAny<string>())
+            {
+                DataContext = new DataContext(It.IsAny<string>()),
+                AlertService = new AlertService()
+            };
             unitOfWork = new UnitOfWork();
-            App.Data = new DataStorage(It.IsAny<string>());
         }
 
         [Fact]
