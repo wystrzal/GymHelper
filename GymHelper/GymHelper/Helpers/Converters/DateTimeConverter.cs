@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace GymHelper.Helpers
 {
-    class DateTimeConverter : IValueConverter
+    public class DateTimeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
