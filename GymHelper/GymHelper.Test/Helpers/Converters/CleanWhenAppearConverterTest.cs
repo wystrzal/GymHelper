@@ -9,6 +9,8 @@ namespace GymHelper.Test.Helpers.Converters
     public class CleanWhenAppearConverterTest
     {
         private readonly CleanWhenAppearConverter converter;
+        private const string testString = "test";
+
         public CleanWhenAppearConverterTest()
         {
             converter = new CleanWhenAppearConverter();
@@ -17,9 +19,6 @@ namespace GymHelper.Test.Helpers.Converters
         [Fact]
         public void Convert_Success()
         {
-            //Arrange
-            var testString = "test";
-
             //Act
             var testValue = converter.Convert(testString, typeof(string), null, null).ToString();
 
@@ -30,9 +29,6 @@ namespace GymHelper.Test.Helpers.Converters
         [Fact]
         public void ConvertBack_Success()
         {
-            //Arrange
-            var testString = "test";
-
             //Act
             var testValue = converter.ConvertBack(testString, typeof(string), null, null).ToString();
 
