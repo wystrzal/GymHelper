@@ -42,6 +42,7 @@ namespace GymHelper.Test.Helpers.Charts.ChartCreators
 
             //Assert
             Assert.Equal(typeof(DonutChart), chart.GetType());
+            Assert.NotNull(chart);
         }
     }
 }
