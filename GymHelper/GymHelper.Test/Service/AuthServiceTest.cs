@@ -26,13 +26,7 @@ namespace GymHelper.Test.Service
 
         public AuthServiceTest()
         {
-            App.Data = new DataStorage(It.IsAny<string>())
-            {
-                DataContext = new DataContext(It.IsAny<string>()),
-                AlertService = new AlertService()
-            };
-            unitOfWork = new Mock<IUnitOfWork>();
-            alertService = new Mock<IAlertService>();
+            TestHelper.PrepareUnitOfWork(out unitOfWork, out alertService);
             authService = new AuthService(unitOfWork.Object, alertService.Object);
             user = new User { Login = username, Password = password, RepeatPassword = repeatPassword, UserId = 1 };
         }

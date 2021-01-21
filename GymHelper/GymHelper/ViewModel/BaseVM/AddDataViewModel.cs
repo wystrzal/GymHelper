@@ -16,7 +16,7 @@ namespace GymHelper.ViewModel.BaseVM
         {
             await unitOfWork.Repository<TEntity>().Add(entity);
             await unitOfWork.SaveChanges();
-            await NavigateService.NavigateBack();
+            await navigateService.NavigateBack();
         }
     }
 }

@@ -17,9 +17,9 @@ namespace GymHelper.ViewModel
     public class ChooseExercisePageVM : ChooseDataViewModel<Exercise>
     {
         public override ICommand NavigateToAddDataCommand 
-            => new Command(async () => await NavigateService.Navigate<NewExercisePage>());
+            => new Command(async () => await navigateService.Navigate<NewExercisePage>());
         public override ICommand NavigateToEditDataCommand 
-            => new Command<Exercise>(async (exercise) => await NavigateService.Navigate<EditExercisePage>(exercise));
+            => new Command<Exercise>(async (exercise) => await navigateService.Navigate<EditExercisePage>(exercise));
 
         protected override async Task<int> GetDataCount()
         {
@@ -35,7 +35,7 @@ namespace GymHelper.ViewModel
         protected override async Task AddSelectedData()
         {
             await SelectedData.LoopAsync(AddWorkoutExercise);
-            await NavigateService.NavigateBack();
+            await navigateService.NavigateBack();
         }
 
         private async Task AddWorkoutExercise(Exercise exercise)

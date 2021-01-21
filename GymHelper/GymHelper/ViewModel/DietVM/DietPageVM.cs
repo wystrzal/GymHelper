@@ -23,9 +23,9 @@ namespace GymHelper.ViewModel
     {
         public ChartPreparer<Diet> ChartPreparer { get; private set; }
         public override ICommand NavigateToAddDataCommand
-            => new Command(async () => await NavigateService.Navigate<ChooseProductPage>());
+            => new Command(async () => await navigateService.Navigate<ChooseProductPage>());
         public override ICommand NavigateToEditDataCommand
-            => new Command<Product>(async (product) => await NavigateService.Navigate<EditDietProductPage>(product));
+            => new Command<Product>(async (product) => await navigateService.Navigate<EditDietProductPage>(product));
 
         private Diet diet;
 
