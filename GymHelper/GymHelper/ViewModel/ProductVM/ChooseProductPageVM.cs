@@ -20,9 +20,9 @@ namespace GymHelper.ViewModel
     {
         private readonly Diet diet = App.Data.User.Diet;
         public override ICommand NavigateToAddDataCommand
-            => new Command(async () => await NavigateService.Navigate<NewProductPage>());
+            => new Command(async () => await navigateService.Navigate<NewProductPage>());
         public override ICommand NavigateToEditDataCommand
-            => new Command<Product>(async (product) => await NavigateService.Navigate<EditProductPage>(product));
+            => new Command<Product>(async (product) => await navigateService.Navigate<EditProductPage>(product));
 
         protected override async Task DeleteData(Product entity)
         {
@@ -48,7 +48,7 @@ namespace GymHelper.ViewModel
         protected override async Task AddSelectedData()
         {
             await SelectedData.LoopAsync(AddProductToDiet);
-            await NavigateService.NavigateBack();
+            await navigateService.NavigateBack();
         }
 
         private async Task AddProductToDiet(Product product)

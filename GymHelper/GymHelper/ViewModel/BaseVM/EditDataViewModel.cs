@@ -17,7 +17,7 @@ namespace GymHelper.ViewModel
         {
             await unitOfWork.Repository<TEntity>().Update(entity);
             await unitOfWork.SaveChanges();
-            await NavigateService.NavigateBack();
+            await navigateService.NavigateBack();
         }
 
         protected object RestoreOldValue(string text, object oldValue, object currentValue)

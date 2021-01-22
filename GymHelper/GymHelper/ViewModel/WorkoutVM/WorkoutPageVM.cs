@@ -20,9 +20,9 @@ namespace GymHelper.ViewModel
     public class WorkoutPageVM : DisplayDataViewModel<Workout>
     {
         public override ICommand NavigateToAddDataCommand
-            => new Command(async () => await NavigateService.Navigate<NewWorkoutPage>());
+            => new Command(async () => await navigateService.Navigate<NewWorkoutPage>());
         public override ICommand NavigateToEditDataCommand
-             => new Command<Workout>(async (workout) => await NavigateService.Navigate<EditWorkoutPage>(workout));
+             => new Command<Workout>(async (workout) => await navigateService.Navigate<EditWorkoutPage>(workout));
 
         public Workout SelectedWorkout
         {
@@ -32,7 +32,7 @@ namespace GymHelper.ViewModel
                 if (value != null)
                 {
                     App.Data.Workout = value;
-                    NavigateService.Navigate<WorkoutExercisePage>();
+                    navigateService.Navigate<WorkoutExercisePage>();
                 }
                 OnPropertyChanged("SelectedWorkout");
             }

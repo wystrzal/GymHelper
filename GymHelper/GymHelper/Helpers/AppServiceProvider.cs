@@ -9,7 +9,7 @@ using System.Text;
 
 namespace GymHelper.Helpers
 {
-    static class AppServiceProvider
+    public static class AppServiceProvider
     {
         public static ServiceProvider BuildServiceProvider()
         {

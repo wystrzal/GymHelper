@@ -20,9 +20,9 @@ namespace GymHelper.ViewModel
     {
         private readonly IAlertService alertService = App.Data.AlertService;
         public override ICommand NavigateToAddDataCommand
-            => new Command(async () => await NavigateService.Navigate<ChooseExercisePage>());
+            => new Command(async () => await navigateService.Navigate<ChooseExercisePage>());
         public override ICommand NavigateToEditDataCommand
-            => new Command(async (data) => await NavigateService.Navigate<EditWorkoutExercisePage>(data));
+            => new Command(async (data) => await navigateService.Navigate<EditWorkoutExercisePage>(data));
         public ICommand CopyDataCommand => new Command(async () => await CopyData());
 
         protected override async Task<IEnumerable<WorkoutExercise>> GetData(int pageIndex, int pageSize = 10)
