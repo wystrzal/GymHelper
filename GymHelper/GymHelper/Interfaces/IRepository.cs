@@ -10,14 +10,9 @@ namespace GymHelper.Data.Interfaces
     {
         Task Add(TEntity entity);
         Task Delete(TEntity entity);
-        Task<List<TEntity>> ReadAll();
-        Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition);
         Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition, int take, int skip = 0);
-        Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition, Func<TEntity, TKey> orderBy, bool orderASC = true);
         Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
             Func<TEntity, TKey> orderBy, int take, int skip = 0, bool orderASC = true);
-        Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
-            Expression<Func<TEntity, TProp>> include);
         Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
             Expression<Func<TEntity, TProp>> include, int take, int skip = 0);
         Task<TEntity> ReadFirstByCondition(Func<TEntity, bool> condition);

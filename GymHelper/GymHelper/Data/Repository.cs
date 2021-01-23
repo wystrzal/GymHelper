@@ -44,60 +44,6 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<List<TEntity>> ReadAll()
-        {
-            try
-            {
-                return await dataContext.Set<TEntity>().ToListAsync();
-            }
-            catch (Exception)
-            {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
-                return null;
-            }
-        }
-
-        public async Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition)
-        {
-            try
-            {
-                var data = dataContext.Set<TEntity>().Where(condition).ToList();
-
-                return await Task.FromResult(data);
-            }
-            catch (Exception)
-            {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
-                return null;
-            }
-        }
-
-        public async Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
-            Func<TEntity, TKey> orderBy, bool orderASC = true)
-        {
-            try
-            {
-                List<TEntity> data;
-
-                if (orderASC)
-                {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).ToList();
-                }
-                else
-                {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).ToList();
-                }
-
-                return await Task.FromResult(data);
-            }
-            catch (Exception)
-            {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
-                return null;
-            }
-        }
-
-
         public async Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition, int take, int skip = 0)
         {
             try
@@ -128,22 +74,6 @@ namespace GymHelper.Data
                 {
                     data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Skip(skip).Take(take).ToList();
                 }
-
-                return await Task.FromResult(data);
-            }
-            catch (Exception)
-            {
-                await alertService.DisplayAlert("Niepowodzenie", "Nie udało się pobrać danych.", "Ok");
-                return null;
-            }
-        }
-
-        public async Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
-            Expression<Func<TEntity, TProp>> include)
-        {
-            try
-            {
-                var data = dataContext.Set<TEntity>().Include(include).Where(condition).ToList();
 
                 return await Task.FromResult(data);
             }
