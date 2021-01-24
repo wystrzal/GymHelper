@@ -41,8 +41,9 @@ namespace GymHelper.Test.ViewModel.DietVM
             viewModel.EditDataCommand.Execute(product);
 
             //Assert
-            unitOfWork.Verify(x => x.Repository<Product>().Update(product));
+            unitOfWork.Verify(x => x.Repository<Product>().Update(product), Times.Once);
             unitOfWork.Verify(x => x.SaveChanges(), Times.Once);
+            navigateService.Verify(x => x.NavigateBack(), Times.Once);
             Assert.Equal(200, product.Calories);
             Assert.Equal(200, App.Data.User.Diet.TotalCalories);
         }

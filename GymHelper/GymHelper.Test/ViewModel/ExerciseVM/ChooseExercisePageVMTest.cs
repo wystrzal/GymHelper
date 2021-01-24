@@ -59,7 +59,7 @@ namespace GymHelper.Test.ViewModel.ExerciseVM
 
             //Assert
             unitOfWork.Verify(x => x.SaveChanges(), Times.Once);
-            unitOfWork.Verify(x => x.Repository<Exercise>().Delete(It.IsAny<Exercise>()));
+            unitOfWork.Verify(x => x.Repository<Exercise>().Delete(It.IsAny<Exercise>()), Times.Once);
             Assert.Single(viewModel.Collection);
         }
 
