@@ -92,6 +92,19 @@ namespace GymHelper.Test.ViewModel
         }
 
         [Fact]
+        public void LoginCommand_CanExecute_EmptyPassword_Failed()
+        {
+            //Arrange
+            user.Password = "";
+
+            //Act
+            var action = vm.LoginCommand.CanExecute(user);
+
+            //Assert
+            Assert.False(action);
+        }
+
+        [Fact]
         public void LoginCommand_CanExecute_Success()
         {
             //Act
