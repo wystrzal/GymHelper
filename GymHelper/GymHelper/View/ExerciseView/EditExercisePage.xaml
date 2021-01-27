@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
+             x:Class="GymHelper.View.EditExercisePage"
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="{StaticResource blackOlive}">
+
+    <ContentPage.BindingContext>
+        <viewModel:EditExercisePageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding EditDataCommand}"
+                     CommandParameter="{Binding Exercise}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="NameEntry"
+                   Text="{Binding Exercise.Name, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Exercise.Name, StringFormat='Nazwa ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding NameChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference NameEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

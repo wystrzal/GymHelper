@@ -4,5 +4,13 @@
              x:Class="GymHelper.App">
     <Application.Resources>
 
+        <ResourceDictionary>
+            <Color x:Key="floralWhite">#FFFCF2</Color>
+            <Color x:Key="paleSilver">#CCC5B9</Color>
+            <Color x:Key="blackOlive">#403D39</Color>
+            <Color x:Key="raisinBlack">#252422</Color>
+            <Color x:Key="vividVermilion">#EB5E28</Color>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

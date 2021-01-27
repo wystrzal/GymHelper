@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GymHelper.Helpers" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
+             x:Class="GymHelper.View.DietPage"
+             x:Name="Diet"
+             BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.BindingContext>
+        <viewModel:DietPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FirstLetterConverter x:Key="letterConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Dodaj"
+                     Command="{Binding NavigateToAddDataCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout>
+            <StackLayout Margin="0, 0, 0, 10">
+                <Label Text="{Binding TotalCalories, StringFormat='Kalorie {0}'}"
+                       FontSize="20"
+                       HorizontalOptions="CenterAndExpand"
+                       TextColor="{DynamicResource vividVermilion}"
+                       Margin="0, 10, 0, 25"/>
+                <forms:ChartView HeightRequest="150"
+                             Chart="{Binding ChartPreparer.NutrientsChart}"/>
+            </StackLayout>
+
+            <SearchBar x:Name="SearchBar"
+                       Placeholder="Wyszukaj produkty."
+                       SearchCommand="{Binding PerformSearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                       BackgroundColor="{DynamicResource blackOlive}"
+                       PlaceholderColor="{DynamicResource vividVermilion}"
+                       TextColor="{DynamicResource vividVermilion}"
+                       CancelButtonColor="{DynamicResource vividVermilion}"/>
+            <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+
+            <ListView ItemsSource="{Binding Collection}"         
+              HasUnevenRows="True"
+              SelectionMode="None">
+
+                <ListView.Behaviors>
+                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+                </ListView.Behaviors>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               Margin="0, 10, 0 , 0"/>
+
+                                <Grid>
+                                    <Label Text="{Binding Grams, StringFormat='Gramy: {0}'}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="StartAndExpand"
+                               Margin="100, 5, 0 , 0"/>
+
+                                    <Label Text="{Binding Calories, StringFormat='Kalorie: {0}'}"
+                               TextColor="{DynamicResource vividVermilion}"
+                               FontSize="16"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="EndAndExpand"
+                               Margin="0, 5, 100, 0"/>
+                                </Grid>
+
+                                <Grid>
+                                    <Label Text="{Binding Proteins, StringFormat='Białko: {0}'}"
+                                   TextColor="{DynamicResource vividVermilion}"
+                                   FontSize="16"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="StartAndExpand"
+                                   Margin="10, 5, 0 , 5"/>
+
+                                    <Label Text="{Binding Carbohydrates, StringFormat='Węglowodany: {0}'}"
+                                   TextColor="{DynamicResource vividVermilion}"
+                                   FontSize="16"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Margin="0, 5, 0 , 5"/>
+
+                                    <Label Text="{Binding Fats, StringFormat='Tłuszcz: {0}'}"
+                                   TextColor="{DynamicResource vividVermilion}"
+                                   FontSize="16"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="0, 5, 10, 5"/>
+                                </Grid>
+                                <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                            </StackLayout>
+
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Usuń"
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.DeleteDataCommand,
+                                    Source={x:Reference Diet}}"
+                                  CommandParameter="{Binding}"/>
+                                <MenuItem Text="Edytuj"
+                                  IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.NavigateToEditDataCommand,
+                                    Source={x:Reference Diet}}"
+                                  CommandParameter="{Binding}"/>
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Footer>
+                    <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                        <Grid.Triggers>
+                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                <Setter Property="HeightRequest" Value="0"/>
+                            </Trigger>
+                        </Grid.Triggers>
+                        <Label Text="Ładowanie..." 
+                           TextColor="{DynamicResource vividVermilion}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                    </Grid>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

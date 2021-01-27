@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:converter="clr-namespace:GymHelper.Helpers" 
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
+             x:Class="GymHelper.View.WorkoutView.WorkoutPage"
+             x:Name="Workout"
+             BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.BindingContext>
+        <viewModel:WorkoutPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FirstLetterConverter x:Key="letterConverter"/>
+            <converter:DateTimeConverter x:Key="dateTimeConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nowy Trening"
+                     Command="{Binding NavigateToAddDataCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <SearchBar x:Name="SearchBar"
+                   Placeholder="Wyszukaj treningi."
+                   SearchCommand="{Binding PerformSearchCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                   BackgroundColor="{DynamicResource blackOlive}"
+                   PlaceholderColor="{DynamicResource vividVermilion}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   CancelButtonColor="{DynamicResource vividVermilion}"/>
+        
+        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+
+        <ListView HasUnevenRows="True"
+                  BackgroundColor="{DynamicResource blackOlive}"
+                  ItemsSource="{Binding Collection}"
+                  SelectedItem="{Binding SelectedWorkout, Mode=TwoWay}">
+
+            <ListView.Behaviors>
+                <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Grid>
+                                <Label Text="{Binding Date, Converter={StaticResource dateTimeConverter}}"
+                                       TextColor="{DynamicResource vividVermilion}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="StartAndExpand"
+                                       Padding="5, 15, 5, 15"
+                                       FontSize="16"/>
+
+                                <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
+                                       TextColor="{DynamicResource vividVermilion}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       Padding="0, 15, 0, 15"
+                                       FontSize="16"/>
+                            </Grid>
+
+                            <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                        </StackLayout>
+
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Usuń"
+                                      IsDestructive="True"
+                                      Command="{Binding Path=BindingContext.DeleteDataCommand, Source={x:Reference Workout}}"
+                                      CommandParameter="{Binding}"/>
+                            <MenuItem Text="Edytuj"
+                                      Command="{Binding Path=BindingContext.NavigateToEditDataCommand, Source={x:Reference Workout}}"
+                                      CommandParameter="{Binding}"/>
+                        </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.Footer>
+                <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                    <Grid.Triggers>
+                        <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                            <Setter Property="HeightRequest" Value="0"/>
+                        </Trigger>
+                    </Grid.Triggers>
+                    <Label Text="Ładowanie..." 
+                           TextColor="{DynamicResource vividVermilion}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </Grid>
+            </ListView.Footer>
+        </ListView>
+    </StackLayout>
+</ContentPage>

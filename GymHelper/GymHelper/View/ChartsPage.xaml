@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:converter="clr-namespace:GymHelper.Helpers" 
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
+             x:Class="GymHelper.View.ChartsPage"
+             BackgroundColor="{DynamicResource blackOlive}">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.BindingContext>
+        <viewModel:ChartsPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FirstLetterConverter x:Key="letterConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout x:Name="ExerciseSelector" IsVisible="{Binding ExerciseSelectorIsVisible}">
+                    <SearchBar x:Name="SearchBar"
+                       Placeholder="Wyszukaj ćwiczenia."
+                       SearchCommand="{Binding PerformSearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                       BackgroundColor="{DynamicResource blackOlive}"
+                       PlaceholderColor="{DynamicResource vividVermilion}"
+                       TextColor="{DynamicResource vividVermilion}"
+                       CancelButtonColor="{DynamicResource vividVermilion}"/>
+                    <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+
+                    <ListView HasUnevenRows="True"
+                              BackgroundColor="{DynamicResource blackOlive}"
+                              ItemsSource="{Binding Collection}"
+                              SelectedItem="{Binding SelectedExercise, Mode=TwoWay}">
+
+                        <ListView.Behaviors>
+                            <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+                        </ListView.Behaviors>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding Name, Converter={StaticResource letterConverter}}"
+                                               TextColor="{DynamicResource vividVermilion}"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               Padding="0, 15, 0, 15"
+                                               FontSize="16"/>
+
+                                        <Grid HeightRequest="1" BackgroundColor="{DynamicResource floralWhite}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                        <ListView.Footer>
+                            <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                                <Grid.Triggers>
+                                    <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                        <Setter Property="HeightRequest" Value="0"/>
+                                    </Trigger>
+                                </Grid.Triggers>
+                                <Label Text="Ładowanie..." 
+                           TextColor="{DynamicResource vividVermilion}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                            </Grid>
+                        </ListView.Footer>
+                    </ListView>
+                </StackLayout>
+
+                <StackLayout x:Name="Charts" IsVisible="{Binding ChartsIsVisible}">
+                    <Button Text="Wybór Ćwiczenia"
+                            TextColor="{StaticResource vividVermilion}"
+                            Margin="30,5,30,5"
+                            CornerRadius="15"
+                            BackgroundColor="{StaticResource raisinBlack}"
+                            Command="{Binding SwitchViewCommand}"/>
+
+                    <StackLayout Margin="0, 0, 0, 20">
+                        <Label Text="Ciężar z ostatnich treningów."
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="{DynamicResource vividVermilion}"
+                           Margin="0, 10, 0, 25"/>
+                        <forms:ChartView HeightRequest="250"
+                                     Chart="{Binding ChartPreparer.LastWeightsChart}"/>
+                    </StackLayout>
+
+                    <StackLayout Margin="0, 0, 0, 20">
+                        <Label Text="Powtórzenia z ostatnich treningów."
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="{DynamicResource vividVermilion}"
+                           Margin="0, 10, 0, 25"/>
+                        <forms:ChartView HeightRequest="250"
+                                     Chart="{Binding ChartPreparer.LastRepetitionsChart}"/>
+                    </StackLayout>
+
+                    <StackLayout Margin="0, 0, 0, 20">
+                        <Label Text="Największy ciężar z każdego mięsiąca."
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="{DynamicResource vividVermilion}"
+                           Margin="0, 10, 0, 25"/>
+                        <forms:ChartView HeightRequest="250"
+                                     Chart="{Binding ChartPreparer.MonthHighestWeightsChart}"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

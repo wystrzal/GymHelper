@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
+             x:Class="GymHelper.View.ProductView.EditProductPage"
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="{StaticResource blackOlive}">
+
+    <ContentPage.BindingContext>
+        <viewModel:EditProductPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding EditDataCommand}"
+                     CommandParameter="{Binding Product}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Entry x:Name="NameEntry"
+                   Text="{Binding Product.Name, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Product.Name, StringFormat='Nazwa ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding NameChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference NameEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Entry x:Name="GramsEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Product.Grams, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Product.Grams, StringFormat='Gramy ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding GramsChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference GramsEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Entry x:Name="CaloriesEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Product.Calories, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Product.Calories, StringFormat='Kalorie ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding CaloriesChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference CaloriesEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Entry x:Name="ProteinsEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Product.Proteins, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Product.Proteins, StringFormat='Białko ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding ProteinsChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference ProteinsEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Entry x:Name="CarbohydratesEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Product.Carbohydrates, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Product.Carbohydrates, StringFormat='Węglowodany ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding CarbohydratesChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference CarbohydratesEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Entry x:Name="FatsEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding Product.Fats, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding Product.Fats, StringFormat='Tłuszcz ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding FatsChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference FatsEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

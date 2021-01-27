@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:GymHelper.ViewModel" 
+             xmlns:local="clr-namespace:GymHelper.Helpers.Converters"
+             xmlns:behaviors="clr-namespace:GymHelper.Helpers.Behaviors"
+             x:Class="GymHelper.View.EditWorkoutExercisePage"
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="{StaticResource blackOlive}">
+
+    <ContentPage.BindingContext>
+        <viewModel:EditWorkoutExercisePageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CleanWhenAppearConverter x:Key="cleanWhenAppear"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz"
+                     Command="{Binding EditDataCommand}"
+                     CommandParameter="{Binding WorkoutExercise}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="SeriesEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding WorkoutExercise.Series, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding WorkoutExercise.Series, StringFormat='Serie ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding SeriesChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference SeriesEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Entry x:Name="RepetitionEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding WorkoutExercise.Repetition, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding WorkoutExercise.Repetition, StringFormat='Powtórzenia ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding RepetitionChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference RepetitionEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Entry x:Name="WeightEntry"
+                   Keyboard="Numeric"
+                   Text="{Binding WorkoutExercise.Weight, Mode=TwoWay, Converter={StaticResource cleanWhenAppear}}"
+                   TextColor="{DynamicResource vividVermilion}"
+                   Placeholder="{Binding WorkoutExercise.Weight, StringFormat='Ciężar ({0})'}"
+                   PlaceholderColor="{DynamicResource vividVermilion}">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding WeightChangedCommand}"
+                                                      CommandParameter="{Binding Source={x:Reference WeightEntry}, Path=Text}"/>
+                </Entry.Behaviors>
+            </Entry>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
