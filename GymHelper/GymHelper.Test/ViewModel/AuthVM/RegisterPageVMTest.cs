@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GymHelper.Test.ViewModel
+namespace GymHelper.Test.ViewModel.AuthVM
 {
     public class RegisterPageVMTest
     {

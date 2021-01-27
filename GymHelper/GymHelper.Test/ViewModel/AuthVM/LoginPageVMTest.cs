@@ -10,7 +10,7 @@ using Xunit;
 using GymHelper.View;
 using GymHelper.Helpers;
 
-namespace GymHelper.Test.ViewModel
+namespace GymHelper.Test.ViewModel.AuthVM
 {
     public class LoginPageVMTest
     {
