@@ -52,7 +52,7 @@ namespace GymHelper.ViewModel
         {
             if (await ExerciseExist(exercise))
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Istnieje już takie ćwiczenie.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Istnieje już takie ćwiczenie.", "Ok");
                 return;
             }
 

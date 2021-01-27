@@ -55,7 +55,7 @@ namespace GymHelper.ViewModel
         {
             if (await ProductExist(entity))
             {
-                await App.Current.MainPage.DisplayAlert("Niepowodzenie", "Istnieje już taki produkt.", "Ok");
+                await alertService.DisplayAlert("Niepowodzenie", "Istnieje już taki produkt.", "Ok");
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace GymHelper.ViewModel
 
         private async Task<bool> ProductExist(Product product)
         {
-            return await unitOfWork.Repository<Exercise>()
+            return await unitOfWork.Repository<Product>()
                 .CheckIfExistByCondition(x => x.Name == product.Name && x.UserId == product.UserId);
         }
     }

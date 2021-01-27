@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GymHelper.Test.ViewModel
+namespace GymHelper.Test.ViewModel.AuthVM
 {
     public class RegisterPageVMTest
     {
@@ -95,6 +95,19 @@ namespace GymHelper.Test.ViewModel
         {
             //Arrange
             user.Login = "";
+
+            //Act
+            var action = vm.RegisterCommand.CanExecute(user);
+
+            //Assert
+            Assert.False(action);
+        }
+
+        [Fact]
+        public void RegisterCommand_CanExecute_EmptyPassword_Failed()
+        {
+            //Arrange
+            user.Password = "";
 
             //Act
             var action = vm.RegisterCommand.CanExecute(user);

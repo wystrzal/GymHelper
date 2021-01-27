@@ -10,7 +10,7 @@ using Xunit;
 using GymHelper.View;
 using GymHelper.Helpers;
 
-namespace GymHelper.Test.ViewModel
+namespace GymHelper.Test.ViewModel.AuthVM
 {
     public class LoginPageVMTest
     {
@@ -83,6 +83,19 @@ namespace GymHelper.Test.ViewModel
         {
             //Arrange
             user.Login = "";
+
+            //Act
+            var action = vm.LoginCommand.CanExecute(user);
+
+            //Assert
+            Assert.False(action);
+        }
+
+        [Fact]
+        public void LoginCommand_CanExecute_EmptyPassword_Failed()
+        {
+            //Arrange
+            user.Password = "";
 
             //Act
             var action = vm.LoginCommand.CanExecute(user);
