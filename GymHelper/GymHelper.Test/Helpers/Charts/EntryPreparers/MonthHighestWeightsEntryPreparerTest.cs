@@ -4,6 +4,7 @@ using GymHelper.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -30,7 +31,8 @@ namespace GymHelper.Test.Helpers.Charts.EntryPreparers
         {
             //Arrange
             unitOfWork.Setup(x => x.Repository<WorkoutExercise>()
-            .ReadFirstByCondition(It.IsAny<Func<WorkoutExercise, bool>>(), It.IsAny<Func<WorkoutExercise, int>>(), It.IsAny<bool>()))
+            .ReadFirstByCondition(It.IsAny<Expression<Func<WorkoutExercise, bool>>>(),
+                It.IsAny<Expression<Func<WorkoutExercise, int>>>(), It.IsAny<bool>()))
             .Returns(Task.FromResult(workoutExercise));
 
             //Act
@@ -39,7 +41,8 @@ namespace GymHelper.Test.Helpers.Charts.EntryPreparers
             //Assert
             Assert.NotNull(action);
             unitOfWork.Verify(x => x.Repository<WorkoutExercise>()
-            .ReadFirstByCondition(It.IsAny<Func<WorkoutExercise, bool>>(), It.IsAny<Func<WorkoutExercise, int>>(), It.IsAny<bool>()),
+            .ReadFirstByCondition(It.IsAny<Expression<Func<WorkoutExercise, bool>>>(),
+                It.IsAny<Expression<Func<WorkoutExercise, int>>>(), It.IsAny<bool>()),
                 Times.Exactly(numberOfMonths));
         }
     }

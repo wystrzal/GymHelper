@@ -4,6 +4,7 @@ using GymHelper.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -29,7 +30,7 @@ namespace GymHelper.Test.Helpers.Charts.EntryPreparers
         public async Task PrepareChartEntry_Success()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<Diet>().ReadFirstByCondition(It.IsAny<Func<Diet, bool>>())).Returns(Task.FromResult(diet));
+            unitOfWork.Setup(x => x.Repository<Diet>().ReadFirstByCondition(It.IsAny<Expression<Func<Diet, bool>>>())).Returns(Task.FromResult(diet));
 
             //Act
             var action = await entryPreparer.PrepareChartEntry();

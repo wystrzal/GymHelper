@@ -5,6 +5,7 @@ using Microcharts;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -27,12 +28,14 @@ namespace GymHelper.Test.Helpers.Charts.ChartPreparers
         {
             //Arrange
             unitOfWork.Setup(x => x.Repository<WorkoutExercise>()
-                .ReadAllByCondition(It.IsAny<Func<WorkoutExercise, bool>>(), It.IsAny<Func<WorkoutExercise, DateTime>>(), It.IsAny<int>(),
+                .ReadAllByCondition(It.IsAny<Expression<Func<WorkoutExercise, bool>>>(),
+                    It.IsAny<Expression<Func<WorkoutExercise, DateTime>>>(), It.IsAny<int>(),
                     It.IsAny<int>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(new List<WorkoutExercise>()));
 
             unitOfWork.Setup(x => x.Repository<WorkoutExercise>()
-                .ReadFirstByCondition(It.IsAny<Func<WorkoutExercise, bool>>(), It.IsAny<Func<WorkoutExercise, int>>(), It.IsAny<bool>()))
+                .ReadFirstByCondition(It.IsAny<Expression<Func<WorkoutExercise, bool>>>(),
+                    It.IsAny<Expression<Func<WorkoutExercise, int>>>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(new WorkoutExercise()));
 
             //Act

@@ -35,7 +35,7 @@ namespace GymHelper.Test.Service
         public async Task LoginTo_NullUser_ReturnFalse()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<User>().ReadFirstByCondition(It.IsAny<Func<User, bool>>()))
+            unitOfWork.Setup(x => x.Repository<User>().ReadFirstByCondition(It.IsAny<Expression<Func<User, bool>>>()))
                 .Returns(Task.FromResult((User)null));
 
             //Act
@@ -52,7 +52,7 @@ namespace GymHelper.Test.Service
             //Arrange
             user.Password = "badPassword";
 
-            unitOfWork.Setup(x => x.Repository<User>().ReadFirstByCondition(It.IsAny<Func<User, bool>>()))
+            unitOfWork.Setup(x => x.Repository<User>().ReadFirstByCondition(It.IsAny<Expression<Func<User, bool>>>()))
                 .Returns(Task.FromResult(user));
 
             //Act
@@ -68,7 +68,7 @@ namespace GymHelper.Test.Service
         {
             //Arrange
             unitOfWork.Setup(x => x.Repository<User>()
-                .ReadFirstByConditionWithInclude(It.IsAny<Func<User, bool>>(), It.IsAny<Expression<Func<User, Diet>>>()))
+                .ReadFirstByConditionWithInclude(It.IsAny<Expression<Func<User, bool>>>(), It.IsAny<Expression<Func<User, Diet>>>()))
                 .Returns(Task.FromResult(user));
 
             //Act
@@ -124,7 +124,7 @@ namespace GymHelper.Test.Service
         public async Task Register_UserExist_ReturnFalse()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Func<User, bool>>()))
+            unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Expression<Func<User, bool>>>()))
                 .Returns(Task.FromResult(true));
 
             //Act
@@ -139,7 +139,7 @@ namespace GymHelper.Test.Service
         public async Task Register_SaveChangesFailed_ReturnFalse()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Func<User, bool>>()))
+            unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Expression<Func<User, bool>>>()))
                 .Returns(Task.FromResult(false));
 
             unitOfWork.Setup(x => x.SaveChanges()).Returns(Task.FromResult(false));
@@ -159,7 +159,7 @@ namespace GymHelper.Test.Service
         public async Task Register_SaveChangesSuccess_ReturnTrue()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Func<User, bool>>()))
+            unitOfWork.Setup(x => x.Repository<User>().CheckIfExistByCondition(It.IsAny<Expression<Func<User, bool>>>()))
                 .Returns(Task.FromResult(false));
 
             unitOfWork.Setup(x => x.SaveChanges()).Returns(Task.FromResult(true));

@@ -44,13 +44,11 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<List<TEntity>> ReadAllByCondition(Func<TEntity, bool> condition, int take, int skip = 0)
+        public async Task<List<TEntity>> ReadAllByCondition(Expression<Func<TEntity, bool>> condition, int take, int skip = 0)
         {
             try
             {
-                var data = dataContext.Set<TEntity>().Where(condition).Skip(skip).Take(take).ToList();
-
-                return await Task.FromResult(data);
+                return await dataContext.Set<TEntity>().Where(condition).Skip(skip).Take(take).ToListAsync();
             }
             catch (Exception)
             {
@@ -59,23 +57,23 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<List<TEntity>> ReadAllByCondition<TKey>(Func<TEntity, bool> condition,
-            Func<TEntity, TKey> orderBy, int take, int skip = 0, bool orderASC = true)
+        public async Task<List<TEntity>> ReadAllByCondition<TKey>(Expression<Func<TEntity, bool>> condition,
+            Expression<Func<TEntity, TKey>> orderBy, int take, int skip = 0, bool orderASC = true)
         {
             try
             {
-                List<TEntity> data;
+                var query = dataContext.Set<TEntity>().Where(condition);
 
                 if (orderASC)
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).Skip(skip).Take(take).ToList();
+                    query = query.OrderBy(orderBy);
                 }
                 else
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).Skip(skip).Take(take).ToList();
+                    query = query.OrderByDescending(orderBy);
                 }
 
-                return await Task.FromResult(data);
+                return await query.Skip(skip).Take(take).ToListAsync();
             }
             catch (Exception)
             {
@@ -84,14 +82,12 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
+        public async Task<List<TEntity>> ReadAllByConditionWithInclude<TProp>(Expression<Func<TEntity, bool>> condition,
             Expression<Func<TEntity, TProp>> include, int take, int skip = 0)
         {
             try
             {
-                var data = dataContext.Set<TEntity>().Include(include).Where(condition).Skip(skip).Take(take).ToList();
-
-                return await Task.FromResult(data);
+                return await dataContext.Set<TEntity>().Include(include).Where(condition).Skip(skip).Take(take).ToListAsync();
             }
             catch (Exception)
             {
@@ -100,12 +96,11 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<TEntity> ReadFirstByCondition(Func<TEntity, bool> condition)
+        public async Task<TEntity> ReadFirstByCondition(Expression<Func<TEntity, bool>> condition)
         {
             try
             {
-                var data = dataContext.Set<TEntity>().Where(condition).FirstOrDefault();
-                return data == null ? null : await Task.FromResult(data);
+                return await dataContext.Set<TEntity>().Where(condition).FirstOrDefaultAsync() ?? null;
             }
             catch (Exception)
             {
@@ -114,23 +109,23 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<TEntity> ReadFirstByCondition<TKey>(Func<TEntity, bool> condition,
-            Func<TEntity, TKey> orderBy, bool orderASC = true)
+        public async Task<TEntity> ReadFirstByCondition<TKey>(Expression<Func<TEntity, bool>> condition,
+            Expression<Func<TEntity, TKey>> orderBy, bool orderASC = true)
         {
             try
             {
-                TEntity data;
+                var query = dataContext.Set<TEntity>().Where(condition);
 
                 if (orderASC)
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderBy(orderBy).FirstOrDefault();
+                    query = query.OrderBy(orderBy);
                 }
                 else
                 {
-                    data = dataContext.Set<TEntity>().Where(condition).OrderByDescending(orderBy).FirstOrDefault();
+                    query = query.OrderByDescending(orderBy);
                 }
 
-                return data == null ? null : await Task.FromResult(data);
+                return await query.FirstOrDefaultAsync() ?? null;
             }
             catch (Exception)
             {
@@ -139,13 +134,12 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<TEntity> ReadFirstByConditionWithInclude<TProp>(Func<TEntity, bool> condition,
+        public async Task<TEntity> ReadFirstByConditionWithInclude<TProp>(Expression<Func<TEntity, bool>> condition,
             Expression<Func<TEntity, TProp>> include)
         {
             try
             {
-                var data = dataContext.Set<TEntity>().Include(include).Where(condition).FirstOrDefault();
-                return data == null ? null : await Task.FromResult(data);
+                return await dataContext.Set<TEntity>().Include(include).Where(condition).FirstOrDefaultAsync() ?? null;
             }
             catch (Exception)
             {
@@ -154,18 +148,16 @@ namespace GymHelper.Data
             }
         }
 
-        public async Task<int> ReadDataCount(Func<TEntity, bool> condition)
+        public async Task<int> ReadDataCount(Expression<Func<TEntity, bool>> condition)
         {
-            var dataCount = dataContext.Set<TEntity>().Where(condition).Count();
-            return await Task.FromResult(dataCount);
+            return await dataContext.Set<TEntity>().Where(condition).CountAsync();
         }
 
-        public async Task<bool> CheckIfExistByCondition(Func<TEntity, bool> condition)
+        public async Task<bool> CheckIfExistByCondition(Expression<Func<TEntity, bool>> condition)
         {
             try
             {
-                var data = dataContext.Set<TEntity>().Where(condition).Any();
-                return await Task.FromResult(data);
+                return await dataContext.Set<TEntity>().Where(condition).AnyAsync();
             }
             catch (Exception)
             {

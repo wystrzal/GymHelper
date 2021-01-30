@@ -5,6 +5,7 @@ using Microcharts;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -26,7 +27,7 @@ namespace GymHelper.Test.Helpers.Charts.ChartPreparers
         public async Task PrepareCharts_Success()
         {
             //Arrange
-            unitOfWork.Setup(x => x.Repository<Diet>().ReadFirstByCondition(It.IsAny<Func<Diet, bool>>()))
+            unitOfWork.Setup(x => x.Repository<Diet>().ReadFirstByCondition(It.IsAny<Expression<Func<Diet, bool>>>()))
                 .Returns(Task.FromResult(new Diet()));
 
             //Act
