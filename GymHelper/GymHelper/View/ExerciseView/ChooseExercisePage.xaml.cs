@@ -39,16 +39,19 @@ namespace GymHelper.View.ExerciseView
 
             if (checkbox.IsChecked)
             {
+                viewModel.SelectedData.Add(exercise);
                 ToolbarItems.Clear();
                 ToolbarItems.Add(addSelectedExercises);
-                viewModel.SelectedData.Add(exercise);
             }
 
             if (!checkbox.IsChecked)
             {
-                ToolbarItems.Clear();
-                ToolbarItems.Add(NewExercise);
                 viewModel.SelectedData.Remove(exercise);
+                if (viewModel.SelectedData.Count <= 0)
+                {
+                    ToolbarItems.Clear();
+                    ToolbarItems.Add(NewExercise);
+                }
             }
         }
     }

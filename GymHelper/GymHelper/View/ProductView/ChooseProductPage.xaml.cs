@@ -39,16 +39,19 @@ namespace GymHelper.View.ProductView
 
             if (checkbox.IsChecked)
             {
+                viewModel.SelectedData.Add(product);
                 ToolbarItems.Clear();
                 ToolbarItems.Add(addSelectedProducts);
-                viewModel.SelectedData.Add(product);
             }
 
             if (!checkbox.IsChecked)
             {
-                ToolbarItems.Clear();
-                ToolbarItems.Add(NewProduct);
                 viewModel.SelectedData.Remove(product);
+                if (viewModel.SelectedData.Count <= 0)
+                {
+                    ToolbarItems.Clear();
+                    ToolbarItems.Add(NewProduct);
+                }
             }
         }
     }
